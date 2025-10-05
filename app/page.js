@@ -1,4 +1,15 @@
+'use client';
+
 import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaRocket } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
+
+const Countdown = dynamic(
+  () => import('../components/Countdown'),
+  { 
+    ssr: false,
+    loading: () => <div className="h-40"></div>
+  }
+);
 
 export default function Home() {
   return (
@@ -36,6 +47,8 @@ export default function Home() {
               Learn More
             </a>
           </div>
+          
+          <Countdown />
         </div>
 
         <div id="about" className="bg-white rounded-2xl shadow-xl p-8 mb-16">
