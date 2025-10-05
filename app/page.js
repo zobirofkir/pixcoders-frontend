@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { useTheme } from '../src/context/ThemeContext';
 import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaRocket, FaSun, FaMoon } from 'react-icons/fa';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -9,36 +10,15 @@ import { motion } from 'framer-motion';
 const Countdown = dynamic(
   () => import('../src/components/CountdownComponent'),
   { 
-    ssr: false,
     loading: () => <div className="h-40"></div>
   }
 );
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    // Check for dark mode preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Apply dark mode class to body
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const { darkMode, toggleDarkMode } = useTheme();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+    <div className={`min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 ${darkMode ? 'bg-black' : 'bg-gradient-to-br from-gray-50 to-gray-100'} transition-colors duration-300`}>
       <button 
         onClick={toggleDarkMode}
         className="fixed top-4 right-4 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 z-50"
