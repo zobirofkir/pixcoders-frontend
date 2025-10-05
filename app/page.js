@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaRocket } from 'react-icons/
 import dynamic from 'next/dynamic';
 
 const Countdown = dynamic(
-  () => import('../components/Countdown'),
+  () => import('../src/components/CountdownComponent'),
   { 
     ssr: false,
     loading: () => <div className="h-40"></div>

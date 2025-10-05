@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const Countdown = () => {
+const CountdownComponent = () => {
   const [timeLeft, setTimeLeft] = useState({
     months: 0,
     days: 0,
@@ -70,4 +70,4 @@ const Countdown = () => {
   );
 };
 
-export default Countdown;
+export default CountdownComponent;
