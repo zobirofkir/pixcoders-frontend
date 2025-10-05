@@ -11,13 +11,16 @@ const CountdownComponent = () => {
     seconds: '--',
   });
   
-  // Function to format time values with leading zeros
+  /**
+   * Function to format time values with leading zeros
+   * @param {*} value 
+   * @returns 
+   */
   const formatTimeValue = (value) => {
     return value < 0 ? '00' : value.toString().padStart(2, '0');
   };
 
   useEffect(() => {
-    // Check if we have a stored target date, otherwise create a new one 2 months from now
     const STORAGE_KEY = 'countdownTargetDate';
     let countDownDate;
     
@@ -61,10 +64,8 @@ const CountdownComponent = () => {
       });
     };
 
-    // Update immediately
     updateCountdown();
 
-    // Then update every second
     const timer = setInterval(updateCountdown, 1000);
 
     return () => clearInterval(timer);
