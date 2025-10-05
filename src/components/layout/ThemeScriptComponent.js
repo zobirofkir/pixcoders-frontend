@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-export default function ThemeScript() {
+export default function ThemeScriptComponent() {
   return (
     <Script id="theme-script" strategy="beforeInteractive">
       {`

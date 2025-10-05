@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const Countdown = dynamic(
-  () => import('../src/components/CountdownComponent'),
+  () => import('../src/components/counter/CountdownComponent'),
   { 
     loading: () => <div className="h-40"></div>
   }

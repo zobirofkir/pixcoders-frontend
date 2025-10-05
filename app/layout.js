@@ -1,7 +1,7 @@
 import './globals.css';
-import { metadata } from '../src/components/layout/Metadata';
-import ThemeScript from '../src/components/layout/ThemeScript';
-import Body from '../src/components/layout/Body';
+import { metadata } from '../src/MetaData/Metadata';
+import ThemeScript from '../src/components/layout/ThemeScriptComponent';
+import Body from '../src/components/layout/BodyComponent';
 
 export { metadata };
 
