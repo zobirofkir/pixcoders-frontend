@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BackgroundElements = () => (
+const BackgroundElementsComponent = () => (
   <>
     <div className="absolute inset-0 bg-grid-white/50 dark:bg-grid-gray-800/30 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-radial from-blue-500/5 via-transparent to-transparent" />
@@ -9,4 +9,4 @@ const BackgroundElements = () => (
   </>
 );
 
-export default BackgroundElements;
+export default BackgroundElementsComponent;

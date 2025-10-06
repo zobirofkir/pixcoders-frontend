@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { skills } from '../../../../../data/skillsData';
 import { item } from '../animations/variants';
 
-const SkillsList = () => (
+const SkillsListComponent = () => (
   <motion.div variants={item} className="mt-12">
     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Our Expertise</h3>
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -22,4 +22,4 @@ const SkillsList = () => (
   </motion.div>
 );
 
-export default SkillsList;
+export default SkillsListComponent;
