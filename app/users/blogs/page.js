@@ -1,31 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { FiSearch, FiClock, FiCalendar, FiTag, FiArrowRight } from 'react-icons/fi';
 import Image from 'next/image';
 import Link from 'next/link';
-import { blogsData } from '@/src/data/blogsData';
 import { blogCategoryData } from '@/src/data/blogsCategoryData';
+import useBlog from '@/src/hooks/useBlog';
 
 export default function BlogPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
-
-  const filteredPosts = blogsData.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-
-  const featuredPosts = blogsData.filter(post => post.featured);
+  const {
+    searchQuery,
+    selectedCategory,
+    currentPage,
+    postsPerPage,
+    filteredPosts,
+    featuredPosts,
+    currentPosts,
+    totalPages,
+    setSearchQuery,
+    setSelectedCategory,
+    setCurrentPage
+  } = useBlog();
 
   return (
     <div className="min-h-screen bg-gray-50">
