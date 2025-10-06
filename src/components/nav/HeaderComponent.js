@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 // Import components
-import Logo from './header/Logo';
-import NavLinks from './header/NavLinks';
-import AuthLinks from './header/AuthLinks';
-import MobileMenuButton from './header/MobileMenuButton';
-import SearchButton from './header/SearchButton';
+import Logo from './header/LogoComponent';
+import NavLinks from './header/NavLinksComponent';
+import AuthLinks from './header/AuthLinksComponent';
+import MobileMenuButton from './header/MobileMenuButtonComponent';
+import SearchButton from './header/SearchButtonComponent';
 
 const HeaderComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

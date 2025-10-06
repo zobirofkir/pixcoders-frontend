@@ -5,7 +5,7 @@ const authLinks = [
   { name: 'Hire Top Talent', href: '/hire', highlight: true },
 ];
 
-const AuthLinks = ({ isMobile = false, onLinkClick }) => {
+const AuthLinksComponent = ({ isMobile = false, onLinkClick }) => {
   if (isMobile) {
     return (
       <div className="pt-2 space-y-1">
@@ -46,4 +46,4 @@ const AuthLinks = ({ isMobile = false, onLinkClick }) => {
   );
 };
 
-export default AuthLinks;
+export default AuthLinksComponent;

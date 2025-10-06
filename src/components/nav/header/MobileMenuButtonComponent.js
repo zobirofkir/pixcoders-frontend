@@ -1,6 +1,6 @@
 import { FiMenu, FiX } from 'react-icons/fi';
 
-const MobileMenuButton = ({ isOpen, onClick }) => (
+const MobileMenuButtonComponent = ({ isOpen, onClick }) => (
   <div className="-mr-2 flex md:hidden">
     <button
       onClick={onClick}
@@ -17,4 +17,4 @@ const MobileMenuButton = ({ isOpen, onClick }) => (
   </div>
 );
 
-export default MobileMenuButton;
+export default MobileMenuButtonComponent;

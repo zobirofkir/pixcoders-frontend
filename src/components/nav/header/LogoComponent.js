@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Logo = () => (
+const LogoComponent = () => (
   <div className="flex-shrink-0 flex items-center">
     <Link href="/" className="flex items-center">
       <Image 
@@ -16,4 +16,4 @@ const Logo = () => (
   </div>
 );
 
-export default Logo;
+export default LogoComponent;

@@ -9,7 +9,7 @@ const navLinks = [
   { name: 'About Us', href: '/about' },
 ];
 
-const NavLinks = ({ isMobile = false, onLinkClick }) => {
+const NavLinksComponent = ({ isMobile = false, onLinkClick }) => {
   if (isMobile) {
     return (
       <div className="space-y-1">
@@ -45,4 +45,4 @@ const NavLinks = ({ isMobile = false, onLinkClick }) => {
   );
 };
 
-export default NavLinks;
+export default NavLinksComponent;
