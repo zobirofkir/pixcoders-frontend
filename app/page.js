@@ -1,10 +1,13 @@
 import AboutComponent from '@/src/components/about/AboutComponent'
 import ContactComponent from '@/src/components/contact/ContactComponent'
+import LoadingComponent from '@/src/components/loading/LoadingComponent'
 import SliderComponent from '@/src/components/slider/SliderComponent'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const page = () => {
   return (
+    <Suspense fallback={LoadingComponent}>
+
     <section>
       <div>
         <SliderComponent />
@@ -18,6 +21,8 @@ const page = () => {
         <ContactComponent />
       </div>
     </section>
+
+    </Suspense>
   )
 }
 
