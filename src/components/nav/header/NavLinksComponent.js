@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FiChevronDown } from 'react-icons/fi';
 
 const navLinks = [
   { name: 'Find Talent', href: '/talent' },
@@ -36,7 +35,6 @@ const NavLinksComponent = ({ isMobile = false, onLinkClick }) => {
             className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium flex items-center"
           >
             {link.name}
-            <FiChevronDown className="ml-1 h-4 w-4" />
           </Link>
           {/* Dropdown menu would go here */}
         </div>
