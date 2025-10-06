@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { skills } from '../../../../../data/skillsData';
+import { skillsData as skills } from '../../../../../data/skillsData';
 import { item } from '../../../../../animations/variants';
 
 const SkillsListComponent = () => (

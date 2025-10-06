@@ -2,7 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AboutHeroSectionComponent, AboutSectionComponent, BackgroundElementsComponent, StatsSectionComponent } from '@/components';
+import BackgroundElementsComponent from './components/ui/BackgroundElementsComponent';
+import AboutHeroSectionComponent from './components/sections/HeroSectionComponent';
+import AboutSectionComponent from './components/sections/AboutSectionComponent';
+import StatsSectionComponent from './components/sections/StatsSectionComponent';
+
 
 const AboutComponent = () => {
   return (

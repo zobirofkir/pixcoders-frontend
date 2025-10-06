@@ -1,4 +1,4 @@
-import { statsData } from '@/src/data/statsData';
+import { statsData } from '@/data/statsData';
 import StatCardComponent from './StatsCardComponent';
 
 

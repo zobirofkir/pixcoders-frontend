@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { stats } from './StatsComponent';
 import { container, item } from '../../../../../animations/variants';
+import { StatsComponent } from './StatsComponent';
 
 const StatsSectionComponent = () => (
   <motion.div 
     variants={container}
     className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24"
   >
-    {stats.map((stat, index) => (
+    {StatsComponent.map((stat, index) => (
       <motion.div
         key={stat.label}
         variants={item}

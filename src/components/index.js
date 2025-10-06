@@ -25,11 +25,3 @@ export { FeaturedPostsComponent } from './users/blogs/FeaturedPostsComponent';
 export { PostCardComponent } from './users/blogs/PostCardComponent';
 export { PaginationComponent } from './users/blogs/PaginationComponent';
 export { NewsletterComponent } from './users/blogs/NewsletterComponent';
-
-/**
- * About Import
- */
-export { HeroSectionComponent as AboutHeroSectionComponent } from './users/about/components/sections/HeroSectionComponent';
-export { AboutSectionComponent } from './users/about/components/sections/AboutSectionComponent';
-export { StatsSectionComponent } from './users/about/components/sections/StatsSectionComponent';
-export { BackgroundElementsComponent } from './users/about/components/ui/BackgroundElementsComponent';
