@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { talentData } from '@/src/data/talentData';
+import { talentData } from '@/data/talentData';
 
 export const useTalents = () => {
   const [talents, setTalents] = useState(talentData);

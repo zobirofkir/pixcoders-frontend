@@ -2,15 +2,15 @@
 import { Suspense } from 'react';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
-import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
-import MobileFilters from '@/src/components/users/talent/MobileFilters';
-import { useTalents } from '@/src/hooks/useTalents';
-import { HeroSectionComponent } from '@/src/components/users/talent/talents-page/page/HeroSectionComponent';
-import TalentSearchHeaderComponent from '@/src/components/users/talent/talents-page/page/TalentSearchHeaderComponent';
-import TalentGridComponent from '@/src/components/users/talent/talents-page/page/TalentGridComponent';
-import PaginationComponent from '@/src/components/users/talent/talents-page/page/PaginationComponent';
-import CallToActionComponent from '@/src/components/users/talent/talents-page/page/CallToActionComponent';
-import LoadingComponent from '@/src/components/loading/LoadingComponent';
+import TalentFiltersComponent from '@/components/users/talent/TalentFiltersComponent';
+import MobileFilters from '@/components/users/talent/MobileFilters';
+import { useTalents } from '@/hooks/useTalents';
+import { HeroSectionComponent } from '@/components/users/talent/talents-page/page/HeroSectionComponent';
+import TalentSearchHeaderComponent from '@/components/users/talent/talents-page/page/TalentSearchHeaderComponent';
+import TalentGridComponent from '@/components/users/talent/talents-page/page/TalentGridComponent';
+import PaginationComponent from '@/components/users/talent/talents-page/page/PaginationComponent';
+import CallToActionComponent from '@/components/users/talent/talents-page/page/CallToActionComponent';
+import LoadingComponent from '@/components/loading/LoadingComponent';
 
 const TalentsPage = () => {
   const {

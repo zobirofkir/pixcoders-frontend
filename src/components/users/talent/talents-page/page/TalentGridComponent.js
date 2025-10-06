@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import TalentCardComponent from '@/src/components/users/talent/TalentCardComponent';
+import TalentCardComponent from '@/components/users/talent/TalentCardComponent';
 
 const container = {
   hidden: { opacity: 0 },
