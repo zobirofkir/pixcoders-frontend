@@ -5,9 +5,7 @@ import { FiSearch, FiClock, FiCalendar, FiTag, FiArrowRight } from 'react-icons/
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogsData } from '@/src/data/blogsData';
-
-
-const categories = ['All', 'Development', 'React', 'CSS', 'JavaScript', 'UI/UX', 'Tutorials'];
+import { blogCategoryData } from '@/src/data/blogsCategoryData';
 
 export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,7 +53,7 @@ export default function BlogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 mb-12 justify-center">
-          {categories.map((category) => (
+          {blogCategoryData.map((category) => (
             <button
               key={category}
               onClick={() => {
