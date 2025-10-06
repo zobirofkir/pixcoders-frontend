@@ -11,7 +11,7 @@ const ContactComponent = () => {
     formData,
     isSubmitting,
     isSubmitted,
-    contactInfo,
+    contactInfoData,
     handleChange,
     handleSubmit,
   } = useContact();
@@ -174,7 +174,7 @@ const ContactComponent = () => {
                 </p>
                 
                 <div className="space-y-6">
-                  {contactInfo.map((item, index) => (
+                  {contactInfoData.map((item, index) => (
                     <motion.a
                       key={index}
                       href={item.href}
