@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { container, fadeInUp, staggerContainer } from '../../../../../animations/variants';
 import ImageLogo from '../../../../../../public/images/logo/logo.png';
-import SkillsList from '../ui/SkillsListComponent';
 import { FiAward, FiUsers, FiLayers, FiCode, FiChevronRight } from 'react-icons/fi';
 import { ButtonComponent } from '../../../../ui/ButtonComponent';
 import StatsGridComponent from './StatsGridComponent';
