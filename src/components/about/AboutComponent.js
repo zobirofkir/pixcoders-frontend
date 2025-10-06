@@ -189,7 +189,7 @@ const AboutComponent = () => {
             <p className="text-gray-600 dark:text-gray-300 mb-6">Let's work together to bring your ideas to life.</p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="/contact"
+                href="/users/contacts"
                 className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:opacity-90 transition-opacity duration-300 shadow-lg hover:shadow-xl"
               >
                 Get in Touch
