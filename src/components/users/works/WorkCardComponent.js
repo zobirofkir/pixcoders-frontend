@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const WorkCardComponent = ({ work, index = 0 }) => {
-  // Animation variants
+  /**
+   * Animation variants
+   */
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i) => ({
@@ -68,7 +69,7 @@ const WorkCardComponent = ({ work, index = 0 }) => {
         className="relative h-64 overflow-hidden"
         variants={imageHoverVariants}
       >
-        <Image
+        <img
           src={work.image}
           alt={work.title}
           fill
