@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { useLogin } from '../../../../app/users/auth/login/context/LoginContext';
+import { useLogin } from '../../../context/LoginContext';
 import { buttonHover, buttonTap } from '../../../animations/animations';
 
 export const SubmitButtonComponent = ({ children }) => {

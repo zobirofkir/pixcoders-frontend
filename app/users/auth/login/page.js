@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { LoginProvider } from './context/LoginContext';
+import { LoginProvider } from '../../../../src/context/LoginContext';
 import { containerVariants } from '../../../../src/animations/animations';
 import { LoginHeader } from '../../../../src/components/auth/login/LoginHeaderComponent';
 import { LoginForm } from '../../../../src/components/auth/login/LoginFormComponent';
