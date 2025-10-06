@@ -1,11 +1,5 @@
+import { statsData } from '@/src/data/statsData';
 import { motion } from 'framer-motion';
-
-const stats = [
-  { value: '99%', label: 'Success Rate' },
-  { value: '24/7', label: 'Support' },
-  { value: '4.9/5', label: 'Client Rating' },
-  { value: '100+', label: 'Projects Delivered' },
-];
 
 const StatCard = ({ stat, index }) => (
   <motion.div
@@ -24,7 +18,7 @@ export const StatsSectionComponent = () => (
   <section className="py-16 bg-gray-50">
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        {stats.map((stat, index) => (
+        {statsData.map((stat, index) => (
           <StatCard key={stat.label} stat={stat} index={index} />
         ))}
       </div>
