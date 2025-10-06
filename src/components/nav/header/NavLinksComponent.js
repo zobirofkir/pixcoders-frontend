@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
 const navLinks = [
-  { name: 'Find Talent', href: '/talent' },
-  { name: 'Find Work', href: '/work' },
+  { name: 'About Us', href: '/abouts' },
+  { name: 'Find Talent', href: '/talents' },
+  { name: 'Find Work', href: '/works' },
   { name: 'Why Pix Coders', href: '/why-pix-coders' },
-  { name: 'Enterprise', href: '/enterprise' },
-  { name: 'About Us', href: '/about' },
+  { name: 'Enterprise', href: '/enterprises' },
 ];
 
 const NavLinksComponent = ({ isMobile = false, onLinkClick }) => {
