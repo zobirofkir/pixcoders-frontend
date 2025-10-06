@@ -94,7 +94,7 @@ const WorksPage = () => {
         onLoadMore={loadMore} 
       />
 
-      <CTASection />
+      <CTASectionComponent />
     </div>
   );
 };
