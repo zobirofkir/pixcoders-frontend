@@ -9,13 +9,6 @@ import { ButtonComponent } from '../../../../ui/ButtonComponent';
 
 const stats = [
   { 
-    value: '8+', 
-    label: 'Years Experience', 
-    icon: <FiAward className="text-2xl" />,
-    color: 'from-blue-500 to-blue-600',
-    delay: 0.1
-  },
-  { 
     value: '200+', 
     label: 'Projects Delivered', 
     icon: <FiLayers className="text-2xl" />,
@@ -79,8 +72,7 @@ const AboutSectionComponent = () => {
                 <FiAward className="text-xl" />
               </div>
               <div>
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400">Since 2015</p>
-                <p className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">8+ Years</p>
+                <p className="text-xs font-medium text-gray-500 dark:text-gray-400">Pix Coders</p>
               </div>
             </div>
           </div>
