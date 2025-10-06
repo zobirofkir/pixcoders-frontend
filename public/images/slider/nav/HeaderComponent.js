@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
+import { FiMenu, FiX, FiChevronDown, FiSearch } from 'react-icons/fi';
 
 const HeaderComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,101 +28,106 @@ const HeaderComponent = () => {
   const navLinks = [
     { name: 'Find Talent', href: '/talent' },
     { name: 'Find Work', href: '/work' },
-    { name: 'Why Us', href: '/why-us' },
+    { name: 'Why Toptal', href: '/why-toptal' },
     { name: 'Enterprise', href: '/enterprise' },
+    { name: 'About Us', href: '/about' },
+  ];
+
+  const authLinks = [
+    { name: 'Log In', href: '/login' },
+    { name: 'Hire Top Talent', href: '/hire', highlight: true },
   ];
 
   return (
-    <header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-md py-2' : 'bg-white/90 backdrop-blur-sm py-4'
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
+    <header className="fixed w-full z-50 bg-white border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center
-           ">
+          <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-blue-600">Pixcoders</span>
+              <Image 
+                src="/images/logo/logo.png" 
+                alt="Pixcoders Logo" 
+                width={120} 
+                height={32}
+                className="h-auto w-auto"
+                priority
+              />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6 ml-10">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href}
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium text-sm uppercase tracking-wider"
-              >
-                {link.name}
-              </Link>
+              <div key={link.name} className="relative group">
+                <Link 
+                  href={link.href}
+                  className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium flex items-center"
+                >
+                  {link.name}
+                  <FiChevronDown className="ml-1 h-4 w-4" />
+                </Link>
+                {/* Dropdown menu would go here */}
+              </div>
             ))}
           </nav>
 
-          {/* Auth Buttons - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link 
-              href="/login" 
-              className="px-4 py-2 text-blue-600 font-medium hover:bg-blue-50 rounded transition-colors"
-            >
-              Log In
-            </Link>
-            <Link 
-              href="/signup" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-medium transition-colors"
-            >
-              Sign Up
-            </Link>
+          {/* Right side items */}
+          <div className="hidden md:flex items-center space-x-6">
+            <button className="text-gray-700 hover:text-gray-900">
+              <FiSearch className="h-5 w-5" />
+            </button>
+            <div className="flex items-center space-x-4">
+              {authLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`px-4 py-2 text-sm font-medium ${
+                    link.highlight 
+                      ? 'bg-green-500 hover:bg-green-600 text-white rounded-md' 
+                      : 'text-gray-700 hover:text-gray-900'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="-mr-2 flex md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-700 hover:text-blue-600 focus:outline-none"
-              aria-label="Toggle menu"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
+              aria-expanded="false"
             >
+              <span className="sr-only">Open main menu</span>
               {isMenuOpen ? (
-                <FiX className="h-6 w-6" />
+                <FiX className="block h-6 w-6" />
               ) : (
-                <FiMenu className="h-6 w-6" />
+                <FiMenu className="block h-6 w-6" />
               )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
+          <div className="md:hidden">
+            <div className="pt-2 pb-3 space-y-1">
+              {[...navLinks, ...authLinks].map((link) => (
                 <Link
-                  key={link.name}
+                  key={`${link.name}-mobile`}
                   href={link.href}
-                  className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md font-medium"
+                  className={`block px-3 py-2 text-base font-medium rounded-md ${
+                    link.highlight 
+                      ? 'bg-green-500 text-white hover:bg-green-600' 
+                      : 'text-gray-700 hover:bg-gray-100'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="border-t border-gray-200 pt-4 mt-2">
-                <Link
-                  href="/login"
-                  className="block px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-md font-medium mb-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Log In
-                </Link>
-                <Link
-                  href="/signup"
-                  className="block px-3 py-2 text-center bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sign Up
-                </Link>
-              </div>
             </div>
           </div>
         )}
