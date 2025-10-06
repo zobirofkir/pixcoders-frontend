@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSectionComponent, FilterButtonsComponent, WorksGridComponent, CTASectionComponent } from '@/src/components';
 import { workData } from '@/src/data/workData';
+import LoadingComponent from '@/src/components/loading/LoadingComponent';
 
 
 const WorksPage = () => {
@@ -61,49 +62,53 @@ const WorksPage = () => {
   };
 
   return (
-    <motion.div 
-      className="min-h-screen bg-white dark:bg-gray-900"
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={pageVariants}
-    >
-      <HeroSectionComponent 
-        title="Our Work Speaks for Itself"
-        description="We've helped businesses of all sizes transform their ideas into successful digital products. Here are some of our recent projects."
+    <Suspense fallback={LoadingComponent}>
+
+      <motion.div 
+        className="min-h-screen bg-white dark:bg-gray-900"
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageVariants}
       >
-        <motion.div
-          key={activeFilter}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+        <HeroSectionComponent 
+          title="Our Work Speaks for Itself"
+          description="We've helped businesses of all sizes transform their ideas into successful digital products. Here are some of our recent projects."
         >
-          <FilterButtonsComponent
-            filters={filters}
-            activeFilter={activeFilter}
-            onFilterChange={handleFilterChange}
-          />
-        </motion.div>
-      </HeroSectionComponent>
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FilterButtonsComponent
+              filters={filters}
+              activeFilter={activeFilter}
+              onFilterChange={handleFilterChange}
+            />
+          </motion.div>
+        </HeroSectionComponent>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeFilter}
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-          className="container mx-auto px-4 py-12"
-        >
-          <WorksGridComponent 
-            works={filteredWorks} 
-            visibleWorks={visibleWorks} 
-            onLoadMore={loadMore} 
-          />
-        </motion.div>
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="container mx-auto px-4 py-12"
+          >
+            <WorksGridComponent 
+              works={filteredWorks} 
+              visibleWorks={visibleWorks} 
+              onLoadMore={loadMore} 
+            />
+          </motion.div>
+        </AnimatePresence>
 
-      <CTASectionComponent />
-    </motion.div>
+        <CTASectionComponent />
+      </motion.div>
+
+    </Suspense>
   );
 };
 
