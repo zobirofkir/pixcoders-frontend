@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import TalentFilters from '@/src/components/users/talent/TalentFiltersComponent';
-import TalentCard from '@/src/components/users/talent/TalentCardComponent';
+import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
+import TalentCardComponent from '@/src/components/users/talent/TalentCardComponent';
 
 // Mock data - in a real app, this would come from an API
 const mockTalents = [
@@ -154,7 +154,7 @@ const TalentsPage = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
           <div className="lg:w-1/4">
-            <TalentFilters onFilterChange={setFilters} />
+            <TalentFiltersComponent onFilterChange={setFilters} />
           </div>
 
           {/* Talents Grid */}
@@ -177,7 +177,7 @@ const TalentsPage = () => {
             {talents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {talents.map((talent) => (
-                  <TalentCard key={talent.id} talent={talent} />
+                  <TalentCardComponent key={talent.id} talent={talent} />
                 ))}
               </div>
             ) : (
