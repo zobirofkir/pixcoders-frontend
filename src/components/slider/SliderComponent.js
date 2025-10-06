@@ -13,8 +13,22 @@ import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
 const SliderComponent = () => {
   const [current, setCurrent] = useState(0);
   const [selectedUser, setSelectedUser] = useState(profileData[0]); // Default to first user
-  const totalSlides = Math.ceil(profileData.length / CARDS_PER_SLIDE);
-  const transformOffset = current * (100 / CARDS_PER_SLIDE);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Calculate responsive values
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+  
+  const cardsToShow = isMobile ? 1 : CARDS_PER_SLIDE;
+  const totalSlides = Math.ceil(profileData.length / cardsToShow);
+  const transformOffset = current * (100 / cardsToShow);
 
   /**
    * Handles card click to update selected user
@@ -170,11 +184,11 @@ const SliderComponent = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="relative max-w-6xl mx-auto mt-16"
+          className="relative w-full max-w-6xl mx-auto mt-8 sm:mt-16 px-2 sm:px-4"
         >
-          <div className="overflow-hidden">
+          <div className="overflow-x-auto pb-4 -mx-2 sm:mx-0">
             <motion.div
-              className="flex"
+              className="flex w-full"
               animate={{ 
                 x: `-${transformOffset}%`,
                 transition: { type: 'spring', stiffness: 300, damping: 30 }
@@ -183,11 +197,11 @@ const SliderComponent = () => {
               {profileData.map((profile, index) => (
                 <motion.div
                   key={profile.id}
-                  className={`w-full flex-shrink-0 p-4 sm:w-1/${CARDS_PER_SLIDE} lg:w-1/${CARDS_PER_SLIDE}`}
+                  className={`flex-shrink-0 p-2 sm:p-4 w-full ${isMobile ? 'sm:w-full' : `sm:w-1/${cardsToShow} lg:w-1/${cardsToShow}`}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 * (index % CARDS_PER_SLIDE) }}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.5, delay: 0.1 * (index % cardsToShow) }}
+                  whileHover={{ y: isMobile ? 0 : -5, transition: { duration: 0.2 } }}
                 >
                   <motion.div 
                     className={`bg-gray-50 border-2 ${selectedUser?.id === profile.id ? 'border-blue-200' : 'border-gray-100'} p-4 rounded-xl flex flex-col items-center text-center h-full cursor-pointer transition-all duration-300`}
@@ -238,47 +252,41 @@ const SliderComponent = () => {
           </div>
           
           {totalSlides > 1 && (
-            <>
-              <motion.button 
-                onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -ml-12 p-3 rounded-full bg-white shadow-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all z-10"
-                aria-label="Previous slide"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FiChevronLeft className="h-6 w-6" />
-              </motion.button>
-              
-              <motion.button 
-                onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 -mr-12 p-3 rounded-full bg-white shadow-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all z-10"
-                aria-label="Next slide"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <FiChevronRight className="h-6 w-6" />
-              </motion.button>
-            </>
-          )}
-
-          {totalSlides > 1 && (
             <motion.div 
-              className="flex justify-center mt-8 space-x-2"
+              className="flex justify-center mt-6 sm:mt-8 space-x-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              {[...Array(totalSlides)].map((_, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => setCurrent(index)}
-                  className={`h-2 rounded-full ${current === index ? 'bg-blue-600' : 'bg-gray-300'}`}
-                  animate={current === index ? { width: 24 } : { width: 8 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  aria-label={`Go to slide ${index + 1}`}
-                  whileHover={{ scale: 1.2 }}
-                />
-              ))}
+              <button
+                onClick={prevSlide}
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+                aria-label="Previous slide"
+                disabled={current === 0}
+              >
+                <FiChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-700" />
+              </button>
+              <div className="flex items-center space-x-1">
+                {Array.from({ length: totalSlides }).map((_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => setCurrent(index)}
+                    className={`h-2 rounded-full ${current === index ? 'bg-blue-600' : 'bg-gray-300'}`}
+                    animate={current === index ? { width: 24 } : { width: 8 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    aria-label={`Go to slide ${index + 1}`}
+                    whileHover={{ scale: 1.2 }}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={nextSlide}
+                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+                aria-label="Next slide"
+                disabled={current === totalSlides - 1}
+              >
+                <FiChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-gray-700" />
+              </button>
             </motion.div>
           )}
         </motion.div>
