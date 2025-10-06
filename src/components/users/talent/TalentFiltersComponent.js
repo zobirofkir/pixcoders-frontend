@@ -1,11 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { 
-  FilterSection, 
-  SearchFilter, 
-  SkillsFilter, 
-  RateFilter, 
-  AvailabilityFilter 
+  FilterSectionComponent, 
+  SearchFilterComponent, 
+  SkillsFilterComponent, 
+  RateFilterComponent, 
+  AvailabilityFilterComponent 
 } from './filters';
 
 export const TalentFiltersComponent = ({ onFilterChange }) => {
@@ -75,56 +75,56 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
       <h2 className="text-xl font-bold text-gray-800 mb-4 lg:mb-6">Find Top Talent</h2>
       
       {/* Search Section */}
-      <FilterSection 
+      <FilterSectionComponent
         title="Search" 
         isOpen={openSections.search} 
         onToggle={() => toggleSection('search')}
         isMobile={isMobile}
       >
-        <SearchFilter 
+        <SearchFilterComponent
           search={filters.search} 
           onChange={handleChange} 
         />
-      </FilterSection>
+      </FilterSectionComponent>
 
       {/* Skills Section */}
-      <FilterSection 
+      <FilterSectionComponent 
         title="Skills" 
         isOpen={openSections.skills} 
         onToggle={() => toggleSection('skills')}
         isMobile={isMobile}
       >
-        <SkillsFilter 
+        <SkillsFilterComponent 
           selectedSkills={filters.skills} 
           onSkillToggle={toggleSkill} 
         />
-      </FilterSection>
+      </FilterSectionComponent>
 
       {/* Hourly Rate Section */}
-      <FilterSection 
+      <FilterSectionComponent 
         title="Hourly Rate" 
         isOpen={openSections.rate} 
         onToggle={() => toggleSection('rate')}
         isMobile={isMobile}
       >
-        <RateFilter 
+        <RateFilterComponent
           rate={filters.rate} 
           onRateChange={handleRateChange} 
         />
-      </FilterSection>
+      </FilterSectionComponent>
 
       {/* Availability Section */}
-      <FilterSection 
+      <FilterSectionComponent 
         title="Availability" 
         isOpen={openSections.availability} 
         onToggle={() => toggleSection('availability')}
         isMobile={isMobile}
       >
-        <AvailabilityFilter 
+        <AvailabilityFilterComponent
           value={filters.availability} 
           onChange={handleChange} 
         />
-      </FilterSection>
+      </FilterSectionComponent>
     </div>
   );
 };
