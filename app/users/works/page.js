@@ -2,9 +2,9 @@
 
 import { Suspense, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HeroSectionComponent, FilterButtonsComponent, WorksGridComponent, CTASectionComponent } from '@/src/components';
-import { workData } from '@/src/data/workData';
-import LoadingComponent from '@/src/components/loading/LoadingComponent';
+import { HeroSectionComponent, FilterButtonsComponent, WorksGridComponent, CTASectionComponent } from '@/components';
+import { workData } from '@/data/workData';
+import LoadingComponent from '@/components/loading/LoadingComponent';
 
 
 const WorksPage = () => {
