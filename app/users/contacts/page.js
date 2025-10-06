@@ -1,5 +1,5 @@
-import ContactComponent from '@/src/components/users/contact/ContactComponent'
-import LoadingComponent from '@/src/components/loading/LoadingComponent'
+import LoadingComponent from '@/components/loading/LoadingComponent'
+import ContactComponent from '@/components/users/contact/ContactComponent'
 import React, { Suspense } from 'react'
 
 const page = () => {

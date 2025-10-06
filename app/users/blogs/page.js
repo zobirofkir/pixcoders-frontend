@@ -10,7 +10,7 @@ import {
   PostCard,
   Pagination,
   Newsletter
-} from '@/src/components/blogs';
+} from '@/src/components';
 
 export default function BlogPage() {
   const {
