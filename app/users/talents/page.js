@@ -1,11 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { motion, AnimatePresence } from 'framer-motion';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
 import TalentCardComponent from '@/src/components/users/talent/TalentCardComponent';
-import { talentData } from '@/src/data/talentData';
-
+import { useTalents } from '@/src/hooks/useTalents';
 
 /**
  * Animation variants
@@ -35,49 +33,13 @@ const item = {
 };
 
 const page = () => {
-  const [talents, setTalents] = useState(talentData);
-  const [filters, setFilters] = useState({
-    search: '',
-    skills: [],
-    availability: '',
-    rate: { min: 0, max: 200 },
-  });
-  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-
-  const filterTalents = () => {
-    return talentData.filter((talent) => {
-      const matchesSearch =
-        talent.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-        talent.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-        talent.skills.some((skill) =>
-          skill.toLowerCase().includes(filters.search.toLowerCase())
-        );
-
-      const matchesSkills =
-        filters.skills.length === 0 ||
-        filters.skills.every((skill) => talent.skills.includes(skill));
-
-      const matchesAvailability =
-        !filters.availability || talent.availability === filters.availability;
-
-      const matchesRate =
-        talent.rate >= filters.rate.min && talent.rate <= filters.rate.max;
-
-      return (
-        matchesSearch &&
-        matchesSkills &&
-        matchesAvailability &&
-        matchesRate
-      );
-    });
-  };
-
-  /**
-   * Update talents when filters change
-   */
-  useEffect(() => {
-    setTalents(filterTalents());
-  }, [filters]);
+  const {
+    talents,
+    filters,
+    setFilters,
+    isMobileFiltersOpen,
+    setIsMobileFiltersOpen
+  } = useTalents();
 
   return (
     <motion.div 
