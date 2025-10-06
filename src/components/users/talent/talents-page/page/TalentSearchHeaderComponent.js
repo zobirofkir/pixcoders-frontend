@@ -1,4 +1,4 @@
-export const TalentSearchHeader = ({ count }) => (
+export const TalentSearchHeaderComponent = ({ count }) => (
   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
     <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
       {count} {count === 1 ? 'Talent' : 'Talents'} Found
@@ -15,4 +15,4 @@ export const TalentSearchHeader = ({ count }) => (
   </div>
 );
 
-export default TalentSearchHeader;
+export default TalentSearchHeaderComponent;

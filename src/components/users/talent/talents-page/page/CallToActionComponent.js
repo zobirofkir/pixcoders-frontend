@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-export const CallToAction = () => (
+export const CallToActionComponent = () => (
   <motion.section 
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -20,4 +20,4 @@ export const CallToAction = () => (
   </motion.section>
 );
 
-export default CallToAction;
+export default CallToActionComponent;

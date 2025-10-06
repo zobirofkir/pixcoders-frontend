@@ -25,7 +25,7 @@ const item = {
   }
 };
 
-export const TalentGrid = ({ talents }) => (
+export const TalentGridComponent = ({ talents }) => (
   <AnimatePresence>
     {talents.length > 0 ? (
       <motion.div 
@@ -55,4 +55,4 @@ export const TalentGrid = ({ talents }) => (
   </AnimatePresence>
 );
 
-export default TalentGrid;
+export default TalentGridComponent;

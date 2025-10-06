@@ -1,4 +1,4 @@
-export const Pagination = () => (
+export const PaginationComponent = () => (
   <div className="mt-8 flex justify-center">
     <nav className="flex items-center space-x-2">
       <button className="px-3 py-1 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50">
@@ -24,4 +24,4 @@ export const Pagination = () => (
   </div>
 );
 
-export default Pagination;
+export default PaginationComponent;

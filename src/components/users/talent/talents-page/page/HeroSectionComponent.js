@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-export const HeroSection = () => (
+export const HeroSectionComponent = () => (
   <motion.div 
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -18,4 +18,4 @@ export const HeroSection = () => (
   </motion.div>
 );
 
-export default HeroSection;
+export default HeroSectionComponent;
