@@ -57,13 +57,13 @@ const ContactComponent = () => {
     {
       icon: <FiPhone className="w-6 h-6 text-blue-500" />,
       title: 'Call Us',
-      content: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      content: '+212 600000000',
+      href: 'tel:+212600000000',
     },
     {
       icon: <FiMapPin className="w-6 h-6 text-blue-500" />,
       title: 'Visit Us',
-      content: '123 Tech Street, Silicon Valley, CA 94025',
+      content: '123 Tech Street, Morocco',
       href: 'https://maps.google.com',
     },
   ];

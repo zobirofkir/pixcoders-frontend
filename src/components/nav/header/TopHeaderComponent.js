@@ -37,7 +37,7 @@ const TopHeaderComponent = () => {
           <div className="flex flex-row justify-between items-center gap-2 sm:gap-4">
             {/* Phone Number - Always visible */}
             <a 
-              href="tel:+1234567890" 
+              href="tel:+212 600000000" 
               className="flex items-center hover:text-blue-200 transition-colors py-1 px-2 rounded-md hover:bg-blue-700/30 active:scale-95 transform transition-transform"
               aria-label="Call us"
             >
