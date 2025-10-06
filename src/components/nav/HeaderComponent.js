@@ -26,11 +26,11 @@ const HeaderComponent = () => {
 
   return (
     <>
-      <header className={`fixed w-full z-40 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-white'
+      <header className={`fixed w-full z-50 transition-all duration-300 ease-in-out ${
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
       } border-b border-gray-100`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 md:h-20">
             <div className="flex-shrink-0">
               <LogoComponent />
             </div>
@@ -39,8 +39,9 @@ const HeaderComponent = () => {
               <NavLinksComponent />
             </div>
 
-            <div className="hidden md:flex items-center space-x-6 ml-auto">
+            <div className="hidden md:flex items-center space-x-4 ml-auto">
               <SearchButtonComponent />
+              <div className="h-6 w-px bg-gray-200" />
               <AuthLinksComponent />
             </div>
 
@@ -59,7 +60,7 @@ const HeaderComponent = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
               onClick={closeMenu}
               role="presentation"
             />
@@ -70,29 +71,32 @@ const HeaderComponent = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
-              className="fixed top-0 right-0 w-4/5 max-w-sm h-full bg-white shadow-xl z-50 overflow-y-auto"
+              className="fixed top-0 right-0 w-80 h-full bg-white shadow-2xl z-50 overflow-y-auto transform transition-transform duration-300 ease-in-out"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation menu"
             >
-              <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
+              <div className="flex items-center justify-between px-6 h-16 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-100">
                 <LogoComponent />
                 <button
                   onClick={closeMenu}
-                  className="p-2 rounded-md text-gray-500 hover:text-gray-700 focus:outline-none"
+                  className="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
                   aria-label="Close menu"
                 >
                   <FiX size={24} />
                 </button>
               </div>
               
-              <div className="px-6 py-4 space-y-6">
+              <div className="px-6 py-6 space-y-8">
                 <NavLinksComponent isMobile onLinkClick={handleLinkClick} />
-                <div className="pt-4 border-t border-gray-100">
+                <div className="space-y-4">
                   <AuthLinksComponent isMobile onLinkClick={handleLinkClick} />
                 </div>
                 <div className="pt-4 border-t border-gray-100">
                   <SearchButtonComponent isMobile onLinkClick={handleLinkClick} />
+                </div>
+                <div className="pt-4 border-t border-gray-100 text-center">
+                  <p className="text-sm text-gray-500">© {new Date().getFullYear()} Pixcoders. All rights reserved.</p>
                 </div>
               </div>
             </motion.div>
