@@ -144,4 +144,4 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
   );
 };
 
-export default TalentFilters;
+export default TalentFiltersComponent;
