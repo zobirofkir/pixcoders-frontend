@@ -1,13 +1,12 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiX, FiSearch } from 'react-icons/fi';
+import { FiX } from 'react-icons/fi';
 
 import LogoComponent from './header/LogoComponent';
 import NavLinksComponent from './header/NavLinksComponent';
 import AuthLinksComponent from './header/AuthLinksComponent';
 import MobileMenuButtonComponent from './header/MobileMenuButtonComponent';
-import SearchButtonComponent from './header/SearchButtonComponent';
 import { useHeader } from '@/src/hooks/useHeader';
 
 /**
@@ -40,15 +39,11 @@ const HeaderComponent = () => {
             </div>
 
             <div className="hidden md:flex items-center space-x-4 ml-auto">
-              <SearchButtonComponent />
               <div className="h-6 w-px bg-gray-200" />
               <AuthLinksComponent />
             </div>
 
             <div className="md:hidden flex items-center space-x-4">
-              <div className="md:hidden">
-                <SearchButtonComponent onClick={handleLinkClick} />
-              </div>
               <MobileMenuButtonComponent isOpen={isMenuOpen} onClick={toggleMenu} />
             </div>
           </div>
@@ -94,9 +89,6 @@ const HeaderComponent = () => {
                 <NavLinksComponent isMobile onLinkClick={handleLinkClick} />
                 <div className="space-y-4">
                   <AuthLinksComponent isMobile onLinkClick={handleLinkClick} />
-                </div>
-                <div className="pt-4 border-t border-gray-100">
-                  <SearchButtonComponent isMobile onLinkClick={handleLinkClick} />
                 </div>
                 <div className="pt-4 border-t border-gray-100 text-center">
                   <p className="text-sm text-gray-500">© {new Date().getFullYear()} Pixcoders. All rights reserved.</p>
