@@ -1,8 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ProfileCard from './hero/ProfileCard';
-import SliderControls from './hero/SliderControls';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';

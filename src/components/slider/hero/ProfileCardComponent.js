@@ -13,7 +13,7 @@ import { FaCheckCircle } from 'react-icons/fa';
  * @param {boolean} profile.isVerified - Whether the profile is verified
  * @returns {JSX.Element} The rendered profile card
  */
-const ProfileCard = ({ profile }) => {
+const ProfileCardComponent = ({ profile }) => {
   return (
     <motion.div
       className="w-full flex-shrink-0 p-4 sm:w-1/3 lg:w-1/3"
@@ -55,4 +55,4 @@ const ProfileCard = ({ profile }) => {
   );
 };
 
-export default ProfileCard;
+export default ProfileCardComponent;

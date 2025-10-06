@@ -10,7 +10,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
  * @param {number} props.totalSlides - Total number of slides
  * @returns {JSX.Element} The slider navigation controls
  */
-const SliderControls = ({ onPrev, onNext, current, totalSlides }) => {
+const SliderControlComponent = ({ onPrev, onNext, current, totalSlides }) => {
   return (
     <div className="flex justify-between items-center mt-8">
       <button
@@ -48,4 +48,4 @@ const SliderControls = ({ onPrev, onNext, current, totalSlides }) => {
   );
 };
 
-export default SliderControls;
+export default SliderControlComponent;
