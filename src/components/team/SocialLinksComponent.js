@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiGithub, FiLinkedin, FiTwitter, FiGlobe } from 'react-icons/fi';
 
-const SocialLinks = ({ member }) => (
+const SocialLinksComponent = ({ member }) => (
   <div className="flex space-x-3">
     {member.social?.twitter && (
       <SocialLink 
@@ -46,4 +46,4 @@ const SocialLink = ({ href, label, icon }) => (
   </a>
 );
 
-export default SocialLinks;
+export default SocialLinksComponent;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const JoinTeam = () => (
+const JoinTeamComponent = () => (
   <div className="mt-16 text-center">
     <h2 className="text-2xl font-bold text-gray-900 mb-4">Want to join our team?</h2>
     <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -12,4 +12,4 @@ const JoinTeam = () => (
   </div>
 );
 
-export default JoinTeam;
+export default JoinTeamComponent;

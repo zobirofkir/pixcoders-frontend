@@ -3,9 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import SocialLinks from './SocialLinks';
+import SocialLinks from './SocialLinksComponent';
 
-const TeamMemberCard = ({ member }) => {
+const TeamMemberCardComponent = ({ member }) => {
   if (member.isJoinCard) {
     return (
       <motion.div 
@@ -69,4 +69,4 @@ const TeamMemberImage = ({ member }) => (
   </div>
 );
 
-export default TeamMemberCard;
+export default TeamMemberCardComponent;

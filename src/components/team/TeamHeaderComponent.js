@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TeamHeader = () => (
+const TeamHeaderComponent = () => (
   <div className="text-center mb-16">
     <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
       Meet Our <span className="text-indigo-600">Team</span>
@@ -11,4 +11,4 @@ const TeamHeader = () => (
   </div>
 );
 
-export default TeamHeader;
+export default TeamHeaderComponent;

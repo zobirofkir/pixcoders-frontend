@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import TeamHeader from '@/src/components/team/TeamHeader';
-import TeamMemberCard from '@/src/components/team/TeamMemberCard';
-import JoinTeam from '@/src/components/team/JoinTeam';
+import TeamHeader from '@/src/components/team/TeamHeaderComponent';
+import TeamMemberCard from '@/src/components/team/TeamMemberCardComponent';
+import JoinTeam from '@/src/components/team/JoinTeamComponent';
 import teamMembers from '@/src/data/teamMembers';
 
 const TeamPage = () => {
