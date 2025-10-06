@@ -3,7 +3,7 @@ import Link from 'next/link';
 const navLinks = [
   { name: 'Find Talent', href: '/talent' },
   { name: 'Find Work', href: '/work' },
-  { name: 'Why Toptal', href: '/why-toptal' },
+  { name: 'Why Pix Coders', href: '/why-pix-coders' },
   { name: 'Enterprise', href: '/enterprise' },
   { name: 'About Us', href: '/about' },
 ];

@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiClock, FiCalendar } from 'react-icons/fi';
 
 const ContactComponent = () => {
@@ -25,7 +26,9 @@ const ContactComponent = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    /**
+     * Simulate form submission
+     */
     setTimeout(() => {
       console.log('Form submitted:', formData);
       setIsSubmitting(false);
@@ -37,7 +40,6 @@ const ContactComponent = () => {
         message: '',
       });
       
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
@@ -66,9 +68,15 @@ const ContactComponent = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="inline-block px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full mb-4">
             Get In Touch
           </span>
@@ -78,16 +86,25 @@ const ContactComponent = () => {
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Have a project in mind or want to discuss potential opportunities? We'd love to hear from you.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
             {isSubmitted ? (
               <div className="text-center py-12">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-6">
+                <motion.div 
+                  className="inline-flex items-center justify-center w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full mb-6"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20
+                  }}
+                >
                   <FiCheckCircle className="w-8 h-8 text-green-500" />
-                </div>
+                </motion.div>
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Message Sent!</h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   Thank you for reaching out. We'll get back to you within 24 hours.
@@ -159,10 +176,13 @@ const ContactComponent = () => {
                     ></textarea>
                   </div>
                   <div className="pt-2">
-                    <button
+                    <motion.button
                       type="submit"
                       disabled={isSubmitting}
                       className={`w-full flex items-center justify-center px-6 py-3.5 text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                      whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                      animate={isSubmitting ? { opacity: 0.7 } : { opacity: 1 }}
                     >
                       {isSubmitting ? (
                         'Sending...'
@@ -172,7 +192,7 @@ const ContactComponent = () => {
                           Send Message
                         </>
                       )}
-                    </button>
+                    </motion.button>
                   </div>
                 </form>
               </>
@@ -180,7 +200,13 @@ const ContactComponent = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Contact Information</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-8">
@@ -189,12 +215,18 @@ const ContactComponent = () => {
               
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
-                  <a
+                  <motion.a
                     key={index}
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-start space-x-4 group"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.1 * index }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-500 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors duration-200">
                       {item.icon}
@@ -203,7 +235,7 @@ const ContactComponent = () => {
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h4>
                       <p className="text-gray-600 dark:text-gray-400">{item.content}</p>
                     </div>
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>
@@ -224,7 +256,7 @@ const ContactComponent = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
