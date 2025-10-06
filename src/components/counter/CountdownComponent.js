@@ -2,6 +2,31 @@
 
 import { useEffect, useState } from 'react';
 
+/**
+ * TimeUnit is a reusable component that displays a single time unit with its label.
+ * @param {Object} props - Component props
+ * @param {string} props.value - The numeric value to display
+ * @param {string} props.label - The label for the time unit (e.g., 'Days', 'Hours')
+ * @returns {JSX.Element} A styled time unit component
+ */
+const TimeUnit = ({ value, label }) => (
+  <div className="flex flex-col items-center mx-2">
+    <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-white rounded-xl shadow-md">
+      <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        {value}
+      </span>
+    </div>
+    <span className="mt-2 text-sm sm:text-base text-gray-500 font-medium">{label}</span>
+  </div>
+);
+
+/**
+ * CountdownComponent displays a countdown timer showing the time remaining until a target date.
+ * The target date is stored in localStorage to persist across page refreshes.
+ * If no target date exists, it defaults to 2 months from the current date.
+ * 
+ * @returns {JSX.Element} A countdown timer component with months, days, hours, minutes, and seconds
+ */
 const CountdownComponent = () => {
   const [timeLeft, setTimeLeft] = useState({
     months: '--',
@@ -12,9 +37,9 @@ const CountdownComponent = () => {
   });
   
   /**
-   * Function to format time values with leading zeros
-   * @param {*} value 
-   * @returns 
+   * Formats a numeric time value to ensure it has at least 2 digits with leading zeros.
+   * @param {number} value - The numeric value to format
+   * @returns {string} The formatted string with leading zeros
    */
   const formatTimeValue = (value) => {
     return value < 0 ? '00' : value.toString().padStart(2, '0');
@@ -40,7 +65,6 @@ const CountdownComponent = () => {
       const now = new Date().getTime();
       let distance = countDownDate - now;
       
-      // If countdown is finished, clear the stored date and reset
       if (distance < 0) {
         if (typeof window !== 'undefined') {
           localStorage.removeItem(STORAGE_KEY);
@@ -48,7 +72,6 @@ const CountdownComponent = () => {
         distance = 0;
       }
 
-      // Calculate time units
       const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
       const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -65,22 +88,9 @@ const CountdownComponent = () => {
     };
 
     updateCountdown();
-
     const timer = setInterval(updateCountdown, 1000);
-
     return () => clearInterval(timer);
   }, []);
-
-  const TimeUnit = ({ value, label }) => (
-    <div className="flex flex-col items-center mx-2">
-      <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center bg-white rounded-xl shadow-md">
-        <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-          {value}
-        </span>
-      </div>
-      <span className="mt-2 text-sm sm:text-base text-gray-500 font-medium">{label}</span>
-    </div>
-  );
 
   return (
     <div className="my-8">
