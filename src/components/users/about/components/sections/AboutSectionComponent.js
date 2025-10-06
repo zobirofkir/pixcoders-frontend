@@ -5,7 +5,7 @@ import { container, fadeInUp, staggerContainer } from '../../../../../animations
 import ImageLogo from '../../../../../../public/images/logo/logo.png';
 import SkillsList from '../ui/SkillsListComponent';
 import { FiAward, FiUsers, FiLayers, FiCode, FiChevronRight } from 'react-icons/fi';
-import { Button } from '../../../../../components/ui/Button';
+import { ButtonComponent } from '../../../../ui/ButtonComponent';
 
 const stats = [
   { 
@@ -122,14 +122,14 @@ const AboutSectionComponent = () => {
               </motion.p>
               
               <motion.div variants={fadeInUp} className="pt-4">
-                <Button 
+                <ButtonComponent 
                   variant="primary"
                   size="lg"
                   className="group inline-flex items-center px-8 py-3 text-base font-medium rounded-full transition-all duration-300"
                 >
                   Learn More About Us
                   <FiChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-                </Button>
+                </ButtonComponent>
               </motion.div>
             </div>
           </motion.div>

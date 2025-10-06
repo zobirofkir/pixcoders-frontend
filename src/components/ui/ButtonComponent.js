@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowRight, FiExternalLink } from 'react-icons/fi';
 
-const Button = React.forwardRef(({
+const ButtonComponent = React.forwardRef(({
   children,
   variant = 'primary',
   size = 'md',
@@ -86,6 +86,6 @@ const Button = React.forwardRef(({
   );
 });
 
-Button.displayName = 'Button';
+ButtonComponent.displayName = 'Button';
 
-export { Button };
+export { ButtonComponent };
