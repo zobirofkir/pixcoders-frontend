@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const TalentCard = ({ talent }) => {
+const TalentCardComponent = ({ talent }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative h-48 bg-gray-100">
@@ -45,4 +45,4 @@ const TalentCard = ({ talent }) => {
   );
 };
 
-export default TalentCard;
+export default TalentCardComponent;

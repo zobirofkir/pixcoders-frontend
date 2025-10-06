@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import TalentFilters from '@/src/components/users/TalentFilters';
-import TalentCard from '@/src/components/users/TalentCard';
+import TalentFilters from '@/src/components/users/talent/TalentFiltersComponent';
+import TalentCard from '@/src/components/users/talent/TalentCardComponent';
 
 // Mock data - in a real app, this would come from an API
 const mockTalents = [

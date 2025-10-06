@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-export const TalentFilters = ({ onFilterChange }) => {
+export const TalentFiltersComponent = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
     search: '',
     skills: [],
