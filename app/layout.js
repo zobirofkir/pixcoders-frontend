@@ -11,11 +11,12 @@ export default function RootLayout({ children }) {
       <header>
         <HeaderComponent />
       </header>
+      
+      <body>{children}</body>
 
       <footer>
         <FooterComponent />
       </footer>
-      <body>{children}</body>
     </html>
   );
 }
