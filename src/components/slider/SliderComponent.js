@@ -3,9 +3,9 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
 import { useSlider } from '../../hooks/useSlider';
-import SliderCard from './hero/SliderCardComponent';
-import SelectedProfile from './hero/SelectedProfileComponent';
-import SliderControls from './hero/SliderControlsComponent';
+import SliderCardComponent from './hero/SliderCardComponent';
+import SelectedProfileComponent from './hero/SelectedProfileComponent';
+import SliderControlsComponent from './hero/SliderControlsComponent';
 
 /**
  * A responsive slider component that displays professional profiles in a carousel.
@@ -40,7 +40,7 @@ const SliderComponent = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-left mb-12 min-h-[300px] relative">
           <AnimatePresence mode="wait">
-            <SelectedProfile user={selectedUser} />
+            <SelectedProfileComponent user={selectedUser} />
           </AnimatePresence>
         </div>
 
@@ -59,7 +59,7 @@ const SliderComponent = () => {
               }}
             >
               {profileData.map((profile, index) => (
-                <SliderCard
+                <SliderCardComponent
                   key={profile.id}
                   profile={profile}
                   isSelected={selectedUser?.id === profile.id}
@@ -73,7 +73,7 @@ const SliderComponent = () => {
           </div>
           
           {totalSlides > 1 && (
-            <SliderControls
+            <SliderControlsComponent
               onPrev={prevSlide}
               onNext={nextSlide}
               current={current}
