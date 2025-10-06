@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ImageLogo from '@/public/images/logo/logo.png';
 
 const stats = [
   { value: '10+', label: 'Years Experience' },
@@ -40,7 +41,7 @@ const AboutComponent = () => {
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 mix-blend-overlay" />
               <Image
-                src="/images/team.jpg"
+                src={ImageLogo}
                 alt="Our Team"
                 fill
                 className="object-cover"
