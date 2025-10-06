@@ -1,8 +1,9 @@
 'use client';
 import Head from 'next/head';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
 import TalentCardComponent from '@/src/components/users/talent/TalentCardComponent';
+import MobileFilters from '@/src/components/users/talent/MobileFilters';
 import { useTalents } from '@/src/hooks/useTalents';
 
 /**
@@ -82,65 +83,25 @@ const page = () => {
             <TalentFiltersComponent onFilterChange={setFilters} />
           </div>
 
-          {/* Mobile Filters Trigger - Only shown on small screens */}
+          {/* Mobile Filter Trigger and Overlay */}
           <div className="lg:hidden mb-4">
             <button 
               onClick={() => setIsMobileFiltersOpen(true)}
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors"
+              aria-label="Open filters"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
               </svg>
               Filter & Sort
             </button>
+            
+            <MobileFilters 
+              isOpen={isMobileFiltersOpen}
+              onClose={() => setIsMobileFiltersOpen(false)}
+              onFilterChange={setFilters}
+            />
           </div>
-
-          {/* Mobile Filters Overlay */}
-          <AnimatePresence>
-            {isMobileFiltersOpen && (
-              <>
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-                  onClick={() => setIsMobileFiltersOpen(false)}
-                />
-                <motion.div 
-                  initial={{ x: '-100%' }}
-                  animate={{ x: 0 }}
-                  exit={{ x: '-100%' }}
-                  transition={{ type: 'tween', duration: 0.3 }}
-                  className="fixed left-0 top-0 bottom-0 w-4/5 max-w-sm bg-white z-50 shadow-xl overflow-y-auto"
-                >
-                  <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-                    <h3 className="text-lg font-medium text-gray-900">Filters</h3>
-                    <button 
-                      onClick={() => setIsMobileFiltersOpen(false)}
-                      className="text-gray-400 hover:text-gray-500"
-                    >
-                      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="p-4">
-                    <TalentFiltersComponent onFilterChange={setFilters} />
-                    <div className="mt-6">
-                      <button
-                        type="button"
-                        onClick={() => setIsMobileFiltersOpen(false)}
-                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      >
-                        Apply Filters
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
 
           {/* Talents Grid */}
           <motion.div 
