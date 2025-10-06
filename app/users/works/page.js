@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { HeroSectionComponent, FilterButtonsComponent, WorksGridComponent, CTASectionComponent } from '@/src/components/users/works';
+import { HeroSectionComponent, FilterButtonsComponent, WorksGridComponent, CTASectionComponent } from '@/src/components';
 
 // Sample work data - replace with your actual work data
 const works = [
