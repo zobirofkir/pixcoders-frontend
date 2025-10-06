@@ -5,8 +5,18 @@ import { FormInput } from './FormInputComponent';
 import { SubmitButton } from './SubmitButtonComponent';
 import { SocialLogin } from './SocialLoginComponent';
 import { itemVariants } from '../../../animations/animations';
+import { useLoginContext } from '../../../context/LoginContext';
 
 export const LoginFormComponent = () => {
+  const {
+    formData,
+    isLoading,
+    error,
+    showPassword,
+    handleChange,
+    handleSubmit,
+    togglePasswordVisibility,
+  } = useLoginContext();
   return (
     <div className="space-y-6">
       <FormInput
