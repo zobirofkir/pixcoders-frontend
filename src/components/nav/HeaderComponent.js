@@ -3,12 +3,12 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiX } from 'react-icons/fi';
 
-import { useHeader } from '@/hooks/useHeader';
 import LogoComponent from './header/LogoComponent';
 import NavLinksComponent from './header/NavLinksComponent';
 import AuthLinksComponent from './header/AuthLinksComponent';
 import MobileMenuButtonComponent from './header/MobileMenuButtonComponent';
 import SearchButtonComponent from './header/SearchButtonComponent';
+import { useHeader } from '@/src/hooks/useHeader';
 
 /**
  * HeaderComponent - A responsive header with mobile menu functionality
