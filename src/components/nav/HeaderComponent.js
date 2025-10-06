@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
-// Import components
-import Logo from './header/LogoComponent';
-import NavLinks from './header/NavLinksComponent';
-import AuthLinks from './header/AuthLinksComponent';
-import MobileMenuButton from './header/MobileMenuButtonComponent';
-import SearchButton from './header/SearchButtonComponent';
+import LogoComponent from './header/LogoComponent';
+import NavLinksComponent from './header/NavLinksComponent';
+import AuthLinksComponent from './header/AuthLinksComponent';
+import MobileMenuButtonComponent from './header/MobileMenuButtonComponent';
+import SearchButtonComponent from './header/SearchButtonComponent';
 
 const HeaderComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,29 +38,29 @@ const HeaderComponent = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center h-16">
           {/* Logo */}
-          <Logo />
+          <LogoComponent />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 ml-10">
-            <NavLinks />
+            <NavLinksComponent />
           </div>
 
           {/* Right side items */}
           <div className="hidden md:flex items-center space-x-6 ml-auto">
-            <SearchButton />
-            <AuthLinks />
+            <SearchButtonComponent />
+            <AuthLinksComponent />
           </div>
 
           {/* Mobile menu button */}
-          <MobileMenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
+          <MobileMenuButtonComponent isOpen={isMenuOpen} onClick={toggleMenu} />
         </div>
 
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="pt-2 pb-3 space-y-1">
-              <NavLinks isMobile onLinkClick={handleLinkClick} />
-              <AuthLinks isMobile onLinkClick={handleLinkClick} />
+              <NavLinksComponent isMobile onLinkClick={handleLinkClick} />
+              <AuthLinksComponent isMobile onLinkClick={handleLinkClick} />
             </div>
           </div>
         )}
