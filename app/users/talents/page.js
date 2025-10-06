@@ -1,4 +1,5 @@
 'use client';
+import { Suspense } from 'react';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
@@ -20,13 +21,14 @@ const TalentsPage = () => {
   } = useTalents();
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gray-50"
-    >
+    <Suspense fallback={<LoadingFallback />}>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="min-h-screen bg-gray-50"
+      >
       <Head>
         <title>Top Talents | Find Skilled Professionals</title>
         <meta
@@ -78,8 +80,9 @@ const TalentsPage = () => {
         </div>
       </main>
 
-      <CallToActionComponent />
-    </motion.div>
+        <CallToActionComponent />
+      </motion.div>
+    </Suspense>
   );
 };
 
