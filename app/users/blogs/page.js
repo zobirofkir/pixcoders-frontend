@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FiSearch, FiClock, FiCalendar, FiTag, FiArrowRight } from 'react-icons/fi';
 import Image from 'next/image';
 import Link from 'next/link';
+import { blogsData } from '@/src/data/blogsData';
 
 
 const categories = ['All', 'Development', 'React', 'CSS', 'JavaScript', 'UI/UX', 'Tutorials'];
@@ -14,7 +15,7 @@ export default function BlogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
 
-  const filteredPosts = blogPosts.filter(post => {
+  const filteredPosts = blogsData.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
@@ -26,7 +27,7 @@ export default function BlogPage() {
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
-  const featuredPosts = blogPosts.filter(post => post.featured);
+  const featuredPosts = blogsData.filter(post => post.featured);
 
   return (
     <div className="min-h-screen bg-gray-50">
