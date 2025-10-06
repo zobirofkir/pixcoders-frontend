@@ -66,20 +66,18 @@ function usePrevious(value) {
 
 /**
  * CountdownComponent displays a countdown timer showing the time remaining until a target date.
- * The target date is stored in localStorage to persist across page refreshes.
- * If no target date exists, it defaults to 2 months from the current date.
  * 
- * @returns {JSX.Element} A countdown timer component with months, days, hours, minutes, and seconds
+ * @returns {JSX.Element} A countdown timer component with weeks, days, hours, minutes, and seconds
  */
 const CountdownComponent = () => {
   const [timeLeft, setTimeLeft] = useState({
-    months: '--',
+    weeks: '--',
     days: '--',
     hours: '--',
     minutes: '--',
     seconds: '--',
   });
-  
+
   /**
    * Formats a numeric time value to ensure it has at least 2 digits with leading zeros.
    * @param {number} value - The numeric value to format
@@ -93,16 +91,18 @@ const CountdownComponent = () => {
     const STORAGE_KEY = 'countdownTargetDate';
     let countDownDate;
     
-    const storedDate = typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
+    // Set Moroccan timezone (UTC+1, but handles DST automatically)
+    const now = new Date();
+    const options = { timeZone: 'Africa/Casablanca' };
+    const moroccoNow = new Date(now.toLocaleString('en-US', options));
     
-    if (storedDate) {
-      countDownDate = new Date(parseInt(storedDate));
-    } else {
-      countDownDate = new Date();
-      countDownDate.setMonth(countDownDate.getMonth() + 2);
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(STORAGE_KEY, countDownDate.getTime().toString());
-      }
+    // Set target date to 2 weeks from now in Moroccan time
+    countDownDate = new Date(moroccoNow);
+    countDownDate.setDate(countDownDate.getDate() + 14); // Add 2 weeks (14 days)
+    
+    // Store the target date if not already set
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, countDownDate.getTime().toString());
     }
 
     const updateCountdown = () => {
@@ -116,15 +116,16 @@ const CountdownComponent = () => {
         distance = 0;
       }
 
-      const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
-      const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const weeks = Math.floor(days / 7);
+      const remainingDays = days % 7;
 
       setTimeLeft({
-        months: formatTimeValue(months),
-        days: formatTimeValue(days),
+        weeks: formatTimeValue(weeks),
+        days: formatTimeValue(remainingDays),
         hours: formatTimeValue(hours),
         minutes: formatTimeValue(minutes),
         seconds: formatTimeValue(seconds),
@@ -167,7 +168,7 @@ const CountdownComponent = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, staggerChildren: 0.1 }}
         >
-          <TimeUnit value={timeLeft.months} label="Months" className="group" />
+          <TimeUnit value={timeLeft.weeks} label="Weeks" className="group" />
           <div className="flex items-center justify-center text-2xl font-bold text-gray-300 dark:text-gray-600">:</div>
           <TimeUnit value={timeLeft.days} label="Days" className="group" />
           <div className="flex items-center justify-center text-2xl font-bold text-gray-300 dark:text-gray-600">:</div>
