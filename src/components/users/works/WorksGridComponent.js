@@ -1,6 +1,6 @@
-import WorkCard from './WorkCard';
+import WorkCard from './WorkCardComponent';
 
-const WorksGrid = ({ works, visibleWorks, onLoadMore }) => {
+const WorksGridComponent = ({ works, visibleWorks, onLoadMore }) => {
   return (
     <section className="py-16 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
@@ -25,4 +25,4 @@ const WorksGrid = ({ works, visibleWorks, onLoadMore }) => {
   );
 };
 
-export default WorksGrid;
+export default WorksGridComponent;

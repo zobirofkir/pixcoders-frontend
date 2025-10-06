@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const WorkCard = ({ work }) => {
+const WorkCardComponent = ({ work }) => {
   return (
     <div className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
       <div className="relative h-64 overflow-hidden">
@@ -43,4 +43,4 @@ const WorkCard = ({ work }) => {
   );
 };
 
-export default WorkCard;
+export default WorkCardComponent;

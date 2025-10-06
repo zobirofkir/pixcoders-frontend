@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const CTASection = () => (
+const CTASectionComponent = () => (
   <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
     <div className="container mx-auto px-4 text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to start your project?</h2>
@@ -25,4 +25,4 @@ const CTASection = () => (
   </section>
 );
 
-export default CTASection;
+export default CTASectionComponent;

@@ -1,4 +1,4 @@
-const HeroSection = ({ title, description, children }) => {
+const HeroSectionComponent = ({ title, description, children }) => {
   return (
     <section className="relative py-20 md:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 opacity-10"></div>
@@ -17,4 +17,4 @@ const HeroSection = ({ title, description, children }) => {
   );
 };
 
-export default HeroSection;
+export default HeroSectionComponent;

@@ -1,4 +1,4 @@
-const FilterButtons = ({ filters, activeFilter, onFilterChange }) => {
+const FilterButtonsComponent = ({ filters, activeFilter, onFilterChange }) => {
   return (
     <div className="flex flex-wrap justify-center gap-3 mb-12">
       {filters.map((filter) => (
@@ -18,4 +18,4 @@ const FilterButtons = ({ filters, activeFilter, onFilterChange }) => {
   );
 };
 
-export default FilterButtons;
+export default FilterButtonsComponent;
