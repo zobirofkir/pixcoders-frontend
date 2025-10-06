@@ -113,10 +113,10 @@ export default function Home() {
               <div className="bg-gray-50 p-6 rounded-xl">
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">Get in Touch</h4>
                 <div className="flex justify-center space-x-4">
-                  <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900">
+                  <a href="https://github.com/zobirofkir" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900">
                     <FaGithub className="text-2xl" />
                   </a>
-                  <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                  <a href="https://linkedin.com/in/zobirofkir" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
                     <FaLinkedin className="text-2xl" />
                   </a>
                   <a href="mailto:zobirofkir19@gmail.com" className="text-gray-600 hover:text-red-500">
