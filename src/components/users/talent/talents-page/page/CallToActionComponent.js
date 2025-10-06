@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export const CallToActionComponent = () => (
   <motion.section 
@@ -13,9 +14,9 @@ export const CallToActionComponent = () => (
       <p className="text-xl text-indigo-100 mb-6 max-w-2xl mx-auto">
         Let us help you find the perfect talent for your specific needs.
       </p>
-      <button className="bg-white text-indigo-700 font-semibold px-6 py-3 rounded-lg hover:bg-indigo-50 transition-colors">
-        Post a Job Request
-      </button>
+      <Link href="/users/talents" className="bg-white text-indigo-700 font-semibold px-6 py-3 rounded-lg hover:bg-indigo-50 transition-colors">
+        Find a Talent
+      </Link>
     </div>
   </motion.section>
 );
