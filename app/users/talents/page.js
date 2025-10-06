@@ -6,7 +6,7 @@ import TalentCardComponent from '@/src/components/users/talent/TalentCardCompone
 import { talentData } from '@/src/data/talentData';
 
 
-const TalentsPage = () => {
+const page = () => {
   const [talents, setTalents] = useState(talentData);
   const [filters, setFilters] = useState({
     search: '',
@@ -158,4 +158,4 @@ const TalentsPage = () => {
   );
 };
 
-export default TalentsPage;
+export default page;
