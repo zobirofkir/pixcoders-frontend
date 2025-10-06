@@ -65,7 +65,7 @@ export const HeroSectionComponent = ({ searchQuery, onSearchChange }) => {
             <input
               type="text"
               placeholder="Search articles, tutorials, and more..."
-              className="w-full px-6 py-5 md:py-6 text-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+              className="w-full px-6 py-5 md:py-6 text-lg text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
             />
