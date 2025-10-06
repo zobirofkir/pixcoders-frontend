@@ -5,7 +5,6 @@ const navLinks = [
   { name: 'Find Talent', href: '/users/talents' },
   { name: 'Find Work', href: '/users/works' },
   { name: 'Why Pix Coders', href: '/users/why-pix-coders' },
-  { name: 'Enterprise', href: '/users/enterprises' },
   { name: 'Contact', href: '/users/contacts' },
 ];
 
