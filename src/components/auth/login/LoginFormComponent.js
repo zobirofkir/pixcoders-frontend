@@ -51,7 +51,7 @@ export const LoginFormComponent = () => {
           <div className="flex items-center justify-between w-full">
             <span>Password</span>
             <Link 
-              href="/reset-password" 
+              href="/users/auth/reset-password" 
               className="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200 hover:underline"
             >
               Forgot password?
