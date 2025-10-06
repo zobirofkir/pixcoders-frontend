@@ -9,7 +9,7 @@ export const talentData = [
       reviews: 42,
       rate: 120,
       availability: 'full-time',
-      avatar: 'https://picsum.photos/200/200?random=1',
+      avatar: 'https://picsum.photos/400/400?random=1',
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ export const talentData = [
       reviews: 36,
       rate: 95,
       availability: 'freelance',
-      avatar: 'https://picsum.photos/200/200?random=2',
+      avatar: 'https://picsum.photos/400/400?random=2',
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ export const talentData = [
       reviews: 28,
       rate: 150,
       availability: 'part-time',
-      avatar: 'https://picsum.photos/200/200?random=3',
+      avatar: 'https://picsum.photos/400/400?random=3',
     },
     {
       id: 4,
@@ -45,7 +45,7 @@ export const talentData = [
       reviews: 31,
       rate: 110,
       availability: 'full-time',
-      avatar: 'https://picsum.photos/200/200?random=4',
+      avatar: 'https://picsum.photos/400/400?random=4',
     },
     {
       id: 5,
@@ -57,7 +57,7 @@ export const talentData = [
       reviews: 24,
       rate: 160,
       availability: 'freelance',
-      avatar: 'https://picsum.photos/200/200?random=5',
+      avatar: 'https://picsum.photos/400/400?random=5',
     },
     {
       id: 6,
@@ -69,7 +69,7 @@ export const talentData = [
       reviews: 19,
       rate: 140,
       availability: 'part-time',
-      avatar: 'https://picsum.photos/200/200?random=6',
+      avatar: 'https://picsum.photos/400/400?random=6',
     },
   ];
   

@@ -8,9 +8,7 @@ const TalentCardComponent = ({ talent }) => {
           <img
             src={talent.avatar}
             alt={`${talent.name}'s profile`}
-            layout="fill"
-            objectFit="cover"
-            className="transition-opacity duration-300 hover:opacity-90"
+            className="w-full h-full object-cover transition-opacity duration-300 hover:opacity-90"
           />
         )}
       </div>
