@@ -51,7 +51,7 @@ export const LoginFormComponent = () => {
           <div className="flex items-center justify-between w-full">
             <span>Password</span>
             <Link 
-              href="/forgot-password" 
+              href="/reset-password" 
               className="text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200 hover:underline"
             >
               Forgot password?
@@ -69,20 +69,6 @@ export const LoginFormComponent = () => {
         </SubmitButtonComponent>
       </motion.div>
 
-        <motion.div 
-          className="pt-4 border-t border-gray-100 text-center"
-          variants={itemVariants}
-        >
-          <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link 
-              href="/signup" 
-              className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors duration-200 hover:underline"
-            >
-              Create an account
-            </Link>
-          </p>
-        </motion.div>
       </form>
     </div>
   );
