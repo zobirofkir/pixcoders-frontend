@@ -6,7 +6,7 @@ import {
   SkillsFilterComponent, 
   RateFilterComponent, 
   AvailabilityFilterComponent 
-} from './filters';
+} from '@/src/components';
 
 export const TalentFiltersComponent = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
