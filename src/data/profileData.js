@@ -1,8 +1,8 @@
 /**
- * Array of professional profiles to display in the slider
+ * Array of professional profileData to display in the slider
  * @type {Array<Object>}
  */
-const profiles = [
+const profileData = [
   {
     id: 1,
     name: 'Anneto Montinari',
@@ -60,4 +60,4 @@ const profiles = [
 ];
 
 export const CARDS_PER_SLIDE = 3;
-export default profiles;
+export default profileData;

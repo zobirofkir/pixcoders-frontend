@@ -1,11 +1,11 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ProfileCard from './ProfileCard';
-import SliderControls from './SliderControls';
-import profiles, { CARDS_PER_SLIDE } from './profiles';
+import ProfileCard from './hero/ProfileCard';
+import SliderControls from './hero/SliderControls';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
 
 /**
  * A responsive slider component that displays professional profiles in a carousel.
@@ -14,7 +14,7 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
  */
 const SliderComponent = () => {
   const [current, setCurrent] = useState(0);
-  const totalSlides = Math.ceil(profiles.length / CARDS_PER_SLIDE);
+  const totalSlides = Math.ceil(profileData.length / CARDS_PER_SLIDE);
   const transformOffset = current * (100 / CARDS_PER_SLIDE);
 
   /**
@@ -38,7 +38,7 @@ const SliderComponent = () => {
     return () => clearTimeout(timer);
   }, [current]);
 
-  if (!Array.isArray(profiles) || profiles.length <= 0) {
+  if (!Array.isArray(profileData) || profileData.length <= 0) {
     return null;
   }
 
@@ -103,7 +103,7 @@ const SliderComponent = () => {
                 transition: { type: 'spring', stiffness: 300, damping: 30 }
               }}
             >
-              {profiles.map((profile, index) => (
+              {profileData.map((profile, index) => (
                 <motion.div
                   key={profile.id}
                   className={`w-full flex-shrink-0 p-4 sm:w-1/${CARDS_PER_SLIDE} lg:w-1/${CARDS_PER_SLIDE}`}
