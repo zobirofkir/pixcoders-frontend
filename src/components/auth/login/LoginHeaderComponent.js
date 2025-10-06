@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiUser } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { itemVariants } from '../../../../../src/animations/animations';
+import { itemVariants } from '../../../animations/animations';
 
-export const LoginHeader = () => (
+export const LoginHeaderComponent = () => (
   <motion.div 
     className="text-center mb-10 pt-2"
     variants={itemVariants}

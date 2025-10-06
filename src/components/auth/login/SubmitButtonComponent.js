@@ -1,10 +1,10 @@
 import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { useLogin } from '../context/LoginContext';
-import { buttonHover, buttonTap } from '../../../../../src/animations/animations';
+import { useLogin } from '../../../../app/users/auth/login/context/LoginContext';
+import { buttonHover, buttonTap } from '../../../animations/animations';
 
-export const SubmitButton = ({ children }) => {
+export const SubmitButtonComponent = ({ children }) => {
   const { isLoading } = useLogin();
 
   return (

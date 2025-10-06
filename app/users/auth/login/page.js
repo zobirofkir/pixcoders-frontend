@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LoginProvider } from './context/LoginContext';
 import { containerVariants } from '../../../../src/animations/animations';
-import { LoginHeader } from './components/LoginHeader';
-import { LoginForm } from './components/LoginForm';
-import { LoginHero } from './components/LoginHero';
-import { AnimatedBackground, DecorativeAccent, AnimatedBlobs } from './components/AnimatedBackground';
+import { LoginHeader } from '../../../../src/components/auth/login/LoginHeaderComponent';
+import { LoginForm } from '../../../../src/components/auth/login/LoginFormComponent';
+import { LoginHero } from '../../../../src/components/auth/login/LoginHeroComponent';
+import { AnimatedBackground, DecorativeAccent, AnimatedBlobs } from '../../../../src/components/auth/login/AnimatedBackgroundComponent';
 
 const LoginPage = () => {
   const [isMounted, setIsMounted] = useState(false);

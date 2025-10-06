@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export const LoginHero = () => (
+export const LoginHeroComponent = () => (
   <motion.div 
     className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 xl:p-16"
     initial={{ opacity: 0, x: 50 }}

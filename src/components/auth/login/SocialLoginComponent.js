@@ -2,7 +2,7 @@ import React from 'react';
 import { FiGithub } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
-export const SocialLogin = () => {
+export const SocialLoginComponent = () => {
   return (
     <div className="mt-8">
       <div className="relative">

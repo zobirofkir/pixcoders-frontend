@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export const AnimatedBackground = () => {
+export const AnimatedBackgroundComponent = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
       {[...Array(5)].map((_, i) => (

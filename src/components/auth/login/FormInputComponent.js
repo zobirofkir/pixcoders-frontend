@@ -1,9 +1,9 @@
 import React from 'react';
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { useLogin } from '../context/LoginContext';
+import { useLogin } from '../../../../app/users/auth/login/context/LoginContext';
 
-export const FormInput = ({ 
+export const FormInputComponent = ({ 
   id, 
   name, 
   type, 

@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FormInput } from './FormInput';
-import { SubmitButton } from './SubmitButton';
-import { SocialLogin } from './SocialLogin';
-import { itemVariants } from '../../../../../src/animations/animations';
+import { FormInput } from './FormInputComponent';
+import { SubmitButton } from './SubmitButtonComponent';
+import { SocialLogin } from './SocialLoginComponent';
+import { itemVariants } from '../../../animations/animations';
 
-export const LoginForm = () => {
+export const LoginFormComponent = () => {
   return (
     <div className="space-y-6">
       <FormInput
