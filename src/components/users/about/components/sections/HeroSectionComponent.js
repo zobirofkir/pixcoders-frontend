@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { container, item } from '../animations/variants';
+import { container, item } from '../../../../../animations/variants';
 
 const HeroSectionComponent = () => (
   <motion.div 

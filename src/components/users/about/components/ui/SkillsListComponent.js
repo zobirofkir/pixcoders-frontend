@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { skills } from '../../../../../data/skillsData';
-import { item } from '../animations/variants';
+import { item } from '../../../../../animations/variants';
 
 const SkillsListComponent = () => (
   <motion.div variants={item} className="mt-12">

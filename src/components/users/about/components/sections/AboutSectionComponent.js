@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { container, item } from '../animations/variants';
+import { container, item } from '../../../../../animations/variants';
 import ImageLogo from '../../../../../../public/images/logo/logo.png';
 import SkillsList from '../ui/SkillsListComponent';
 
