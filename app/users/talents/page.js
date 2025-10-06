@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
 import MobileFilters from '@/src/components/users/talent/MobileFilters';
 import { useTalents } from '@/src/hooks/useTalents';
-import { HeroSection } from '@/src/components/users/talent/talents-page/page/HeroSectionComponent';
-import TalentSearchHeader from '@/src/components/users/talent/talents-page/page/TalentSearchHeaderComponent';
-import TalentGrid from '@/src/components/users/talent/talents-page/page/TalentGridComponent';
-import Pagination from '@/src/components/users/talent/talents-page/page/PaginationComponent';
-import CallToAction from '@/src/components/users/talent/talents-page/page/CallToActionComponent';
+import { HeroSectionComponent } from '@/src/components/users/talent/talents-page/page/HeroSectionComponent';
+import TalentSearchHeaderComponent from '@/src/components/users/talent/talents-page/page/TalentSearchHeaderComponent';
+import TalentGridComponent from '@/src/components/users/talent/talents-page/page/TalentGridComponent';
+import PaginationComponent from '@/src/components/users/talent/talents-page/page/PaginationComponent';
+import CallToActionComponent from '@/src/components/users/talent/talents-page/page/CallToActionComponent';
 
 const TalentsPage = () => {
   const {
@@ -35,7 +35,7 @@ const TalentsPage = () => {
         />
       </Head>
 
-      <HeroSection />
+      <HeroSectionComponent />
 
       <main className="container mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
@@ -71,14 +71,14 @@ const TalentsPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full lg:w-3/4"
           >
-            <TalentSearchHeader count={talents.length} />
-            <TalentGrid talents={talents} />
-            {talents.length > 0 && <Pagination />}
+            <TalentSearchHeaderComponent count={talents.length} />
+            <TalentGridComponent talents={talents} />
+            {talents.length > 0 && <PaginationComponent />}
           </motion.div>
         </div>
       </main>
 
-      <CallToAction />
+      <CallToActionComponent />
     </motion.div>
   );
 };
