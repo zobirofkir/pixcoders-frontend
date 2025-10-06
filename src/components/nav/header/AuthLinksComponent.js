@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const authLinks = [
   { name: 'Log In', href: '/users/auth/login' },
-  { name: 'Hire Top Talent', href: '#', highlight: true },
+  { name: 'Pix Team Members', href: '/users/auth/pix-team-members', highlight: true },
 ];
 
 const AuthLinksComponent = ({ isMobile = false, onLinkClick }) => {
