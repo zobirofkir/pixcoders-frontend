@@ -6,7 +6,7 @@ import React, { Suspense } from 'react'
 
 const page = () => {
   return (
-    <Suspense fallback={LoadingComponent}>
+    <Suspense fallback={<LoadingComponent />}>
 
     <section>
       <div>
