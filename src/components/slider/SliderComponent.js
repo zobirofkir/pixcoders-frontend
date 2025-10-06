@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
-import { useSlider } from './hooks/useSlider';
+import { useSlider } from '../../hooks/useSlider';
 import SliderCard from './SliderCard';
 import SelectedProfile from './SelectedProfile';
 import SliderControls from './SliderControls';
