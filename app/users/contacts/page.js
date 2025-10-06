@@ -1,11 +1,12 @@
 import ContactComponent from '@/src/components/contact/ContactComponent'
-import React from 'react'
+import LoadingComponent from '@/src/components/loading/LoadingComponent'
+import React, { Suspense } from 'react'
 
 const page = () => {
   return (
-    <div>
+    <Suspense fallback={<LoadingComponent/>}>
       <ContactComponent />
-    </div>
+    </Suspense>
   )
 }
 

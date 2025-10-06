@@ -62,7 +62,7 @@ const WorksPage = () => {
   };
 
   return (
-    <Suspense fallback={LoadingComponent}>
+    <Suspense fallback={<LoadingComponent/>}>
 
       <motion.div 
         className="min-h-screen bg-white dark:bg-gray-900"

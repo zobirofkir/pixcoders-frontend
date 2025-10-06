@@ -10,7 +10,7 @@ import LoadingComponent from '@/src/components/loading/LoadingComponent';
 
 const WhyPixCoders = () => {
   return (
-    <Suspense fallback={LoadingComponent}>
+    <Suspense fallback={<LoadingComponent />}>
 
       <div className="min-h-screen bg-white">
         <HeroSectionComponent />
