@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { stats } from '../../data/stats';
+import { stats } from './StatsComponent';
 import { container, item } from '../animations/variants';
 
 const StatsSection = () => (
