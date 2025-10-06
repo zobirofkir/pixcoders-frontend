@@ -8,14 +8,15 @@ export { metadata };
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
-        
-        <HeaderComponent />
-      
-      <body>{children}</body>
+      <body>
 
-      <footer>
+        <HeaderComponent />
+
+        {children}
+
         <FooterComponent />
-      </footer>
+        
+      </body>
     </html>
   );
 }
