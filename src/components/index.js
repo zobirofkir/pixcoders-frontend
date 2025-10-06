@@ -19,7 +19,7 @@ export { default as AvailabilityFilterComponent } from './users/talent/talents-p
 /**
  * Blogs Import
  */
-export { HeroSectionComponent as BlogHeroSection } from './users/blogs/HeroSectionComponent';
+export { HeroSectionComponent as BlogHeroSectionComponent } from './users/blogs/HeroSectionComponent';
 export { CategoryFilterComponent } from './users/blogs/CategoryFilterComponent';
 export { FeaturedPostsComponent } from './users/blogs/FeaturedPostsComponent';
 export { PostCardComponent } from './users/blogs/PostCardComponent';

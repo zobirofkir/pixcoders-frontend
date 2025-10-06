@@ -4,7 +4,7 @@ import React from 'react';
 import { blogCategoryData } from '@/src/data/blogsCategoryData';
 import useBlog from '@/src/hooks/useBlog';
 import {
-  HeroSectionComponent,
+  BlogHeroSectionComponent,
   CategoryFilterComponent,
   FeaturedPostsComponent,
   PostCardComponent,
@@ -29,7 +29,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <HeroSectionComponent 
+      <BlogHeroSectionComponent 
         searchQuery={searchQuery} 
         onSearchChange={setSearchQuery} 
       />
