@@ -1,78 +1,28 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FiX } from 'react-icons/fi';
 
+import { useHeader } from '@/hooks/useHeader';
 import LogoComponent from './header/LogoComponent';
 import NavLinksComponent from './header/NavLinksComponent';
 import AuthLinksComponent from './header/AuthLinksComponent';
 import MobileMenuButtonComponent from './header/MobileMenuButtonComponent';
 import SearchButtonComponent from './header/SearchButtonComponent';
-import { FiX } from 'react-icons/fi';
 
 /**
  * HeaderComponent - A responsive header with mobile menu functionality
  * @returns {JSX.Element} The header component with navigation and mobile menu
  */
 const HeaderComponent = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const menuRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target) && 
-          !event.target.closest('button[aria-label="Toggle menu"]')) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'auto';
-    };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
-
-  /**
-   * Toggles the mobile menu open/closed
-   */
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  /**
-   * Closes the mobile menu
-   */
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  /**
-   * Handles link clicks in the mobile menu
-   */
-  const handleLinkClick = () => {
-    closeMenu();
-  };
+  const {
+    isMenuOpen,
+    scrolled,
+    menuRef,
+    toggleMenu,
+    closeMenu,
+    handleLinkClick
+  } = useHeader();
 
   return (
     <>
