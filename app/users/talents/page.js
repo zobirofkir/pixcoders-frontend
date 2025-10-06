@@ -3,85 +3,11 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
 import TalentCardComponent from '@/src/components/users/talent/TalentCardComponent';
+import { talentData } from '@/src/data/talentData';
 
-// Mock data - in a real app, this would come from an API
-const mockTalents = [
-  {
-    id: 1,
-    name: 'Alex Johnson',
-    title: 'Senior Full-Stack Developer',
-    bio: 'Passionate about building scalable web applications with React, Node.js, and modern JavaScript.',
-    skills: ['React', 'Node.js', 'TypeScript', 'AWS', 'GraphQL'],
-    rating: 4.9,
-    reviews: 42,
-    rate: 120,
-    availability: 'full-time',
-    avatar: '/images/avatars/1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Sarah Williams',
-    title: 'UI/UX Designer & Frontend Developer',
-    bio: 'Creating beautiful, intuitive user experiences with a focus on accessibility and performance.',
-    skills: ['Figma', 'React', 'CSS/SCSS', 'UI/UX', 'Responsive Design'],
-    rating: 4.8,
-    reviews: 36,
-    rate: 95,
-    availability: 'freelance',
-    avatar: '/images/avatars/2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Michael Chen',
-    title: 'DevOps Engineer',
-    bio: 'Helping teams build, deploy, and scale applications efficiently with modern cloud technologies.',
-    skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Terraform'],
-    rating: 4.7,
-    reviews: 28,
-    rate: 150,
-    availability: 'part-time',
-    avatar: '/images/avatars/3.jpg',
-  },
-  {
-    id: 4,
-    name: 'Emily Rodriguez',
-    title: 'Mobile App Developer',
-    bio: 'Building cross-platform mobile applications with React Native and Flutter.',
-    skills: ['React Native', 'Flutter', 'iOS', 'Android', 'Firebase'],
-    rating: 4.9,
-    reviews: 31,
-    rate: 110,
-    availability: 'full-time',
-    avatar: '/images/avatars/4.jpg',
-  },
-  {
-    id: 5,
-    name: 'David Kim',
-    title: 'Machine Learning Engineer',
-    bio: 'Transforming data into intelligent solutions with machine learning and AI.',
-    skills: ['Python', 'TensorFlow', 'PyTorch', 'NLP', 'Computer Vision'],
-    rating: 4.8,
-    reviews: 24,
-    rate: 160,
-    availability: 'freelance',
-    avatar: '/images/avatars/5.jpg',
-  },
-  {
-    id: 6,
-    name: 'Priya Patel',
-    title: 'Blockchain Developer',
-    bio: 'Building decentralized applications and smart contracts on Ethereum and other blockchains.',
-    skills: ['Solidity', 'Ethereum', 'Smart Contracts', 'Web3.js', 'DeFi'],
-    rating: 4.7,
-    reviews: 19,
-    rate: 140,
-    availability: 'part-time',
-    avatar: '/images/avatars/6.jpg',
-  },
-];
 
 const TalentsPage = () => {
-  const [talents, setTalents] = useState(mockTalents);
+  const [talents, setTalents] = useState(talentData);
   const [filters, setFilters] = useState({
     search: '',
     skills: [],
@@ -89,10 +15,8 @@ const TalentsPage = () => {
     rate: { min: 0, max: 200 },
   });
 
-  // Filter talents based on filters
   const filterTalents = () => {
-    return mockTalents.filter((talent) => {
-      // Search filter
+    return talentData.filter((talent) => {
       const matchesSearch =
         talent.name.toLowerCase().includes(filters.search.toLowerCase()) ||
         talent.title.toLowerCase().includes(filters.search.toLowerCase()) ||
@@ -100,16 +24,13 @@ const TalentsPage = () => {
           skill.toLowerCase().includes(filters.search.toLowerCase())
         );
 
-      // Skills filter
       const matchesSkills =
         filters.skills.length === 0 ||
         filters.skills.every((skill) => talent.skills.includes(skill));
 
-      // Availability filter
       const matchesAvailability =
         !filters.availability || talent.availability === filters.availability;
 
-      // Rate filter
       const matchesRate =
         talent.rate >= filters.rate.min && talent.rate <= filters.rate.max;
 
@@ -122,7 +43,9 @@ const TalentsPage = () => {
     });
   };
 
-  // Update talents when filters change
+  /**
+   * Update talents when filters change
+   */
   useEffect(() => {
     setTalents(filterTalents());
   }, [filters]);
