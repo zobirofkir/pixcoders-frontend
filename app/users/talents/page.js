@@ -111,10 +111,26 @@ const page = () => {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <div className="lg:w-1/4">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+          {/* Filters Sidebar - Hidden on mobile, shown on larger screens */}
+          <div className="hidden lg:block lg:w-1/4">
             <TalentFiltersComponent onFilterChange={setFilters} />
+          </div>
+
+          {/* Mobile Filters Trigger - Only shown on small screens */}
+          <div className="lg:hidden mb-4">
+            <button 
+              onClick={() => {
+                // You might want to implement a mobile filter drawer here
+                alert('Mobile filters would open here');
+              }}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-lg text-gray-700 font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              </svg>
+              Filter & Sort
+            </button>
           </div>
 
           {/* Talents Grid */}
@@ -122,15 +138,15 @@ const page = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:w-3/4"
+            className="w-full lg:w-3/4"
           >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
                 {talents.length} {talents.length === 1 ? 'Talent' : 'Talents'} Found
               </h2>
-              <div className="flex items-center">
-                <span className="text-gray-600 mr-2">Sort by:</span>
-                <select className="border border-gray-300 rounded-md px-3 py-1.5 text-sm">
+              <div className="flex items-center w-full sm:w-auto">
+                <span className="text-sm sm:text-base text-gray-600 mr-2 whitespace-nowrap">Sort by:</span>
+                <select className="w-full sm:w-auto text-sm sm:text-base border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                   <option>Relevance</option>
                   <option>Rating: High to Low</option>
                   <option>Rate: Low to High</option>
@@ -145,7 +161,7 @@ const page = () => {
                   variants={container}
                   initial="hidden"
                   animate="show"
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-5"
                 >
                   {talents.map((talent) => (
                     <motion.div key={talent.id} variants={item} layout>
