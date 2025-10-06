@@ -85,7 +85,7 @@ const FloatingIcon = ({ icon, index, color, animation }) => {
 
   return (
     <motion.div
-      className={`absolute text-4xl md:text-5xl ${animation} group`}
+      className={`absolute text-4xl md:text-5xl ${animation} group overflow-hidden`}
       style={{
         left: `${position.x}%`,
         top: `${position.y}%`,
