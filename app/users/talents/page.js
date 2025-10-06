@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
 import MobileFilters from '@/src/components/users/talent/MobileFilters';
 import { useTalents } from '@/src/hooks/useTalents';
-import { HeroSection } from '@/src/components/users/talents-page/HeroSection';
-import TalentSearchHeader from '@/src/components/users/talents-page/TalentSearchHeader';
-import TalentGrid from '@/src/components/users/talents-page/TalentGrid';
-import Pagination from '@/src/components/users/talents-page/Pagination';
-import CallToAction from '@/src/components/users/talents-page/CallToAction';
+import { HeroSection } from '@/src/components/users/talent/talents-page/page/HeroSection';
+import TalentSearchHeader from '@/src/components/users/talent/talents-page/page/TalentSearchHeader';
+import TalentGrid from '@/src/components/users/talent/talents-page/page/TalentGrid';
+import Pagination from '@/src/components/users/talent/talents-page/page/Pagination';
+import CallToAction from '@/src/components/users/talent/talents-page/page/CallToAction';
 
 const TalentsPage = () => {
   const {

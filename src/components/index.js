@@ -10,8 +10,8 @@ export { default as WorksGridComponent } from './users/works/WorksGridComponent'
 /**
  * Works Import
  */
-export { default as FilterSectionComponent } from './users/talent/filters/FilterSectionComponent';
-export { default as SearchFilterComponent } from './users/talent/filters/SearchFilterComponent';
-export { default as SkillsFilterComponent } from './users/talent/filters/SkillsFilterComponent';
-export { default as RateFilterComponent } from './users/talent/filters/RateFilterComponent';
-export { default as AvailabilityFilterComponent } from './users/talent/filters/AvailabilityFilterComponent';
+export { default as FilterSectionComponent } from './users/talent/talents-page/FilterSectionComponent';
+export { default as SearchFilterComponent } from './users/talent/talents-page/SearchFilterComponent';
+export { default as SkillsFilterComponent } from './users/talent/talents-page/SkillsFilterComponent';
+export { default as RateFilterComponent } from './users/talent/talents-page/RateFilterComponent';
+export { default as AvailabilityFilterComponent } from './users/talent/talents-page/AvailabilityFilterComponent';
