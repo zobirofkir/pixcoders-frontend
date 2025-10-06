@@ -31,7 +31,7 @@ const TopHeaderComponent = () => {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
+    <header className={`block top-0 z-50 transition-all duration-300 ${isScrolled ? 'shadow-lg' : ''}`}>
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white text-sm py-2 bg-opacity-95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-row justify-between items-center gap-2 sm:gap-4">
