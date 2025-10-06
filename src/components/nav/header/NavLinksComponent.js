@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 const navLinks = [
   { name: 'About Us', href: '/users/abouts' },
-  { name: 'Find Talent', href: '/talents' },
-  { name: 'Find Work', href: '/works' },
-  { name: 'Why Pix Coders', href: '/why-pix-coders' },
-  { name: 'Enterprise', href: '/enterprises' },
+  { name: 'Find Talent', href: '/users/talents' },
+  { name: 'Find Work', href: '/users/works' },
+  { name: 'Why Pix Coders', href: '/users/why-pix-coders' },
+  { name: 'Enterprise', href: '/users/enterprises' },
   { name: 'Contact', href: '/users/contacts' },
 ];
 
