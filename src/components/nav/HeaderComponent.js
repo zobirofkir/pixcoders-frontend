@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiX } from 'react-icons/fi';
+import { FiX, FiSearch } from 'react-icons/fi';
 
 import LogoComponent from './header/LogoComponent';
 import NavLinksComponent from './header/NavLinksComponent';
@@ -45,7 +45,10 @@ const HeaderComponent = () => {
               <AuthLinksComponent />
             </div>
 
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center space-x-4">
+              <div className="md:hidden">
+                <SearchButtonComponent onClick={handleLinkClick} />
+              </div>
               <MobileMenuButtonComponent isOpen={isMenuOpen} onClick={toggleMenu} />
             </div>
           </div>
