@@ -19,9 +19,9 @@ export { default as AvailabilityFilterComponent } from './users/talent/talents-p
 /**
  * Blogs Import
  */
-export { HeroSection } from './users/blogs/HeroSectionComponent';
-export { CategoryFilter } from './users/blogs/CategoryFilterComponent';
-export { FeaturedPosts } from './users/blogs/FeaturedPostsComponent';
-export { PostCard } from './users/blogs/PostCardComponent';
-export { Pagination } from './users/blogs/PaginationComponent';
-export { Newsletter } from './users/blogs/NewsletterComponent';
+export { HeroSectionComponent } from './users/blogs/HeroSectionComponent';
+export { CategoryFilterComponent } from './users/blogs/CategoryFilterComponent';
+export { FeaturedPostsComponent } from './users/blogs/FeaturedPostsComponent';
+export { PostCardComponent } from './users/blogs/PostCardComponent';
+export { PaginationComponent } from './users/blogs/PaginationComponent';
+export { NewsletterComponent } from './users/blogs/NewsletterComponent';

@@ -1,4 +1,4 @@
-export const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+export const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null;
 
   return (
