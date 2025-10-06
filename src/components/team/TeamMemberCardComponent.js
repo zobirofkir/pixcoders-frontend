@@ -52,12 +52,11 @@ const TeamMemberCardComponent = ({ member }) => {
 const TeamMemberImage = ({ member }) => (
   <div className="relative h-64 w-full bg-gray-100">
     {member.image ? (
-      <Image
+      <img
         src={member.image}
         alt={member.name}
         layout="fill"
-        objectFit="cover"
-        className="transition-transform duration-500 group-hover:scale-105"
+        className="transition-transform duration-500 group-hover:scale-105 object-cover"
       />
     ) : (
       <div className="w-full h-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">

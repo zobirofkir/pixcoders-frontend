@@ -3,7 +3,7 @@ const teamMembersData = [
     id: 1,
     name: 'Alex Johnson',
     role: 'CEO & Founder',
-    image: '/images/team/alex.jpg',
+    image: 'https://picsum.photos/400/400?random=100',
     bio: 'Visionary leader with 10+ years of experience in tech entrepreneurship.',
     social: {
       twitter: 'https://twitter.com',
@@ -16,7 +16,7 @@ const teamMembersData = [
     id: 2,
     name: 'Sarah Chen',
     role: 'Lead Developer',
-    image: '/images/team/sarah.jpg',
+    image: 'https://picsum.photos/400/400?random=200',
     bio: 'Full-stack developer specializing in modern web technologies and architecture.',
     social: {
       twitter: 'https://twitter.com',
@@ -28,7 +28,7 @@ const teamMembersData = [
     id: 3,
     name: 'Michael Brown',
     role: 'UI/UX Designer',
-    image: '/images/team/michael.jpg',
+    image: 'https://picsum.photos/400/400?random=300',
     bio: 'Passionate about creating intuitive and beautiful user experiences.',
     social: {
       twitter: 'https://twitter.com',
@@ -40,7 +40,7 @@ const teamMembersData = [
     id: 4,
     name: 'Emily Davis',
     role: 'Marketing Director',
-    image: '/images/team/emily.jpg',
+    image: 'https://picsum.photos/400/400?random=400',
     bio: 'Data-driven marketer with a passion for growth and community building.',
     social: {
       twitter: 'https://twitter.com',
@@ -51,7 +51,7 @@ const teamMembersData = [
     id: 5,
     name: 'David Kim',
     role: 'DevOps Engineer',
-    image: '/images/team/david.jpg',
+    image: 'https://picsum.photos/400/400?random=500',
     bio: 'Ensuring our infrastructure is scalable, reliable, and secure.',
     social: {
       github: 'https://github.com',
