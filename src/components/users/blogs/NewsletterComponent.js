@@ -1,4 +1,4 @@
-export const Newsletter = () => (
+export const NewsletterComponent = () => (
   <div className="bg-indigo-50 py-16 px-4 sm:px-6 lg:px-8">
     <div className="max-w-3xl mx-auto text-center">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">Subscribe to our newsletter</h2>

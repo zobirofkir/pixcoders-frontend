@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiClock, FiArrowRight } from 'react-icons/fi';
 
-export const PostCard = ({ post }) => (
+export const PostCardComponent = ({ post }) => (
   <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
     <div className="relative h-48">
       <Image

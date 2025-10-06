@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FiCalendar, FiClock } from 'react-icons/fi';
 import Link from 'next/link';
 
-export const FeaturedPosts = ({ posts }) => (
+export const FeaturedPostsComponent = ({ posts }) => (
   <div className="mb-16">
     <h2 className="text-2xl font-bold mb-8 text-gray-900">Featured Posts</h2>
     <div className="grid md:grid-cols-2 gap-8">

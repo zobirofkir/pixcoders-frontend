@@ -1,6 +1,6 @@
 import { FiSearch } from 'react-icons/fi';
 
-export const HeroSection = ({ searchQuery, onSearchChange }) => (
+export const HeroSectionComponent = ({ searchQuery, onSearchChange }) => (
   <div className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20 px-4 sm:px-6 lg:px-8">
     <div className="max-w-7xl mx-auto text-center">
       <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Blog</h1>

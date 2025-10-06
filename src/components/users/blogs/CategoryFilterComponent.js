@@ -1,4 +1,4 @@
-export const CategoryFilter = ({ categories, selectedCategory, onSelectCategory }) => (
+export const CategoryFilterComponent = ({ categories, selectedCategory, onSelectCategory }) => (
   <div className="flex flex-wrap gap-2 mb-12 justify-center">
     {categories.map((category) => (
       <button
