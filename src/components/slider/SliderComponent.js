@@ -1,18 +1,32 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { FaCheckCircle } from 'react-icons/fa';
 
-// --- Mock Data Restyled to Match the Image Content ---
+/**
+ * @typedef {Object} Profile
+ * @property {number} id - Unique identifier for the profile
+ * @property {string} name - Full name of the professional
+ * @property {string} role - Professional role or position
+ * @property {string} company - Current or previous company name
+ * @property {string} image - URL to the profile image
+ * @property {string} companyLogo - URL to the company's logo
+ * @property {boolean} isVerified - Whether the profile is verified
+ */
+
+/**
+ * Array of professional profiles to display in the slider
+ * @type {Profile[]}
+ */
 const profiles = [
   {
     id: 1,
     name: 'Anneto Montinari',
     role: 'Interim PM Director',
     company: 'J.P.Morgan',
-    image: 'https://randomuser.me/api/portraits/men/3.jpg', // Placeholder image
-    companyLogo: 'https://cdn.iconscout.com/icon/free/png-256/jpmorgan-chase-1-285191.png', // Placeholder for JPM logo
+    image: 'https://randomuser.me/api/portraits/men/3.jpg',
+    companyLogo: 'https://cdn.iconscout.com/icon/free/png-256/jpmorgan-chase-1-285191.png',
     isVerified: true
   },
   {
@@ -20,8 +34,8 @@ const profiles = [
     name: 'Ian Cornwall',
     role: 'Product Lead',
     company: 'Google',
-    image: 'https://randomuser.me/api/portraits/men/4.jpg', // Placeholder image
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png', // Placeholder for Google logo
+    image: 'https://randomuser.me/api/portraits/men/4.jpg',
+    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png',
     isVerified: true
   },
   {
@@ -29,8 +43,8 @@ const profiles = [
     name: 'Paula Yliasasi',
     role: 'Product Manager',
     company: 'BBDO',
-    image: 'https://randomuser.me/api/portraits/women/3.jpg', // Placeholder image
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/07/BBDO_Logo.svg/1200px-BBDO_Logo.svg.png', // Placeholder for BBDO logo
+    image: 'https://randomuser.me/api/portraits/women/3.jpg',
+    companyLogo: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/07/BBDO_Logo.svg/1200px-BBDO_Logo.svg.png',
     isVerified: true
   },
   {
@@ -38,8 +52,8 @@ const profiles = [
     name: 'Carson Leung',
     role: 'Product Manager',
     company: 'Airlines Inc.',
-    image: 'https://randomuser.me/api/portraits/men/5.jpg', // Placeholder image
-    companyLogo: 'https://img.icons8.com/color/48/000000/amex.png', // Placeholder for a company logo
+    image: 'https://randomuser.me/api/portraits/men/5.jpg',
+    companyLogo: 'https://img.icons8.com/color/48/000000/amex.png',
     isVerified: true
   },
   {
@@ -47,8 +61,8 @@ const profiles = [
     name: 'Savannah Enright',
     role: 'Sr. Product Manager',
     company: 'Accenture',
-    image: 'https://randomuser.me/api/portraits/women/4.jpg', // Placeholder image
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Accenture_logo.svg/1200px-Accenture_logo.svg.png', // Placeholder for Accenture logo
+    image: 'https://randomuser.me/api/portraits/women/4.jpg',
+    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Accenture_logo.svg/1200px-Accenture_logo.svg.png',
     isVerified: true
   },
   {
@@ -56,29 +70,39 @@ const profiles = [
     name: 'David Lo',
     role: 'Product Manager',
     company: 'American Express',
-    image: 'https://randomuser.me/api/portraits/men/6.jpg', // Placeholder image
-    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png', // Placeholder for Amex logo
+    image: 'https://randomuser.me/api/portraits/men/6.jpg',
+    companyLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png',
     isVerified: true
   }
 ];
 
-// Configuration for how many cards to show per slide
+/** Number of profile cards to show per slide */
 const CARDS_PER_SLIDE = 3;
 
+/**
+ * A responsive slider component that displays professional profiles in a carousel.
+ * Features smooth animations, auto-sliding, and responsive design.
+ * @returns {JSX.Element} The rendered slider component
+ */
 const SliderComponent = () => {
   const [current, setCurrent] = useState(0);
-  // Calculate the total number of "slides" based on the cards and how many we show at once
   const totalSlides = Math.ceil(profiles.length / CARDS_PER_SLIDE);
+  const transformOffset = current * (100 / CARDS_PER_SLIDE);
 
+  /**
+   * Advances to the next slide
+   */
   const nextSlide = () => {
     setCurrent(current === totalSlides - 1 ? 0 : current + 1);
   };
 
+  /**
+   * Returns to the previous slide
+   */
   const prevSlide = () => {
     setCurrent(current === 0 ? totalSlides - 1 : current - 1);
   };
 
-  // Auto-slide functionality (optional, can be removed if a static grid is preferred)
   useEffect(() => {
     const timer = setTimeout(() => {
       nextSlide();
@@ -90,9 +114,6 @@ const SliderComponent = () => {
     return null;
   }
 
-  // Calculate the offset for the slide transformation
-  const transformOffset = current * (100 / CARDS_PER_SLIDE);
-
   return (
     <motion.section 
       initial={{ opacity: 0, y: 20 }}
@@ -101,8 +122,6 @@ const SliderComponent = () => {
       className="relative bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
-        
-        {/* --- Section Title and Subtitle (Matches the Toptal style) --- */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -125,7 +144,6 @@ const SliderComponent = () => {
           </button>
         </motion.div>
 
-        {/* --- Profile Slider/Grid Container --- */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -149,20 +167,17 @@ const SliderComponent = () => {
                   transition={{ duration: 0.5, delay: 0.1 * (index % CARDS_PER_SLIDE) }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  {/* --- Profile Card (Based on Toptal Image) --- */}
                   <motion.div 
                     className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col items-center text-center h-full"
                     whileHover={{ boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
                   >
-                    
-                    {/* Profile Image */}
                     <img
                       className="h-28 w-28 rounded-full object-cover mb-4 border-4 border-white shadow-md"
                       src={profile.image}
                       alt={profile.name}
+                      loading="lazy"
                     />
                     
-                    {/* Name and Verification */}
                     <h4 className="text-xl font-semibold text-gray-900">{profile.name}</h4>
                     <div className="flex items-center text-sm font-medium mt-1 text-gray-600">
                       {profile.isVerified && (
@@ -171,10 +186,8 @@ const SliderComponent = () => {
                       Verified Expert
                     </div>
                     
-                    {/* Role */}
                     <p className="text-sm text-gray-500 mt-2">{profile.role}</p>
 
-                    {/* Previous Company */}
                     <div className="mt-4 pt-4 border-t border-gray-200 w-full flex flex-col items-center">
                       <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">
                         Previously at
@@ -183,6 +196,7 @@ const SliderComponent = () => {
                         className="h-6 object-contain mt-2"
                         src={profile.companyLogo}
                         alt={`${profile.company} Logo`}
+                        loading="lazy"
                       />
                     </div>
                   </motion.div>
@@ -191,7 +205,6 @@ const SliderComponent = () => {
             </motion.div>
           </div>
           
-          {/* --- Navigation Buttons --- */}
           {totalSlides > 1 && (
             <>
               <motion.button 
@@ -216,7 +229,6 @@ const SliderComponent = () => {
             </>
           )}
 
-          {/* --- Pagination Dots --- */}
           {totalSlides > 1 && (
             <motion.div 
               className="flex justify-center mt-8 space-x-2"
