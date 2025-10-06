@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { container, item } from '../animations/variants';
 
-const HeroSection = () => (
+const HeroSectionComponent = () => (
   <motion.div 
     variants={container}
     className="text-center mb-20"
@@ -34,4 +34,4 @@ const HeroSection = () => (
   </motion.div>
 );
 
-export default HeroSection;
+export default HeroSectionComponent;

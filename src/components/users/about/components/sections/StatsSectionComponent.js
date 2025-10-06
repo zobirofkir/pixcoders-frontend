@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { stats } from './StatsComponent';
 import { container, item } from '../animations/variants';
 
-const StatsSection = () => (
+const StatsSectionComponent = () => (
   <motion.div 
     variants={container}
     className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24"
@@ -28,4 +28,4 @@ const StatsSection = () => (
   </motion.div>
 );
 
-export default StatsSection;
+export default StatsSectionComponent;

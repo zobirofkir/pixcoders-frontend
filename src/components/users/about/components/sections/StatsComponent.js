@@ -1,4 +1,4 @@
-export const stats = [
+export const StatsComponent = [
   { 
     value: '10+', 
     label: 'Years Experience',

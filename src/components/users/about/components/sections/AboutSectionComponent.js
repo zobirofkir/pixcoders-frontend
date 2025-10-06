@@ -5,7 +5,7 @@ import { container, item } from '../animations/variants';
 import ImageLogo from '../../../../../../public/images/logo/logo.png';
 import SkillsList from '../ui/SkillsListComponent';
 
-const AboutSection = () => (
+const AboutSectionComponent = () => (
   <motion.div 
     variants={container}
     className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24"
@@ -52,4 +52,4 @@ const AboutSection = () => (
   </motion.div>
 );
 
-export default AboutSection;
+export default AboutSectionComponent;
