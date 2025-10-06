@@ -11,12 +11,15 @@ import MobileMenuButtonComponent from './header/MobileMenuButtonComponent';
 import SearchButtonComponent from './header/SearchButtonComponent';
 import { FiX } from 'react-icons/fi';
 
+/**
+ * HeaderComponent - A responsive header with mobile menu functionality
+ * @returns {JSX.Element} The header component with navigation and mobile menu
+ */
 const HeaderComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target) && 
@@ -25,7 +28,6 @@ const HeaderComponent = () => {
       }
     };
 
-    // Disable body scroll when menu is open
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
       document.addEventListener('mousedown', handleClickOutside);
@@ -51,14 +53,23 @@ const HeaderComponent = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
+  /**
+   * Toggles the mobile menu open/closed
+   */
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  /**
+   * Closes the mobile menu
+   */
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
+  /**
+   * Handles link clicks in the mobile menu
+   */
   const handleLinkClick = () => {
     closeMenu();
   };
@@ -70,23 +81,19 @@ const HeaderComponent = () => {
       } border-b border-gray-100`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <div className="flex-shrink-0">
               <LogoComponent />
             </div>
 
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8 ml-10">
               <NavLinksComponent />
             </div>
 
-            {/* Right side items */}
             <div className="hidden md:flex items-center space-x-6 ml-auto">
               <SearchButtonComponent />
               <AuthLinksComponent />
             </div>
 
-            {/* Mobile menu button */}
             <div className="md:hidden">
               <MobileMenuButtonComponent isOpen={isMenuOpen} onClick={toggleMenu} />
             </div>
@@ -94,11 +101,9 @@ const HeaderComponent = () => {
         </div>
       </header>
 
-      {/* Mobile menu overlay and sidebar */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -106,9 +111,9 @@ const HeaderComponent = () => {
               transition={{ duration: 0.2 }}
               className="fixed inset-0 bg-black/50 z-40 md:hidden"
               onClick={closeMenu}
+              role="presentation"
             />
             
-            {/* Sidebar */}
             <motion.div
               ref={menuRef}
               initial={{ x: '100%' }}
@@ -116,6 +121,9 @@ const HeaderComponent = () => {
               exit={{ x: '100%' }}
               transition={{ type: 'tween', ease: 'easeInOut', duration: 0.3 }}
               className="fixed top-0 right-0 w-4/5 max-w-sm h-full bg-white shadow-xl z-50 overflow-y-auto"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation menu"
             >
               <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
                 <LogoComponent />
