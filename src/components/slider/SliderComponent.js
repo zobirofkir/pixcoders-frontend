@@ -1,7 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import { FaCheckCircle } from 'react-icons/fa'; // Used for the Verified Expert badge
+import { FaCheckCircle } from 'react-icons/fa';
 
 // --- Mock Data Restyled to Match the Image Content ---
 const profiles = [
@@ -93,11 +94,21 @@ const SliderComponent = () => {
   const transformOffset = current * (100 / CARDS_PER_SLIDE);
 
   return (
-    <section className="relative bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <motion.section 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto">
         
         {/* --- Section Title and Subtitle (Matches the Toptal style) --- */}
-        <div className="text-left mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-left mb-12"
+        >
           <h2 className="text-5xl font-extrabold text-gray-900 leading-none">
             Hire the <span className="text-blue-600">Top 3%</span> of
             <br />
@@ -112,23 +123,37 @@ const SliderComponent = () => {
           <button className="mt-8 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg shadow-md transition duration-300">
             Hire a Top Product Manager
           </button>
-        </div>
+        </motion.div>
 
         {/* --- Profile Slider/Grid Container --- */}
-        <div className="relative max-w-6xl mx-auto mt-16">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="relative max-w-6xl mx-auto mt-16"
+        >
           <div className="overflow-hidden">
-            <div
-              className="transition-transform duration-700 ease-in-out flex"
-              style={{ transform: `translateX(-${transformOffset}%)` }}
+            <motion.div
+              className="flex"
+              animate={{ 
+                x: `-${transformOffset}%`,
+                transition: { type: 'spring', stiffness: 300, damping: 30 }
+              }}
             >
-              {profiles.map((profile) => (
-                <div
+              {profiles.map((profile, index) => (
+                <motion.div
                   key={profile.id}
-                  // Each card takes up the full width when only 1 is shown, 1/3 when 3 are shown
-                  className={`w-full flex-shrink-0 p-4 sm:w-1/${CARDS_PER_SLIDE} lg:w-1/${CARDS_PER_SLIDE}`} 
+                  className={`w-full flex-shrink-0 p-4 sm:w-1/${CARDS_PER_SLIDE} lg:w-1/${CARDS_PER_SLIDE}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * (index % CARDS_PER_SLIDE) }}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
                   {/* --- Profile Card (Based on Toptal Image) --- */}
-                  <div className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col items-center text-center">
+                  <motion.div 
+                    className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col items-center text-center h-full"
+                    whileHover={{ boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+                  >
                     
                     {/* Profile Image */}
                     <img
@@ -160,50 +185,61 @@ const SliderComponent = () => {
                         alt={`${profile.company} Logo`}
                       />
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           
           {/* --- Navigation Buttons --- */}
-          {/* Only show navigation if there are more cards than fit on one slide */}
           {totalSlides > 1 && (
             <>
-              <button 
+              <motion.button 
                 onClick={prevSlide}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -ml-12 p-3 rounded-full bg-white shadow-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -ml-12 p-3 rounded-full bg-white shadow-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all z-10"
                 aria-label="Previous slide"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <FiChevronLeft className="h-6 w-6" />
-              </button>
+              </motion.button>
               
-              <button 
+              <motion.button 
                 onClick={nextSlide}
-                className="absolute right-0 top-1/2 -translate-y-1/2 -mr-12 p-3 rounded-full bg-white shadow-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all"
+                className="absolute right-0 top-1/2 -translate-y-1/2 -mr-12 p-3 rounded-full bg-white shadow-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all z-10"
                 aria-label="Next slide"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <FiChevronRight className="h-6 w-6" />
-              </button>
+              </motion.button>
             </>
           )}
 
           {/* --- Pagination Dots --- */}
           {totalSlides > 1 && (
-            <div className="flex justify-center mt-8 space-x-2">
+            <motion.div 
+              className="flex justify-center mt-8 space-x-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
               {[...Array(totalSlides)].map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => setCurrent(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${current === index ? 'bg-blue-600 w-6' : 'bg-gray-300 w-2'}`}
+                  className={`h-2 rounded-full ${current === index ? 'bg-blue-600' : 'bg-gray-300'}`}
+                  animate={current === index ? { width: 24 } : { width: 8 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   aria-label={`Go to slide ${index + 1}`}
+                  whileHover={{ scale: 1.2 }}
                 />
               ))}
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
