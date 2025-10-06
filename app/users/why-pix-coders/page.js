@@ -1,11 +1,11 @@
 "use client";
 
 import React from 'react';
-import { HeroSection } from './components/HeroSection';
-import { StatsSection } from './components/StatsSection';
-import { BenefitsSection } from './components/BenefitsSection';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { CallToActionSection } from './components/CallToActionSection';
+import { HeroSection } from '../../../src/components/users/why-pix-coders/HeroSection';
+import { StatsSection } from '../../../src/components/users/why-pix-coders/StatsSection';
+import { BenefitsSection } from '../../../src/components/users/why-pix-coders/BenefitsSection';
+import { TestimonialsSection } from '../../../src/components/users/why-pix-coders/TestimonialsSection';
+import { CallToActionSection } from '../../../src/components/users/why-pix-coders/CallToActionSection';
 
 const WhyPixCoders = () => {
   return (
