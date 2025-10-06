@@ -27,6 +27,11 @@ const HeaderComponent = () => {
   return (
     <>
     
+    {
+      /**
+       * Top header
+       */
+    }
     <TopHeaderComponent />
 
       {/* Main Header */}
