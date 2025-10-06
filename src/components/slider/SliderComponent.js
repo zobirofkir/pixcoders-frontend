@@ -3,9 +3,9 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
 import { useSlider } from '../../hooks/useSlider';
-import SliderCard from './SliderCard';
-import SelectedProfile from './SelectedProfile';
-import SliderControls from './SliderControls';
+import SliderCard from './hero/SliderCardComponent';
+import SelectedProfile from './hero/SelectedProfileComponent';
+import SliderControls from './hero/SliderControlsComponent';
 
 /**
  * A responsive slider component that displays professional profiles in a carousel.

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const SelectedProfile = ({ user }) => {
+const SelectedProfileComponent = ({ user }) => {
   if (!user) return null;
 
   return (
@@ -106,4 +106,4 @@ const SelectedProfile = ({ user }) => {
   );
 };
 
-export default React.memo(SelectedProfile);
+export default React.memo(SelectedProfileComponent);

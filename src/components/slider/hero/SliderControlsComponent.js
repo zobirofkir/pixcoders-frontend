@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-const SliderControls = ({ 
+const SliderControlsComponent = ({ 
   onPrev, 
   onNext, 
   current, 
@@ -51,4 +51,4 @@ const SliderControls = ({
   );
 };
 
-export default React.memo(SliderControls);
+export default React.memo(SliderControlsComponent);

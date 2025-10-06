@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCheckCircle } from 'react-icons/fa';
 
-const SliderCard = ({ 
+const SliderCardComponent = ({ 
   profile, 
   isSelected, 
   onClick,
@@ -63,4 +63,4 @@ const SliderCard = ({
   );
 };
 
-export default React.memo(SliderCard);
+export default React.memo(SliderCardComponent);
