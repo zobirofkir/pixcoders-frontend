@@ -9,13 +9,13 @@ const CTASectionComponent = () => (
       </p>
       <div className="flex flex-wrap justify-center gap-4">
         <Link 
-          href="/contact" 
+          href="/users/contacts" 
           className="px-8 py-4 bg-white text-blue-600 hover:bg-gray-100 font-medium rounded-full transition-colors duration-300"
         >
           Contact Us
         </Link>
         <Link 
-          href="/about" 
+          href="/users/works" 
           className="px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white/10 font-medium rounded-full transition-colors duration-300"
         >
           Learn More
