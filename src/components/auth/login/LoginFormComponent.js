@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FormInput } from './FormInputComponent';
-import { SubmitButton } from './SubmitButtonComponent';
-import { SocialLogin } from './SocialLoginComponent';
+import { FormInputComponent } from './FormInputComponent';
+import { SubmitButtonComponent } from './SubmitButtonComponent';
+import { SocialLoginComponent } from './SocialLoginComponent';
 import { itemVariants } from '../../../animations/animations';
-import { useLoginContext } from '../../../context/LoginContext';
+import { useLogin } from '../../../hooks/useLogin';
 
 export const LoginFormComponent = () => {
   const {
@@ -16,21 +16,37 @@ export const LoginFormComponent = () => {
     handleChange,
     handleSubmit,
     togglePasswordVisibility,
-  } = useLoginContext();
+  } = useLogin();
+
   return (
     <div className="space-y-6">
-      <FormInput
-        id="email"
-        name="email"
-        type="email"
-        placeholder="you@example.com"
-        label="Email Address"
-      />
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {error && (
+          <motion.div 
+            className="p-3 text-sm text-red-700 bg-red-100 rounded-lg"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {error}
+          </motion.div>
+        )}
+        <FormInputComponent
+          id="email"
+          name="email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="you@example.com"
+          label="Email Address"
+          required
+        />
 
-      <FormInput
+      <FormInputComponent
         id="password"
         name="password"
-        type="password"
+        type={showPassword ? 'text' : 'password'}
+        value={formData.password}
+        onChange={handleChange}
         placeholder="••••••••"
         label={
           <div className="flex items-center justify-between w-full">
@@ -44,30 +60,35 @@ export const LoginFormComponent = () => {
           </div>
         }
         showPasswordToggle
+        onTogglePasswordVisibility={togglePasswordVisibility}
+        required
       />
 
       <motion.div className="pt-1" variants={itemVariants}>
-        <SubmitButton>Continue</SubmitButton>
+        <SubmitButtonComponent disabled={isLoading}>
+          {isLoading ? 'Signing in...' : 'Continue'}
+        </SubmitButtonComponent>
       </motion.div>
 
-      <motion.div variants={itemVariants}>
-        <SocialLogin />
-      </motion.div>
+        <motion.div variants={itemVariants}>
+          <SocialLoginComponent />
+        </motion.div>
 
-      <motion.div 
-        className="pt-4 border-t border-gray-100 text-center"
-        variants={itemVariants}
-      >
-        <p className="text-sm text-gray-600">
-          Don't have an account?{' '}
-          <Link 
-            href="/signup" 
-            className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors duration-200 hover:underline"
-          >
-            Create an account
-          </Link>
-        </p>
-      </motion.div>
+        <motion.div 
+          className="pt-4 border-t border-gray-100 text-center"
+          variants={itemVariants}
+        >
+          <p className="text-sm text-gray-600">
+            Don't have an account?{' '}
+            <Link 
+              href="/signup" 
+              className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors duration-200 hover:underline"
+            >
+              Create an account
+            </Link>
+          </p>
+        </motion.div>
+      </form>
     </div>
   );
 };

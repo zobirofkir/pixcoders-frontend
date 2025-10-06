@@ -2,12 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { LoginProvider } from '../../../../src/context/LoginContext';
 import { containerVariants } from '../../../../src/animations/animations';
-import { LoginHeader } from '../../../../src/components/auth/login/LoginHeaderComponent';
-import { LoginForm } from '../../../../src/components/auth/login/LoginFormComponent';
-import { LoginHero } from '../../../../src/components/auth/login/LoginHeroComponent';
-import { AnimatedBackground, DecorativeAccent, AnimatedBlobs } from '../../../../src/components/auth/login/AnimatedBackgroundComponent';
+import { LoginHeaderComponent } from '../../../../src/components/auth/login/LoginHeaderComponent';
+import { LoginFormComponent } from '../../../../src/components/auth/login/LoginFormComponent';
+import { LoginHeroComponent } from '../../../../src/components/auth/login/LoginHeroComponent';
+import { AnimatedBackgroundComponent } from '../../../../src/components/auth/login/AnimatedBackgroundComponent';
 
 const LoginPage = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -17,9 +16,8 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <LoginProvider>
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 relative overflow-hidden">
-        <AnimatedBackground />
+        <AnimatedBackgroundComponent />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-center min-h-[calc(100vh-4rem)]">
@@ -30,17 +28,15 @@ const LoginPage = () => {
               animate={isMounted ? "visible" : "hidden"}
               variants={containerVariants}
             >
-              <DecorativeAccent />
-              <LoginHeader />
-              <LoginForm />
+              <LoginHeaderComponent />
+              <LoginFormComponent />
             </motion.div>
 
             {/* Right side - Hero */}
-            <LoginHero />
+            <LoginHeroComponent />
           </div>
         </div>
       </div>
-    </LoginProvider>
   );
 };
 
