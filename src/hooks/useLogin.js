@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+/**
+ * Custom hook to handle login form state and submission
+ * @returns {Object} Login form state and handlers
+ * @property {Object} formData - Current form data with email and password
+ * @property {boolean} isLoading - Loading state during form submission
+ * @property {string|null} error - Error message if login fails
+ * @property {boolean} showPassword - Toggle password visibility state
+ * @property {Function} handleChange - Handler for form input changes
+ * @property {Function} handleSubmit - Handler for form submission
+ * @property {Function} togglePasswordVisibility - Toggles password visibility
+ */
 export const useLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -11,34 +22,36 @@ export const useLogin = () => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
+  /**
+   * Handles input changes and updates form data
+   * @param {React.ChangeEvent<HTMLInputElement>} e - Input change event
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (error) setError(null);
   };
 
+  /**
+   * Handles form submission and authentication
+   * @param {React.FormEvent} e - Form submission event
+   * @throws {Error} If form validation fails or authentication error occurs
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
     
     try {
-      // Basic validation
       if (!formData.email || !formData.password) {
         throw new Error('Please fill in all fields');
       }
 
-      // TODO: Replace with actual API call
-      console.log('Login attempt with:', formData);
-      // Simulate API call
       await new Promise((resolve, reject) => {
         setTimeout(() => {
-          // Simulate successful login
-          // In a real app, you would validate credentials with your backend
           if (formData.email && formData.password) {
             resolve();
           } else {
@@ -47,7 +60,6 @@ export const useLogin = () => {
         }, 1000);
       });
       
-      // Redirect after successful login
       router.push('/dashboard');
     } catch (err) {
       console.error('Login error:', err);
@@ -57,6 +69,9 @@ export const useLogin = () => {
     }
   };
 
+  /**
+   * Toggles the password visibility state
+   */
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
