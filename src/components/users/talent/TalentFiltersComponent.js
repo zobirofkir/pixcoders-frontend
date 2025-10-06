@@ -1,5 +1,37 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+
+const FilterSection = ({ title, children, isOpen, onToggle }) => (
+  <div className="mb-6">
+    <button 
+      onClick={onToggle}
+      className="w-full flex justify-between items-center lg:cursor-default"
+      aria-expanded={isOpen}
+    >
+      <h3 className="font-medium text-gray-700">{title}</h3>
+      <span className="lg:hidden">
+        {isOpen ? <FiChevronUp size={20} /> : <FiChevronDown size={20} />}
+      </span>
+    </button>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, height: 0, overflow: 'hidden' }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="overflow-hidden"
+        >
+          <div className="pt-4">
+            {children}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </div>
+);
 
 export const TalentFiltersComponent = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
@@ -8,11 +40,40 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
     availability: '',
     rate: { min: 0, max: 200 },
   });
+  
+  const [isMobile, setIsMobile] = useState(false);
+  const [openSections, setOpenSections] = useState({
+    search: true,
+    skills: true,
+    rate: true,
+    availability: true
+  });
 
   const skills = [
     'React', 'Node.js', 'Python', 'UI/UX Design',
     'Mobile Development', 'DevOps', 'Machine Learning', 'Blockchain'
   ];
+
+  // Check if mobile on mount and on resize
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  const toggleSection = (section) => {
+    if (isMobile) {
+      setOpenSections(prev => ({
+        ...prev,
+        [section]: !prev[section]
+      }));
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,9 +93,15 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-      <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-4">Find Top Talent</h2>
+    <div className="bg-white p-4 lg:p-6 rounded-lg shadow-md mb-8">
+      <h2 className="text-xl font-bold text-gray-800 mb-4 lg:mb-6">Find Top Talent</h2>
+      
+      {/* Search Section */}
+      <FilterSection 
+        title="Search" 
+        isOpen={openSections.search} 
+        onToggle={() => toggleSection('search')}
+      >
         <div className="relative">
           <input
             type="text"
@@ -57,16 +124,20 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
             />
           </svg>
         </div>
-      </div>
+      </FilterSection>
 
-      <div className="mb-6">
-        <h3 className="font-medium text-gray-700 mb-3">Skills</h3>
+      {/* Skills Section */}
+      <FilterSection 
+        title="Skills" 
+        isOpen={openSections.skills} 
+        onToggle={() => toggleSection('skills')}
+      >
         <div className="flex flex-wrap gap-2">
           {skills.map((skill) => (
             <button
               key={skill}
               onClick={() => toggleSkill(skill)}
-              className={`px-3 py-1 rounded-full text-sm ${
+              className={`px-3 py-1 rounded-full text-sm transition-colors ${
                 filters.skills.includes(skill)
                   ? 'bg-indigo-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -76,10 +147,14 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
             </button>
           ))}
         </div>
-      </div>
+      </FilterSection>
 
-      <div className="mb-6">
-        <h3 className="font-medium text-gray-700 mb-3">Hourly Rate</h3>
+      {/* Hourly Rate Section */}
+      <FilterSection 
+        title="Hourly Rate" 
+        isOpen={openSections.rate} 
+        onToggle={() => toggleSection('rate')}
+      >
         <div className="flex items-center space-x-4">
           <div className="flex-1">
             <label className="block text-sm text-gray-500 mb-1">Min</label>
@@ -97,7 +172,7 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
                   setFilters(newFilters);
                   onFilterChange(newFilters);
                 }}
-                className="w-full pl-8 p-2 border border-gray-300 rounded-lg"
+                className="w-full pl-8 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 min="0"
               />
             </div>
@@ -118,28 +193,32 @@ export const TalentFiltersComponent = ({ onFilterChange }) => {
                   setFilters(newFilters);
                   onFilterChange(newFilters);
                 }}
-                className="w-full pl-8 p-2 border border-gray-300 rounded-lg"
+                className="w-full pl-8 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 min={filters.rate.min}
               />
             </div>
           </div>
         </div>
-      </div>
+      </FilterSection>
 
-      <div>
-        <h3 className="font-medium text-gray-700 mb-3">Availability</h3>
+      {/* Availability Section */}
+      <FilterSection 
+        title="Availability" 
+        isOpen={openSections.availability} 
+        onToggle={() => toggleSection('availability')}
+      >
         <select
           name="availability"
           value={filters.availability}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         >
           <option value="">Any Availability</option>
           <option value="full-time">Full-time</option>
           <option value="part-time">Part-time</option>
           <option value="freelance">Freelance</option>
         </select>
-      </div>
+      </FilterSection>
     </div>
   );
 };
