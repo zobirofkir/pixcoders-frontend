@@ -4,7 +4,7 @@ import React from 'react';
 import TeamHeaderComponent from '@/src/components/team/TeamHeaderComponent';
 import TeamMemberCardComponent from '@/src/components/team/TeamMemberCardComponent';
 import JoinTeamComponent from '@/src/components/team/JoinTeamComponent';
-import teamMembers from '@/src/data/teamMembers';
+import teamMembersData from '@/src/data/teamMembersData';
 
 const TeamPage = () => {
   return (
@@ -13,7 +13,7 @@ const TeamPage = () => {
         <TeamHeaderComponent />
         
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {teamMembers.map((member) => (
+          {teamMembersData.map((member) => (
             <TeamMemberCardComponent key={member.id} member={member} />
           ))}
         </div>
