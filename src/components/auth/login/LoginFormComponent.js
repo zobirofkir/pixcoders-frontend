@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { FormInputComponent } from './FormInputComponent';
 import { SubmitButtonComponent } from './SubmitButtonComponent';
-import { SocialLoginComponent } from './SocialLoginComponent';
 import { itemVariants } from '../../../animations/animations';
 import { useLogin } from '../../../hooks/useLogin';
 
@@ -69,10 +68,6 @@ export const LoginFormComponent = () => {
           {isLoading ? 'Signing in...' : 'Continue'}
         </SubmitButtonComponent>
       </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <SocialLoginComponent />
-        </motion.div>
 
         <motion.div 
           className="pt-4 border-t border-gray-100 text-center"
