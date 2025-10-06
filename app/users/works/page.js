@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { HeroSection, FilterButtons, WorksGrid, CTASection } from '@/src/components/users/works';
+import { HeroSectionComponent, FilterButtonsComponent, WorksGridComponent, CTASectionComponent } from '@/src/components/users/works';
 
 // Sample work data - replace with your actual work data
 const works = [
@@ -72,23 +72,23 @@ const WorksPage = () => {
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
-    setVisibleWorks(6); // Reset visible works when filter changes
+    setVisibleWorks(6); 
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      <HeroSection 
+      <HeroSectionComponent 
         title="Our Work Speaks for Itself"
         description="We've helped businesses of all sizes transform their ideas into successful digital products. Here are some of our recent projects."
       >
-        <FilterButtons 
+        <FilterButtonsComponent
           filters={filters}
           activeFilter={activeFilter}
           onFilterChange={handleFilterChange}
         />
-      </HeroSection>
+      </HeroSectionComponent>
 
-      <WorksGrid 
+      <WorksGridComponent 
         works={filteredWorks} 
         visibleWorks={visibleWorks} 
         onLoadMore={loadMore} 
