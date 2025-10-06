@@ -10,6 +10,7 @@ import TalentSearchHeaderComponent from '@/src/components/users/talent/talents-p
 import TalentGridComponent from '@/src/components/users/talent/talents-page/page/TalentGridComponent';
 import PaginationComponent from '@/src/components/users/talent/talents-page/page/PaginationComponent';
 import CallToActionComponent from '@/src/components/users/talent/talents-page/page/CallToActionComponent';
+import LoadingComponent from '@/src/components/loading/LoadingComponent';
 
 const TalentsPage = () => {
   const {
@@ -21,7 +22,7 @@ const TalentsPage = () => {
   } = useTalents();
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
+    <Suspense fallback={<LoadingComponent />}>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
