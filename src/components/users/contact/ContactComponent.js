@@ -3,7 +3,7 @@
 import React, { Suspense, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiClock, FiCalendar } from 'react-icons/fi';
-import LoadingComponent from '../loading/LoadingComponent';
+import LoadingComponent from '../../loading/LoadingComponent';
 
 const ContactComponent = () => {
   const [formData, setFormData] = useState({

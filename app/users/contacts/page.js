@@ -1,4 +1,4 @@
-import ContactComponent from '@/src/components/contact/ContactComponent'
+import ContactComponent from '@/src/components/users/contact/ContactComponent'
 import LoadingComponent from '@/src/components/loading/LoadingComponent'
 import React, { Suspense } from 'react'
 

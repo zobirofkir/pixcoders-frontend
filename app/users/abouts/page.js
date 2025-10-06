@@ -1,4 +1,4 @@
-import AboutComponent from '@/src/components/about/AboutComponent'
+import AboutComponent from '@/src/components/users/about/AboutComponent'
 import LoadingComponent from '@/src/components/loading/LoadingComponent'
 import React, { Suspense } from 'react'
 

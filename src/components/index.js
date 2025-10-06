@@ -15,3 +15,13 @@ export { default as SearchFilterComponent } from './users/talent/talents-page/Se
 export { default as SkillsFilterComponent } from './users/talent/talents-page/SkillsFilterComponent';
 export { default as RateFilterComponent } from './users/talent/talents-page/RateFilterComponent';
 export { default as AvailabilityFilterComponent } from './users/talent/talents-page/AvailabilityFilterComponent';
+
+/**
+ * Blogs Import
+ */
+export { HeroSection } from './users/blogs/HeroSection';
+export { CategoryFilter } from './users/blogs/CategoryFilter';
+export { FeaturedPosts } from './users/blogs/FeaturedPosts';
+export { PostCard } from './users/blogs/PostCard';
+export { Pagination } from './users/blogs/Pagination';
+export { Newsletter } from './users/blogs/Newsletter';

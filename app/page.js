@@ -1,5 +1,5 @@
-import AboutComponent from '@/src/components/about/AboutComponent'
-import ContactComponent from '@/src/components/contact/ContactComponent'
+import AboutComponent from '@/src/components/users/about/AboutComponent'
+import ContactComponent from '@/src/components/users/contact/ContactComponent'
 import LoadingComponent from '@/src/components/loading/LoadingComponent'
 import SliderComponent from '@/src/components/slider/SliderComponent'
 import React, { Suspense } from 'react'
