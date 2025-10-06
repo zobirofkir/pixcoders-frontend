@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { FormInput } from './FormInput';
 import { SubmitButton } from './SubmitButton';
 import { SocialLogin } from './SocialLogin';
-import { itemVariants } from '../animations';
+import { itemVariants } from '../../../../../src/animations/animations';
 
 export const LoginForm = () => {
   return (

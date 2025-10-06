@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LoginProvider } from './context/LoginContext';
-import { containerVariants } from './animations';
+import { containerVariants } from '../../../../src/animations/animations';
 import { LoginHeader } from './components/LoginHeader';
 import { LoginForm } from './components/LoginForm';
 import { LoginHero } from './components/LoginHero';

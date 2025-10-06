@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiUser } from 'react-icons/fi';
 import { motion } from 'framer-motion';
-import { itemVariants } from '../animations';
+import { itemVariants } from '../../../../../src/animations/animations';
 
 export const LoginHeader = () => (
   <motion.div 
