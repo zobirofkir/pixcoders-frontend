@@ -1,10 +1,36 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { motion, AnimatePresence } from 'framer-motion';
 import TalentFiltersComponent from '@/src/components/users/talent/TalentFiltersComponent';
 import TalentCardComponent from '@/src/components/users/talent/TalentCardComponent';
 import { talentData } from '@/src/data/talentData';
 
+
+// Animation variants
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 15
+    }
+  }
+};
 
 const page = () => {
   const [talents, setTalents] = useState(talentData);
@@ -51,7 +77,13 @@ const page = () => {
   }, [filters]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gray-50"
+    >
       <Head>
         <title>Top Talents | Find Skilled Professionals</title>
         <meta
@@ -61,7 +93,12 @@ const page = () => {
       </Head>
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16"
+      >
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Find Top Tech Talent
@@ -70,7 +107,7 @@ const page = () => {
             Connect with highly skilled developers, designers, and tech experts ready to work on your next project.
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
@@ -81,7 +118,12 @@ const page = () => {
           </div>
 
           {/* Talents Grid */}
-          <div className="lg:w-3/4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:w-3/4"
+          >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 {talents.length} {talents.length === 1 ? 'Talent' : 'Talents'} Found
@@ -97,20 +139,33 @@ const page = () => {
               </div>
             </div>
 
-            {talents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {talents.map((talent) => (
-                  <TalentCardComponent key={talent.id} talent={talent} />
-                ))}
-              </div>
-            ) : (
-              <div className="bg-white rounded-lg shadow p-8 text-center">
-                <h3 className="text-xl font-medium text-gray-700 mb-2">No talents found</h3>
-                <p className="text-gray-500">
-                  Try adjusting your search or filter criteria to find what you're looking for.
-                </p>
-              </div>
-            )}
+            <AnimatePresence>
+              {talents.length > 0 ? (
+                <motion.div 
+                  variants={container}
+                  initial="hidden"
+                  animate="show"
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6"
+                >
+                  {talents.map((talent) => (
+                    <motion.div key={talent.id} variants={item} layout>
+                      <TalentCardComponent talent={talent} />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="bg-white rounded-lg shadow p-8 text-center"
+                >
+                  <h3 className="text-xl font-medium text-gray-700 mb-2">No talents found</h3>
+                  <p className="text-gray-500">
+                    Try adjusting your search or filter criteria to find what you're looking for.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Pagination */}
             {talents.length > 0 && (
@@ -138,12 +193,18 @@ const page = () => {
                 </nav>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </main>
 
       {/* Call to Action */}
-      <section className="bg-indigo-700 text-white py-12 mt-12">
+      <motion.section 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-indigo-700 text-white py-12 mt-12"
+      >
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Can't find what you're looking for?</h2>
           <p className="text-xl text-indigo-100 mb-6 max-w-2xl mx-auto">
@@ -153,8 +214,8 @@ const page = () => {
             Post a Job Request
           </button>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
   );
 };
 
