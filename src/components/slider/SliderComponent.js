@@ -12,8 +12,17 @@ import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
  */
 const SliderComponent = () => {
   const [current, setCurrent] = useState(0);
+  const [selectedUser, setSelectedUser] = useState(profileData[0]); // Default to first user
   const totalSlides = Math.ceil(profileData.length / CARDS_PER_SLIDE);
   const transformOffset = current * (100 / CARDS_PER_SLIDE);
+
+  /**
+   * Handles card click to update selected user
+   * @param {Object} user - The user object that was clicked
+   */
+  const handleCardClick = (user) => {
+    setSelectedUser(user);
+  };
 
   /**
    * Advances to the next slide
@@ -54,19 +63,29 @@ const SliderComponent = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-left mb-12"
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight">
-            Hire the <span className="text-blue-600">Top 3%</span> of
-            <br />
-            Product Managers
-          </h2>
+          <div className="flex items-center mb-4">
+            <img 
+              src={selectedUser.image} 
+              alt={selectedUser.name} 
+              className="w-16 h-16 rounded-full border-2 border-blue-100 mr-4"
+            />
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+                {selectedUser.name}
+              </h2>
+              <p className="text-lg text-gray-600">
+                {selectedUser.role} at {selectedUser.company}
+              </p>
+            </div>
+          </div>
           <p className="mt-6 max-w-3xl text-base sm:text-lg text-gray-700">
-            Toptal is a marketplace for top product managers who are experts in
+            {selectedUser.name} is a {selectedUser.role} at {selectedUser.company} with extensive experience in
             product research, ideation, roadmaps, user stories, execution, and
-            launch. Leading companies hire product managers from Toptal for
+            launch. {selectedUser.company} trusts {selectedUser.name.split(' ')[0]} for
             end-to-end product lifecycle success.
           </p>
           <button className="mt-8 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            Hire a Top Product Manager
+            Hire {selectedUser.name.split(' ')[0]}
           </button>
         </motion.div>
 
@@ -94,8 +113,9 @@ const SliderComponent = () => {
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
                   <motion.div 
-                    className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col items-center text-center h-full"
+                    className="bg-gray-50 border border-gray-100 p-4 rounded-xl flex flex-col items-center text-center h-full cursor-pointer"
                     whileHover={{ boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+                    onClick={() => handleCardClick(profile)}
                   >
                     <img
                       className="h-28 w-28 rounded-full object-cover mb-4 border-4 border-white shadow-md"
