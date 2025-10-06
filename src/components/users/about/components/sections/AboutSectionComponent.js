@@ -129,9 +129,6 @@ const AboutSectionComponent = () => {
 
           <StatsGridComponent stats={stats} isInView={isInView} /> 
 
-          <motion.div variants={fadeInUp}>
-            <SkillsList />
-          </motion.div>
         </motion.div>
       </div>
     </div>
