@@ -29,7 +29,7 @@ const TestimonialCard = ({ testimonial, index }) => (
   </motion.div>
 );
 
-export const TestimonialsSection = () => (
+export const TestimonialsSectionComponent = () => (
   <section className="py-20 bg-gray-50">
     <div className="container mx-auto px-4">
       <div className="text-center mb-16">
@@ -46,4 +46,4 @@ export const TestimonialsSection = () => (
   </section>
 );
 
-export default TestimonialsSection;
+export default TestimonialsSectionComponent;

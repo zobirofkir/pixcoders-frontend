@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-export const HeroSection = () => (
+export const HeroSectionComponent = () => (
   <section className="relative bg-gradient-to-r from-blue-900 to-blue-700 text-white py-20 md:py-32">
     <div className="container mx-auto px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -38,4 +38,4 @@ export const HeroSection = () => (
   </section>
 );
 
-export default HeroSection;
+export default HeroSectionComponent;

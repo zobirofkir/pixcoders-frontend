@@ -33,7 +33,7 @@ const BenefitCard = ({ benefit, index }) => (
   </motion.div>
 );
 
-export const BenefitsSection = () => (
+export const BenefitsSectionComponent = () => (
   <section className="py-20">
     <div className="container mx-auto px-4">
       <div className="text-center mb-16">
@@ -50,4 +50,4 @@ export const BenefitsSection = () => (
   </section>
 );
 
-export default BenefitsSection;
+export default BenefitsSectionComponent;

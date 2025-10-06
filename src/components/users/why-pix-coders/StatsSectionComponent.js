@@ -20,7 +20,7 @@ const StatCard = ({ stat, index }) => (
   </motion.div>
 );
 
-export const StatsSection = () => (
+export const StatsSectionComponent = () => (
   <section className="py-16 bg-gray-50">
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -32,4 +32,4 @@ export const StatsSection = () => (
   </section>
 );
 
-export default StatsSection;
+export default StatsSectionComponent;

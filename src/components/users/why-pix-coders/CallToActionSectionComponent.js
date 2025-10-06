@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const CallToActionSection = () => (
+export const CallToActionSectionComponent = () => (
   <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-700 text-white">
     <div className="container mx-auto px-4 text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to work with the best?</h2>
@@ -25,4 +25,4 @@ export const CallToActionSection = () => (
   </section>
 );
 
-export default CallToActionSection;
+export default CallToActionSectionComponent;
