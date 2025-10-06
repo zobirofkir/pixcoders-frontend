@@ -1,6 +1,6 @@
 'use client';
 
-const RateFilter = ({ rate, onRateChange }) => {
+const RateFilterComponent = ({ rate, onRateChange }) => {
   const handleMinChange = (e) => {
     onRateChange({
       min: parseInt(e.target.value) || 0,
@@ -49,4 +49,4 @@ const RateFilter = ({ rate, onRateChange }) => {
   );
 };
 
-export default RateFilter;
+export default RateFilterComponent;

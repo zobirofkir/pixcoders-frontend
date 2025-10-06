@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
-const FilterSection = ({ title, children, isOpen, onToggle, isMobile }) => (
+const FilterSectionComponent = ({ title, children, isOpen, onToggle, isMobile }) => (
   <div className="mb-6">
     <button 
       onClick={onToggle}
@@ -34,4 +34,4 @@ const FilterSection = ({ title, children, isOpen, onToggle, isMobile }) => (
   </div>
 );
 
-export default FilterSection;
+export default FilterSectionComponent;

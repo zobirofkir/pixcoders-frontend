@@ -5,7 +5,7 @@ const skills = [
   'Mobile Development', 'DevOps', 'Machine Learning', 'Blockchain'
 ];
 
-const SkillsFilter = ({ selectedSkills, onSkillToggle }) => (
+const SkillsFilterComponent = ({ selectedSkills, onSkillToggle }) => (
   <div className="flex flex-wrap gap-2">
     {skills.map((skill) => (
       <button
@@ -23,4 +23,4 @@ const SkillsFilter = ({ selectedSkills, onSkillToggle }) => (
   </div>
 );
 
-export default SkillsFilter;
+export default SkillsFilterComponent;

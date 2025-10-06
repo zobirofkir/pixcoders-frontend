@@ -1,6 +1,6 @@
 'use client';
 
-const SearchFilter = ({ search, onChange }) => (
+const SearchFilterComponent = ({ search, onChange }) => (
   <div className="relative">
     <input
       type="text"
@@ -25,4 +25,4 @@ const SearchFilter = ({ search, onChange }) => (
   </div>
 );
 
-export default SearchFilter;
+export default SearchFilterComponent;

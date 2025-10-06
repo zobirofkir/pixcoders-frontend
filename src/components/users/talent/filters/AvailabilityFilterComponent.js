@@ -1,6 +1,6 @@
 'use client';
 
-const AvailabilityFilter = ({ value, onChange }) => (
+const AvailabilityFilterComponent = ({ value, onChange }) => (
   <select
     name="availability"
     value={value}
@@ -14,4 +14,4 @@ const AvailabilityFilter = ({ value, onChange }) => (
   </select>
 );
 
-export default AvailabilityFilter;
+export default AvailabilityFilterComponent;
