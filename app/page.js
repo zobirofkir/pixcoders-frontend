@@ -1,4 +1,4 @@
-import SliderComponent from '@/public/images/slider/SliderComponent'
+import SliderComponent from '@/src/components/slider/SliderComponent'
 import React from 'react'
 
 const page = () => {

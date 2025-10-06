@@ -1,7 +1,7 @@
 import './globals.css';
 import { metadata } from '../src/MetaData/Metadata';
-import HeaderComponent from '@/public/images/slider/nav/HeaderComponent';
-import FooterComponent from '@/public/images/slider/nav/FooterComponent';
+import HeaderComponent from '@/src/components/nav/HeaderComponent';
+import FooterComponent from '@/src/components/nav/FooterComponent';
 
 export { metadata };
 
