@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 const authLinks = [
-  { name: 'Log In', href: '/login' },
-  { name: 'Hire Top Talent', href: '/hire', highlight: true },
+  { name: 'Log In', href: '#' },
+  { name: 'Hire Top Talent', href: '#', highlight: true },
 ];
 
 const AuthLinksComponent = ({ isMobile = false, onLinkClick }) => {
