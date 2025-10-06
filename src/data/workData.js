@@ -5,7 +5,7 @@ export const workData = [
     description: 'A full-featured e-commerce solution with payment integration and inventory management.',
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     image: 'https://picsum.photos/800/600?random=101',
-    link: '/works/ecommerce',
+    link: '#',
     featured: true
   },
   {
@@ -14,7 +14,7 @@ export const workData = [
     description: 'Secure and user-friendly mobile banking application with biometric authentication.',
     tags: ['React Native', 'Node.js', 'PostgreSQL'],
     image: 'https://picsum.photos/800/600?random=102',
-    link: '/works/banking'
+    link: '#'
   },
   {
     id: 3,
@@ -22,7 +22,7 @@ export const workData = [
     description: 'Comprehensive healthcare solution for patient records and appointment scheduling.',
     tags: ['Vue.js', 'Python', 'Django', 'MySQL'],
     image: 'https://picsum.photos/800/600?random=103',
-    link: '/works/healthcare'
+    link: '#'
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ export const workData = [
     description: 'Interactive property listing platform with virtual tours and mortgage calculator.',
     tags: ['Next.js', 'Node.js', 'MongoDB', 'Mapbox'],
     image: 'https://picsum.photos/800/600?random=104',
-    link: '/works/real-estate'
+    link: '#'
   },
   {
     id: 5,
@@ -38,7 +38,7 @@ export const workData = [
     description: 'Interactive online learning platform with video courses and progress tracking.',
     tags: ['React', 'Node.js', 'MongoDB', 'WebRTC'],
     image: 'https://picsum.photos/800/600?random=105',
-    link: '/works/elearning'
+    link: '#'
   },
   {
     id: 6,
@@ -46,6 +46,6 @@ export const workData = [
     description: 'On-demand food delivery service with real-time order tracking.',
     tags: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
     image: 'https://picsum.photos/800/600?random=106',
-    link: '/works/food-delivery'
+    link: '#'
   },
 ];
