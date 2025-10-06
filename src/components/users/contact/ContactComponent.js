@@ -1,72 +1,29 @@
 "use client"
 
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiClock, FiCalendar } from 'react-icons/fi';
 import LoadingComponent from '../../loading/LoadingComponent';
+import { useContact } from '@/hooks/useContact';
 
 const ContactComponent = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const {
+    formData,
+    isSubmitting,
+    isSubmitted,
+    contactInfo,
+    handleChange,
+    handleSubmit,
+  } = useContact();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  /**
+   * Map icon strings to actual components
+   */
+  const iconMap = {
+    FiMail: <FiMail className="w-6 h-6 text-blue-500" />,
+    FiPhone: <FiPhone className="w-6 h-6 text-blue-500" />,
+    FiMapPin: <FiMapPin className="w-6 h-6 text-blue-500" />,
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    /**
-     * Simulate form submission
-     */
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
-    }, 1500);
-  };
-
-  const contactInfo = [
-    {
-      icon: <FiMail className="w-6 h-6 text-blue-500" />,
-      title: 'Email Us',
-      content: 'contact@pixcoders.dev',
-      href: 'mailto:contact@pixcoders.dev',
-    },
-    {
-      icon: <FiPhone className="w-6 h-6 text-blue-500" />,
-      title: 'Call Us',
-      content: '+212 600000000',
-      href: 'tel:+212600000000',
-    },
-    {
-      icon: <FiMapPin className="w-6 h-6 text-blue-500" />,
-      title: 'Visit Us',
-      content: '123 Tech Street, Morocco',
-      href: 'https://maps.google.com',
-    },
-  ];
 
   return (
     <Suspense fallback={<LoadingComponent/>}>
@@ -226,13 +183,12 @@ const ContactComponent = () => {
                       className="flex items-start space-x-4 group"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.1 * index }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <div className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-500 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors duration-200">
-                        {item.icon}
+                        {iconMap[item.icon] || <FiMail className="w-6 h-6 text-blue-500" />}
                       </div>
                       <div>
                         <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h4>
