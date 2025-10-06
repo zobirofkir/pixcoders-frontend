@@ -178,20 +178,6 @@ const CountdownComponent = () => {
           <TimeUnit value={timeLeft.seconds} label="Seconds" className="group" />
         </motion.div>
         
-        <div className="mt-10">
-          <button 
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-            onClick={() => {
-              // Reset the countdown to 2 months from now
-              const newDate = new Date();
-              newDate.setMonth(newDate.getMonth() + 2);
-              localStorage.setItem('countdownTargetDate', newDate.getTime().toString());
-              window.location.reload();
-            }}
-          >
-            Reset Countdown
-          </button>
-        </div>
       </motion.div>
     </div>
   );
