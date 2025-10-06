@@ -8,9 +8,7 @@ const inter = Inter({
 export default function BodyComponent({ children }) {
   return (
     <body className={`${inter.className} bg-gradient-to-br from-gray-50 to-gray-100 dark:bg-black min-h-screen transition-colors duration-300`}>
-      <ThemeProvider>
-        {children}
-      </ThemeProvider>
+      {children}
     </body>
   );
 }
