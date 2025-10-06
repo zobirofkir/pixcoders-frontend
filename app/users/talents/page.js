@@ -7,7 +7,9 @@ import TalentCardComponent from '@/src/components/users/talent/TalentCardCompone
 import { talentData } from '@/src/data/talentData';
 
 
-// Animation variants
+/**
+ * Animation variants
+ */
 const container = {
   hidden: { opacity: 0 },
   show: {
