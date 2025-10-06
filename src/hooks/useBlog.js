@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { blogsData } from '@/src/data/blogsData';
+import { blogsData } from '@/data/blogsData';
 
 export const useBlog = (initialCategory = 'All', postsPerPage = 6) => {
   const [searchQuery, setSearchQuery] = useState('');

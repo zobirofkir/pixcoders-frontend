@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import ImageLogo from '@/public/images/logo/logo.png';
+import ImageLogo from '../../../../public/images/logo/logo.png';
 
 const stats = [
   { value: '10+', label: 'Years Experience' },

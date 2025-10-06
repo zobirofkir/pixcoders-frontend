@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { blogCategoryData } from '@/src/data/blogsCategoryData';
-import useBlog from '@/src/hooks/useBlog';
+import { blogCategoryData } from '@/data/blogsCategoryData';
+import useBlog from '@/hooks/useBlog';
 import {
   BlogHeroSectionComponent,
   CategoryFilterComponent,

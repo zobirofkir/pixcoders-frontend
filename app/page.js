@@ -1,7 +1,7 @@
-import AboutComponent from '@/src/components/users/about/AboutComponent'
+import AboutComponent from '@/components/users/about/AboutComponent'
 import ContactComponent from '@/components/users/contact/ContactComponent'
-import LoadingComponent from '@/src/components/loading/LoadingComponent'
-import SliderComponent from '@/src/components/slider/SliderComponent'
+import LoadingComponent from '@/components/loading/LoadingComponent'
+import SliderComponent from '@/components/slider/SliderComponent'
 import React, { Suspense } from 'react'
 
 const page = () => {
