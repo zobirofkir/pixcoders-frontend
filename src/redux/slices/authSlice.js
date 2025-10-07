@@ -11,15 +11,9 @@ export const login = createAsyncThunk(
         email,
         password,
       });
-      
-      // Store the token in local storage
-      if (response.data.data?.accessToken?.accessToken) {
-        localStorage.setItem('accessToken', response.data.data.accessToken.accessToken);
-      }
-      
       return response.data.data;
     } catch (error) {
-      if (error.response && error.response.data) {
+      if (error.response?.data) {
         return rejectWithValue(error.response.data);
       }
       return rejectWithValue({ message: error.message });
@@ -41,7 +35,6 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.loading = false;
       state.error = null;
-      localStorage.removeItem('accessToken');
     },
     clearError: (state) => {
       state.error = null;
