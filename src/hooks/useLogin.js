@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/slices/authSlice';
 
 /**
  * Custom hook to handle login form state and submission
@@ -17,10 +19,11 @@ export const useLogin = () => {
     email: '',
     password: '',
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
   const router = useRouter();
+  
+  const { loading: isLoading, error, user, accessToken } = useSelector((state) => state.auth);
 
   /**
    * Handles input changes and updates form data
@@ -40,32 +43,33 @@ export const useLogin = () => {
    * @param {React.FormEvent} e - Form submission event
    * @throws {Error} If form validation fails or authentication error occurs
    */
+  useEffect(() => {
+    if (user && accessToken) {
+      router.push('/');
+    }
+  }, [user, accessToken, router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError(null);
     
-    try {
-      if (!formData.email || !formData.password) {
-        throw new Error('Please fill in all fields');
-      }
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields');
+      return;
+    }
 
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (formData.email && formData.password) {
-            resolve();
-          } else {
-            reject(new Error('Invalid credentials'));
-          }
-        }, 1000);
-      });
-      
-      router.push('/dashboard');
+    try {
+      const resultAction = await dispatch(login({
+        email: formData.email,
+        password: formData.password
+      }));
+
+      if (login.fulfilled.match(resultAction)) {
+      } else if (login.rejected.match(resultAction)) {
+        return;
+      }
     } catch (err) {
       console.error('Login error:', err);
-      setError(err.message || 'An error occurred during login');
-    } finally {
-      setIsLoading(false);
+      setError('An unexpected error occurred');
     }
   };
 
@@ -79,7 +83,7 @@ export const useLogin = () => {
   return {
     formData,
     isLoading,
-    error,
+    error: error || null,
     showPassword,
     handleChange,
     handleSubmit,
