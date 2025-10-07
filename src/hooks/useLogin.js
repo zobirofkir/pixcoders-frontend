@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthToken } from '../utils/cookies';
 import { login } from '../redux/slices/authSlice';
@@ -22,7 +21,6 @@ export const useLogin = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const router = useRouter();
   
   const { loading: isLoading, error, user, accessToken } = useSelector((state) => state.auth);
 
@@ -68,7 +66,7 @@ export const useLogin = () => {
       if (login.fulfilled.match(resultAction)) {
         const { accessToken } = resultAction.payload;
         if (accessToken) {
-          router.push('/');
+          window.location.href = '/';
         }
       } else if (login.rejected.match(resultAction)) {
         const errorMessage = resultAction.error?.message || 'Login failed. Please check your credentials.';
