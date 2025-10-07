@@ -10,6 +10,7 @@ export const login = createAsyncThunk(
         email,
         password,
       });
+      console.log('Login API Response:', response.data);
       return response.data.data;
     } catch (error) {
       if (error.response?.data) {
