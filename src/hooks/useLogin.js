@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
+import { setAuthToken } from '../utils/cookies';
 import { login } from '../redux/slices/authSlice';
 
 /**
@@ -46,6 +47,7 @@ export const useLogin = () => {
   useEffect(() => {
     if (user && accessToken) {
       console.log('User logged in successfully');
+      setAuthToken(accessToken);
     }
   }, [user, accessToken]);
 
@@ -62,10 +64,15 @@ export const useLogin = () => {
         email: formData.email,
         password: formData.password
       }));
-      
 
       if (login.fulfilled.match(resultAction)) {
+        const { accessToken } = resultAction.payload;
+        if (accessToken) {
+          router.push('/');
+        }
       } else if (login.rejected.match(resultAction)) {
+        const errorMessage = resultAction.error?.message || 'Login failed. Please check your credentials.';
+        setError(errorMessage);
         return;
       }
     } catch (err) {
