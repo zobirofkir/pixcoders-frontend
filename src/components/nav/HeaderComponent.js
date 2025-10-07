@@ -101,7 +101,7 @@ const HeaderComponent = () => {
                   <AuthLinksComponent isMobile onLinkClick={handleLinkClick} />
                 </div>
                 <div className="pt-4 border-t border-gray-100 text-center">
-                  <p className="text-sm text-gray-500">© {new Date().getFullYear()} Pixcoders. All rights reserved.</p>
+                  <p className="text-sm text-gray-500">© <span suppressHydrationWarning={true}>{new Date().getFullYear()}</span> Pixcoders. All rights reserved.</p>
                 </div>
               </div>
             </motion.div>
