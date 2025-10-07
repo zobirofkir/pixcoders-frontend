@@ -8,7 +8,7 @@ import { LoginFormComponent } from '../../../../src/components/auth/login/LoginF
 import { LoginHeroComponent } from '../../../../src/components/auth/login/LoginHeroComponent';
 import { AnimatedBackgroundComponent } from '../../../../src/components/auth/login/AnimatedBackgroundComponent';
 
-const LoginPage = () => {
+const page = () => {
   const [isMounted, setIsMounted] = useState(false);
   
   useEffect(() => {
@@ -40,4 +40,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default page;
