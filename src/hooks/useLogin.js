@@ -45,9 +45,9 @@ export const useLogin = () => {
    */
   useEffect(() => {
     if (user && accessToken) {
-      router.push('/');
+      console.log('User logged in successfully');
     }
-  }, [user, accessToken, router]);
+  }, [user, accessToken]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
