@@ -24,7 +24,7 @@ const HeroProfileComponent = ({
                 name="cover"
                 onChange={onFileChange}
                 accept="image/*"
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-[999] "
               />
               {formData.cover ? (
                 <div className="absolute inset-0">
@@ -94,7 +94,7 @@ const HeroProfileComponent = ({
 };
 
 const AvatarProfileComponent = ({ user, formData, isEditing, onFileChange }) => (
-  <div className="absolute -bottom-12 left-6 z-20">
+  <div className="absolute -bottom-12 left-6 z-[999] ">
     <div className="relative h-24 w-24 rounded-full border-4 border-white bg-white overflow-hidden shadow-2xl ring-4 ring-blue-50">
       {isEditing ? (
         <label className="w-full h-full cursor-pointer block">
@@ -151,7 +151,7 @@ const AvatarProfileComponent = ({ user, formData, isEditing, onFileChange }) => 
 );
 
 const ActionButtonsComponent = ({ isEditing, isSubmitting, onEditToggle, onCancel, onSubmit }) => (
-  <div className="absolute top-4 right-4 flex space-x-2">
+  <div className="absolute top-4 right-4 flex space-x-2 z-[999] ">
     {isEditing ? (
       <>
         <button
