@@ -1,4 +1,3 @@
-// @AuthHeaderComponent.js
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes, FaBell, FaComments, FaChevronDown, FaSignOutAlt, FaUser, FaCog } from "react-icons/fa";
@@ -6,12 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../../../public/images/logo/logo.png";
 
+/**
+ * AuthHeaderComponent - A responsive navigation header component for authenticated users.
+ * 
+ * Features:
+ * - Responsive design with mobile menu
+ * - Profile dropdown with user options
+ * - Notification and messages indicators
+ * - Clean, modern UI with smooth transitions
+ * 
+ * @returns {React.ReactElement} The rendered header component
+ */
 const AuthHeaderComponent = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,7 +42,6 @@ const AuthHeaderComponent = () => {
   return (
     <header className="w-full bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-3 flex items-center justify-between">
-        {/* Logo */}
         <div className="flex items-center gap-2">
           <Link href="/dashboard" className="flex items-center gap-2">
             <Image
@@ -47,7 +55,6 @@ const AuthHeaderComponent = () => {
           </Link>
         </div>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
             <Link
@@ -60,7 +67,6 @@ const AuthHeaderComponent = () => {
           ))}
         </nav>
 
-        {/* Icons + Profile */}
         <div className="flex items-center gap-4">
           <button className="relative text-gray-600 hover:text-blue-600">
             <FaBell size={18} />
@@ -73,7 +79,6 @@ const AuthHeaderComponent = () => {
             <FaComments size={18} />
           </button>
 
-          {/* Profile */}
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setProfileOpen(!profileOpen)}
