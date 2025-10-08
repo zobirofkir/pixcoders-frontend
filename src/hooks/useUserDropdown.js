@@ -26,21 +26,36 @@ export const useUserDropdown = () => {
       setIsLoggingOut(true);
       const token = getAuthToken();
       
-      // Call the logout endpoint to invalidate the session on the server
-      const response = await fetch(API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUTH.LOGOUT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        credentials: 'include',
-      });
+      // First remove the token to ensure logout happens on client side
+      removeAuthToken();
       
-      // removeAuthToken();
-
+      // Create a form and submit it to handle the logout
+      // This is a workaround for CORS issues with fetch
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUTH.LOGOUT;
+      form.style.display = 'none';
       
-      window.location.href = '/';
+      // Add CSRF token if needed
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = '_token';
+      csrfInput.value = token;
+      form.appendChild(csrfInput);
+      
+      // Add to document and submit
+      document.body.appendChild(form);
+      
+      // Use a timeout to ensure the form is submitted
+      setTimeout(() => {
+        try {
+          form.submit();
+        } catch (e) {
+          console.warn('Form submission failed, continuing with redirect', e);
+        }
+        // Redirect regardless of form submission success
+        window.location.href = '/';
+      }, 100);
       
     } catch (error) {
       console.error('Logout error:', error);
