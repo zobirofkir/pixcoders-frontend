@@ -80,7 +80,7 @@ const UserDropdown = () => {
           >
             <motion.div variants={itemVariants}>
               <Link
-                href="/auth/dashboard/profile"
+                href="/users/dashboard/profile"
                 className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
                 onClick={closeDropdown}
               >
