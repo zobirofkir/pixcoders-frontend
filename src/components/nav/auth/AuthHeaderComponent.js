@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import LogoComponent from "./header/LogoComponent";
 import DesktopNavComponent from "./header/DesktopNavComponent";
-import NotificationIconsComponent from "./header/NotificationIconsComponent";
 import UserDropdownComponent from "./header/UserDropdownComponent";
 import MobileMenuComponent from "./header/MobileMenuComponent";
 
@@ -34,7 +33,6 @@ const AuthHeaderComponent = () => {
 
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex items-center space-x-6">
-            <NotificationIconsComponent />
             <UserDropdownComponent />
           </div>
 
