@@ -50,21 +50,28 @@ const EditingSkillsComponent = ({ skills, newSkill, onAddSkill, onRemoveSkill, o
       ))}
     </div>
     
-    <form onSubmit={onAddSkill} className="flex gap-2">
+    <div className="flex gap-2">
       <input
         type="text"
         value={newSkill}
         onChange={onSkillInputChange}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            onAddSkill(e);
+          }
+        }}
         className="flex-1 min-w-0 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm"
         placeholder="Add a skill"
       />
       <button
-        type="submit"
+        type="button"
+        onClick={onAddSkill}
         className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-lg shadow-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105"
       >
         <FiPlus className="w-4 h-4" />
       </button>
-    </form>
+    </div>
   </div>
 );
 

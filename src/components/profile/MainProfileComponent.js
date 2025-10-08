@@ -182,7 +182,7 @@ const ActionButtonsSectionComponent = ({ isSubmitting, onCancel, onSubmit }) => 
         Cancel
       </button>
       <button
-        type="submit"
+        type="button"
         onClick={onSubmit}
         disabled={isSubmitting}
         className="px-6 py-2.5 border border-transparent rounded-lg shadow-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"

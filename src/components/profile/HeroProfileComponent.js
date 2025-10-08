@@ -40,7 +40,7 @@ const HeroProfileComponent = ({
                   src={user.cover}
                   alt="Cover"
                   fill
-                  className="object-cover transition-all duration-300 group-hover:scale-105"
+                  className="object-cover transition-all duration-300 group-hover:scale-105 z-[999] "
                 />
               </div>
             ) : (
