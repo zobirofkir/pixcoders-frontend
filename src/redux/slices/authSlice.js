@@ -45,6 +45,62 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async (userData, { rejectWithValue, getState }) => {
+    try {
+      const token = getAuthToken();
+      if (!token) return rejectWithValue('No token found');
+
+      const formData = new FormData();
+      
+      // Append user fields
+      if (userData.name) formData.append('name', userData.name);
+      if (userData.email) formData.append('email', userData.email);
+      if (userData.password) formData.append('password', userData.password);
+      if (userData.avatar) formData.append('avatar', userData.avatar);
+      if (userData.cover) formData.append('cover', userData.cover);
+      
+      // Append profile fields
+      if (userData.bio !== undefined) formData.append('bio', userData.bio);
+      if (userData.website) formData.append('website', userData.website);
+      if (userData.location) formData.append('location', userData.location);
+      if (userData.phone) formData.append('phone', userData.phone);
+      if (userData.description) formData.append('description', userData.description);
+      if (userData.stars) formData.append('stars', userData.stars);
+      if (userData.skills) formData.append('skills', JSON.stringify(userData.skills));
+      if (userData.username) formData.append('username', userData.username);
+      if (userData.first_name) formData.append('first_name', userData.first_name);
+      if (userData.last_name) formData.append('last_name', userData.last_name);
+      if (userData.experience) formData.append('experience', JSON.stringify(userData.experience));
+      if (userData.education) formData.append('education', JSON.stringify(userData.education));
+
+      const response = await axios.post(
+        getApiUrl(API_CONFIG.ENDPOINTS.AUTH.UPDATE_PROFILE),
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+        }
+      );
+      
+      return response.data.data;
+    } catch (error) {
+      if (error.response) {
+        return rejectWithValue({
+          message: error.response.data?.message || 'Failed to update profile',
+          errors: error.response.data?.errors || {}
+        });
+      }
+      return rejectWithValue({ message: error.message || 'An error occurred while updating profile' });
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -98,12 +154,25 @@ const authSlice = createSlice({
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Failed to fetch user';
-        state.isAuthenticated = false;
+      })
+      .addCase(updateProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.loading = false;
         state.user = {
-          id: action.payload?.id,
-          email: action.payload?.email,
+          ...state.user,
+          ...action.payload,
+          profile: {
+            ...state.user?.profile,
+            ...action.payload.profile
+          }
         };
-        state.accessToken = null;
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || 'Failed to update profile';
       });
   },
 });
