@@ -3,7 +3,8 @@ export const API_CONFIG = {
   ENDPOINTS: {
     AUTH: {
       LOGIN: '/auth/login',
-      LOGOUT: '/auth/me/logout'
+      LOGOUT: '/auth/me/logout',
+      ME: '/auth/me'
     },
   },
 };

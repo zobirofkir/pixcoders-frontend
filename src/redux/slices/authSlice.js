@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getApiUrl, API_CONFIG } from '../../config/api';
+import { getAuthToken } from '../../utils/cookies';
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -21,6 +22,28 @@ export const login = createAsyncThunk(
   }
 );
 
+export const getCurrentUser = createAsyncThunk(
+  'auth/currentUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = getAuthToken();
+      if (!token) return rejectWithValue('No token found');
+      
+      const response = await axios.get(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.ME), {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      return response.data.data;
+    } catch (error) {
+      if (error.response?.data) {
+        return rejectWithValue(error.response.data);
+      }
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -28,6 +51,7 @@ const authSlice = createSlice({
     accessToken: null,
     loading: false,
     error: null,
+    isAuthenticated: false,
   },
   reducers: {
     logout: (state) => {
@@ -48,15 +72,32 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = {
-          id: action.payload.id,
-          email: action.payload.email,
-        };
-        state.accessToken = action.payload.accessToken?.accessToken || null;
+        state.user = action.payload.user;
+        state.accessToken = action.payload.access_token;
+        state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Login failed';
+      })
+      .addCase(getCurrentUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.isAuthenticated = true;
+      })
+      .addCase(getCurrentUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || 'Failed to fetch user';
+        state.isAuthenticated = false;
+        state.user = {
+          id: action.payload?.id,
+          email: action.payload?.email,
+        };
+        state.accessToken = null;
       });
   },
 });
