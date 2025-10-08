@@ -43,7 +43,7 @@ const page = () => {
                     className="object-cover"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/70 to-blue-800/70" />
+                  <div className="absolute inset-0" />
                 </div>
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800" />
