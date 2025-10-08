@@ -1,11 +1,7 @@
 import Link from 'next/link';
 
 const navLinks = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Projects", href: "/projects" },
-  { name: "Messages", href: "/messages" },
-  { name: "Notifications", href: "/notifications" },
-  { name: "Support", href: "/support" },
+  { name: "Dashboard", href: "/users/dashboard" },
 ];
 
 const DesktopNavComponent = () => (
