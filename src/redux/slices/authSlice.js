@@ -61,10 +61,10 @@ export const updateCurrentUser = createAsyncThunk(
           if (value instanceof File) {
             formData.append(key, value);
           }
-        } else if (key === 'skills') {
+        } else if (key === 'skills' || key === 'experience' || key === 'education') {
           if (Array.isArray(value)) {
-            value.forEach((skill, index) => {
-              formData.append(`skills[${index}]`, skill);
+            value.forEach((item, index) => {
+              formData.append(`${key}[${index}]`, typeof item === 'object' ? JSON.stringify(item) : item);
             });
           }
         } else if (value !== null && value !== undefined && value !== '') {
@@ -150,6 +150,20 @@ const authSlice = createSlice({
             userData.profile.skills = [];
           }
         }
+        if (userData.profile?.experience && typeof userData.profile.experience === 'string') {
+          try {
+            userData.profile.experience = JSON.parse(userData.profile.experience);
+          } catch (e) {
+            userData.profile.experience = [];
+          }
+        }
+        if (userData.profile?.education && typeof userData.profile.education === 'string') {
+          try {
+            userData.profile.education = JSON.parse(userData.profile.education);
+          } catch (e) {
+            userData.profile.education = [];
+          }
+        }
         state.user = userData;
         state.accessToken = getAuthToken();
         state.isAuthenticated = true;
@@ -171,6 +185,20 @@ const authSlice = createSlice({
             updatedData.profile.skills = JSON.parse(updatedData.profile.skills);
           } catch (e) {
             updatedData.profile.skills = [];
+          }
+        }
+        if (updatedData.profile?.experience && typeof updatedData.profile.experience === 'string') {
+          try {
+            updatedData.profile.experience = JSON.parse(updatedData.profile.experience);
+          } catch (e) {
+            updatedData.profile.experience = [];
+          }
+        }
+        if (updatedData.profile?.education && typeof updatedData.profile.education === 'string') {
+          try {
+            updatedData.profile.education = JSON.parse(updatedData.profile.education);
+          } catch (e) {
+            updatedData.profile.education = [];
           }
         }
         

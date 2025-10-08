@@ -16,6 +16,8 @@ const EditProfilePage = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    password: '',
+    password_confirmation: '',
     bio: '',
     website: '',
     location: '',
@@ -24,11 +26,13 @@ const EditProfilePage = () => {
     username: '',
     first_name: '',
     last_name: '',
+    role: '',
+    stars: '',
     skills: [],
     avatar: null,
     cover: null,
-    experience: '',
-    education: '',
+    experience: [],
+    education: [],
   });
   const [newSkill, setNewSkill] = useState('');
 
@@ -55,9 +59,38 @@ const EditProfilePage = () => {
         }
       }
       
+      let parsedExperience = [];
+      let parsedEducation = [];
+      
+      if (profile?.experience) {
+        try {
+          parsedExperience = typeof profile.experience === 'string' 
+            ? JSON.parse(profile.experience) 
+            : Array.isArray(profile.experience) 
+            ? profile.experience 
+            : [];
+        } catch (e) {
+          parsedExperience = [];
+        }
+      }
+      
+      if (profile?.education) {
+        try {
+          parsedEducation = typeof profile.education === 'string' 
+            ? JSON.parse(profile.education) 
+            : Array.isArray(profile.education) 
+            ? profile.education 
+            : [];
+        } catch (e) {
+          parsedEducation = [];
+        }
+      }
+      
       setFormData({
         name: user.name || '',
         email: user.email || '',
+        password: '',
+        password_confirmation: '',
         bio: profile?.bio || '',
         website: profile?.website || '',
         location: profile?.location || '',
@@ -66,9 +99,11 @@ const EditProfilePage = () => {
         username: profile?.username || '',
         first_name: profile?.first_name || '',
         last_name: profile?.last_name || '',
+        role: user.role || '',
+        stars: profile?.stars || '',
         skills: parsedSkills,
-        experience: profile?.experience || '',
-        education: profile?.education || '',
+        experience: parsedExperience,
+        education: parsedEducation,
         avatar: null,
         cover: null,
       });
@@ -109,10 +144,22 @@ const EditProfilePage = () => {
 
   const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
+    
+    if (formData.password && formData.password !== formData.password_confirmation) {
+      toast.error('Password confirmation does not match');
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
-      await dispatch(updateCurrentUser(formData)).unwrap();
+      const submitData = { ...formData };
+      if (!submitData.password) {
+        delete submitData.password;
+        delete submitData.password_confirmation;
+      }
+      
+      await dispatch(updateCurrentUser(submitData)).unwrap();
       toast.success('Profile updated successfully!');
       router.push('/users/dashboard/profile');
     } catch (error) {
@@ -198,6 +245,63 @@ const EditProfilePage = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
                     placeholder="Last name"
+                  />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">Role</label>
+                  <select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                  >
+                    <option value="">Select Role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">Rating (Stars)</label>
+                  <input
+                    type="number"
+                    name="stars"
+                    value={formData.stars}
+                    onChange={handleInputChange}
+                    min="0"
+                    max="5"
+                    step="0.1"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                    placeholder="0.0"
+                  />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">New Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                    placeholder="Leave blank to keep current password"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">Confirm Password</label>
+                  <input
+                    type="password"
+                    name="password_confirmation"
+                    value={formData.password_confirmation}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+                    placeholder="Confirm new password"
                   />
                 </div>
               </div>
@@ -327,6 +431,36 @@ const EditProfilePage = () => {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+
+            {/* Experience & Education Section */}
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Experience & Education</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">Experience</label>
+                  <textarea
+                    name="experience"
+                    value={Array.isArray(formData.experience) ? formData.experience.join('\n') : formData.experience}
+                    onChange={(e) => setFormData(prev => ({ ...prev, experience: e.target.value.split('\n').filter(item => item.trim()) }))}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+                    placeholder="Enter each experience on a new line..."
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">Education</label>
+                  <textarea
+                    name="education"
+                    value={Array.isArray(formData.education) ? formData.education.join('\n') : formData.education}
+                    onChange={(e) => setFormData(prev => ({ ...prev, education: e.target.value.split('\n').filter(item => item.trim()) }))}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+                    placeholder="Enter each education on a new line..."
+                  />
+                </div>
               </div>
             </div>
 
