@@ -137,15 +137,25 @@ const AuthHeaderComponent = () => {
       {/* Mobile Menu */}
       <div 
         className={`fixed inset-0 z-40 transform transition-all duration-300 ease-in-out ${
-          menuOpen ? 'translate-x-0' : '-translate-x-full'
+          menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         } md:hidden`}
       >
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 bg-black transition-opacity duration-300"
+          style={{ backgroundColor: menuOpen ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0)' }}
           onClick={() => setMenuOpen(false)}
         />
-        <div className="relative w-64 h-full bg-white shadow-xl overflow-y-auto">
-          <div className="flex items-center justify-between p-4 border-b border-gray-100">
+        <div 
+          className={`relative w-64 h-full bg-white shadow-xl overflow-y-auto transform transition-transform duration-300 ${
+            menuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="flex items-center justify-between p-4 border-b border-gray-100 transition-all duration-300 transform"
+               style={{
+                 opacity: menuOpen ? 1 : 0,
+                 transform: menuOpen ? 'translateY(0)' : 'translateY(-10px)',
+                 transition: 'opacity 0.3s ease, transform 0.3s ease'
+               }}>
             <Link href="/dashboard" className="flex items-center gap-2">
               <Image
                 src={Logo}
@@ -164,16 +174,24 @@ const AuthHeaderComponent = () => {
             </button>
           </div>
           <nav className="flex flex-col py-3 px-4 space-y-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link, index) => {
+              const delay = (index + 1) * 75; // Staggered delay for each item
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 transform hover:translate-x-1"
+                  style={{
+                    opacity: menuOpen ? 1 : 0,
+                    transform: menuOpen ? 'translateX(0)' : 'translateX(-20px)',
+                    transition: `opacity 0.3s ease ${delay}ms, transform 0.3s ease ${delay}ms`
+                  }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </div>
