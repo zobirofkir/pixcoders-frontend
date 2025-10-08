@@ -23,13 +23,17 @@ const AuthHeaderComponent = () => {
 
   return (
     <header className="w-full bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-3 flex items-center justify-between">
-        <LogoComponent />
+      <div className="max-w-full px-6 sm:px-8 py-3 flex items-center space-x-8">
+        <div className="flex-shrink-0">
+          <LogoComponent />
+        </div>
         
-        <DesktopNavComponent />
+        <div className="flex-1">
+          <DesktopNavComponent />
+        </div>
 
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-4">
+        <div className="flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-6">
             <NotificationIconsComponent />
             <UserDropdownComponent />
           </div>
