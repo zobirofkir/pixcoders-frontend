@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Logo from "../../../../public/images/logo/logo.png";
+import Logo from "../../../../../public/images/logo/logo.png";
 
 const LogoComponent = () => (
   <Link href="/dashboard" className="flex items-center gap-2">
