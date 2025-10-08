@@ -45,43 +45,32 @@ export const getCurrentUser = createAsyncThunk(
   }
 );
 
-export const updateProfile = createAsyncThunk(
-  'auth/updateProfile',
-  async (userData, { rejectWithValue, getState }) => {
+export const updateCurrentUser = createAsyncThunk(
+  'auth/updateCurrentUser',
+  async (userData, { rejectWithValue }) => {
     try {
       const token = getAuthToken();
-      if (!token) return rejectWithValue('No token found');
+      if (!token) return rejectWithValue({ message: 'No token found' });
 
       const formData = new FormData();
       
-      /**
-       * Append user fields
-       */
-      if (userData.name) formData.append('name', userData.name);
-      if (userData.email) formData.append('email', userData.email);
-      if (userData.password) formData.append('password', userData.password);
-      if (userData.avatar) formData.append('avatar', userData.avatar);
-      if (userData.cover) formData.append('cover', userData.cover);
-      
-      /**
-       * Append profile fields
-       */
-      if (userData.bio !== undefined) formData.append('bio', userData.bio);
-      if (userData.website) formData.append('website', userData.website);
-      if (userData.location) formData.append('location', userData.location);
-      if (userData.phone) formData.append('phone', userData.phone);
-      if (userData.description) formData.append('description', userData.description);
-      if (userData.stars) formData.append('stars', userData.stars);
-      if (userData.skills && Array.isArray(userData.skills)) {
-        userData.skills.forEach((skill, index) => {
-          formData.append(`skills[${index}]`, skill);
-        });
-      }
-      if (userData.username) formData.append('username', userData.username);
-      if (userData.first_name) formData.append('first_name', userData.first_name);
-      if (userData.last_name) formData.append('last_name', userData.last_name);
-      if (userData.experience) formData.append('experience', JSON.stringify(userData.experience));
-      if (userData.education) formData.append('education', JSON.stringify(userData.education));
+      Object.keys(userData).forEach(key => {
+        const value = userData[key];
+        
+        if (key === 'avatar' || key === 'cover') {
+          if (value instanceof File) {
+            formData.append(key, value);
+          }
+        } else if (key === 'skills') {
+          if (Array.isArray(value)) {
+            value.forEach((skill, index) => {
+              formData.append(`skills[${index}]`, skill);
+            });
+          }
+        } else if (value !== null && value !== undefined && value !== '') {
+          formData.append(key, value);
+        }
+      });
 
       const response = await axios.post(
         getApiUrl(API_CONFIG.ENDPOINTS.AUTH.UPDATE_PROFILE),
@@ -90,24 +79,22 @@ export const updateProfile = createAsyncThunk(
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
-            'Accept': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
+            'Accept': 'application/json'
           },
         }
       );
       
       return response.data.data;
     } catch (error) {
-      if (error.response) {
-        return rejectWithValue({
-          message: error.response.data?.message || 'Failed to update profile',
-          errors: error.response.data?.errors || {}
-        });
-      }
-      return rejectWithValue({ message: error.message || 'An error occurred while updating profile' });
+      return rejectWithValue({
+        message: error.response?.data?.message || 'Failed to update profile'
+      });
     }
   }
 );
+
+// Keep updateProfile for backward compatibility
+export const updateProfile = updateCurrentUser;
 
 const authSlice = createSlice({
   name: 'auth',
@@ -171,13 +158,14 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload?.message || 'Failed to fetch user';
       })
-      .addCase(updateProfile.pending, (state) => {
+      .addCase(updateCurrentUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(updateProfile.fulfilled, (state, action) => {
+      .addCase(updateCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
         const updatedData = { ...action.payload };
+        
         if (updatedData.profile?.skills && typeof updatedData.profile.skills === 'string') {
           try {
             updatedData.profile.skills = JSON.parse(updatedData.profile.skills);
@@ -185,6 +173,7 @@ const authSlice = createSlice({
             updatedData.profile.skills = [];
           }
         }
+        
         state.user = {
           ...state.user,
           ...updatedData,
@@ -194,7 +183,7 @@ const authSlice = createSlice({
           }
         };
       })
-      .addCase(updateProfile.rejected, (state, action) => {
+      .addCase(updateCurrentUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Failed to update profile';
       });
