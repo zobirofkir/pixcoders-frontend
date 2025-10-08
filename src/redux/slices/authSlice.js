@@ -54,14 +54,18 @@ export const updateProfile = createAsyncThunk(
 
       const formData = new FormData();
       
-      // Append user fields
+      /**
+       * Append user fields
+       */
       if (userData.name) formData.append('name', userData.name);
       if (userData.email) formData.append('email', userData.email);
       if (userData.password) formData.append('password', userData.password);
       if (userData.avatar) formData.append('avatar', userData.avatar);
       if (userData.cover) formData.append('cover', userData.cover);
       
-      // Append profile fields
+      /**
+       * Append profile fields
+       */
       if (userData.bio !== undefined) formData.append('bio', userData.bio);
       if (userData.website) formData.append('website', userData.website);
       if (userData.location) formData.append('location', userData.location);
