@@ -12,6 +12,7 @@ const EditProfilePage = () => {
   const { id } = useParams();
   const { user, loading } = useSelector((state) => state.auth);
   
+  const [activeTab, setActiveTab] = useState('profile');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -35,6 +36,11 @@ const EditProfilePage = () => {
     education: [],
   });
   const [newSkill, setNewSkill] = useState('');
+
+  const tabs = [
+    { id: 'profile', label: 'Profile Information', icon: '👤' },
+    { id: 'personal', label: 'Personal Data', icon: '📋' }
+  ];
 
   useEffect(() => {
     if (!user || user.id !== parseInt(id)) {
@@ -175,359 +181,445 @@ const EditProfilePage = () => {
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-2xl shadow-lg">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="text-gray-600 mt-4 text-center">Loading profile...</p>
-        </div>
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Edit Profile</h1>
-          <p className="text-gray-600">Update your professional information</p>
-        </div>
-
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6">
-            <h2 className="text-2xl font-semibold text-white">Profile Information</h2>
-            <p className="text-blue-100 mt-1">Keep your profile up to date</p>
+  const renderProfileTab = () => (
+    <div className="space-y-8 animate-fadeIn">
+      {/* Basic Information */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-sm">👤</div>
+          Basic Information
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Display Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="Your display name"
+            />
           </div>
           
-          <form onSubmit={handleSubmit} className="p-8 space-y-8">
-            {/* Personal Information Section */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Personal Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Full Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Username</label>
-                  <input
-                    type="text"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="Choose a username"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">First Name</label>
-                  <input
-                    type="text"
-                    name="first_name"
-                    value={formData.first_name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="First name"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Last Name</label>
-                  <input
-                    type="text"
-                    name="last_name"
-                    value={formData.last_name}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="Last name"
-                  />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Role</label>
-                  <select
-                    name="role"
-                    value={formData.role}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                  >
-                    <option value="">Select Role</option>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Rating (Stars)</label>
-                  <input
-                    type="number"
-                    name="stars"
-                    value={formData.stars}
-                    onChange={handleInputChange}
-                    min="0"
-                    max="5"
-                    step="0.1"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="0.0"
-                  />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">New Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="Leave blank to keep current password"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Confirm Password</label>
-                  <input
-                    type="password"
-                    name="password_confirmation"
-                    value={formData.password_confirmation}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="Confirm new password"
-                  />
-                </div>
-              </div>
-            </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="@username"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Website</label>
+            <input
+              type="url"
+              name="website"
+              value={formData.website}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="https://yourwebsite.com"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Location</label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="City, Country"
+            />
+          </div>
+        </div>
+      </div>
 
-            {/* Contact Information Section */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Contact Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Email Address</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Phone Number</label>
-                  <input
-                    type="text"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="+1 (555) 123-4567"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Website</label>
-                  <input
-                    type="url"
-                    name="website"
-                    value={formData.website}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="https://yourwebsite.com"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Location</label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    placeholder="City, Country"
-                  />
-                </div>
-              </div>
-            </div>
+      {/* Bio & Description */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-teal-600 rounded-lg flex items-center justify-center text-white text-sm">✍️</div>
+          About You
+        </h3>
+        
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Bio</label>
+            <textarea
+              name="bio"
+              value={formData.bio}
+              onChange={handleInputChange}
+              rows={3}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+              placeholder="Tell us about yourself in a few words..."
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Description</label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              rows={4}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+              placeholder="Provide a detailed description of your professional background..."
+            />
+          </div>
+        </div>
+      </div>
 
-            {/* Professional Information Section */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Professional Information</h3>
-              
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Bio</label>
-                <textarea
-                  name="bio"
-                  value={formData.bio}
-                  onChange={handleInputChange}
-                  rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
-                  placeholder="Tell us about yourself in a few words..."
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Description</label>
-                <textarea
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
-                  placeholder="Provide a detailed description of your professional background..."
-                />
-              </div>
-            </div>
-
-            {/* Skills Section */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Skills & Expertise</h3>
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="text"
-                    value={newSkill}
-                    onChange={(e) => setNewSkill(e.target.value)}
-                    placeholder="Add a skill (e.g., JavaScript, Design, Marketing)"
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                    onKeyPress={(e) => e.key === 'Enter' && handleAddSkill(e)}
-                  />
+      {/* Skills */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white text-sm">🚀</div>
+          Skills & Expertise
+        </h3>
+        
+        <div className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              value={newSkill}
+              onChange={(e) => setNewSkill(e.target.value)}
+              placeholder="Add a skill (e.g., JavaScript, Design, Marketing)"
+              className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              onKeyPress={(e) => e.key === 'Enter' && handleAddSkill(e)}
+            />
+            <button
+              type="button"
+              onClick={handleAddSkill}
+              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Add Skill
+            </button>
+          </div>
+          
+          {formData.skills.length > 0 && (
+            <div className="flex flex-wrap gap-3">
+              {formData.skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-800 rounded-full text-sm font-medium border border-blue-200 hover:border-blue-300 transition-all duration-200 animate-slideIn"
+                >
+                  {skill}
                   <button
                     type="button"
-                    onClick={handleAddSkill}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                    onClick={() => handleRemoveSkill(skill)}
+                    className="ml-2 text-blue-600 hover:text-red-600 transition-colors duration-200 font-bold text-lg leading-none"
                   >
-                    Add Skill
+                    ×
                   </button>
-                </div>
-                
-                {formData.skills.length > 0 && (
-                  <div className="flex flex-wrap gap-3">
-                    {formData.skills.map((skill, index) => (
-                      <span
-                        key={index}
-                        className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-800 rounded-full text-sm font-medium border border-blue-200 hover:border-blue-300 transition-all duration-200"
-                      >
-                        {skill}
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveSkill(skill)}
-                          className="ml-2 text-blue-600 hover:text-red-600 transition-colors duration-200 font-bold text-lg leading-none"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+                </span>
+              ))}
             </div>
+          )}
+        </div>
+      </div>
 
-            {/* Experience & Education Section */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Experience & Education</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Experience</label>
-                  <textarea
-                    name="experience"
-                    value={Array.isArray(formData.experience) ? formData.experience.join('\n') : formData.experience}
-                    onChange={(e) => setFormData(prev => ({ ...prev, experience: e.target.value.split('\n').filter(item => item.trim()) }))}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
-                    placeholder="Enter each experience on a new line..."
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Education</label>
-                  <textarea
-                    name="education"
-                    value={Array.isArray(formData.education) ? formData.education.join('\n') : formData.education}
-                    onChange={(e) => setFormData(prev => ({ ...prev, education: e.target.value.split('\n').filter(item => item.trim()) }))}
-                    rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
-                    placeholder="Enter each education on a new line..."
-                  />
-                </div>
-              </div>
-            </div>
+      {/* Media Upload */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center text-white text-sm">📸</div>
+          Profile Media
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Profile Avatar</label>
+            <input
+              type="file"
+              name="avatar"
+              onChange={handleFileChange}
+              accept="image/*"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Cover Image</label>
+            <input
+              type="file"
+              name="cover"
+              onChange={handleFileChange}
+              accept="image/*"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
-            {/* Media Upload Section */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Profile Media</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Profile Avatar</label>
-                  <div className="relative">
-                    <input
-                      type="file"
-                      name="avatar"
-                      onChange={handleFileChange}
-                      accept="image/*"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-gray-700">Cover Image</label>
-                  <div className="relative">
-                    <input
-                      type="file"
-                      name="cover"
-                      onChange={handleFileChange}
-                      accept="image/*"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-                    />
-                  </div>
-                </div>
-              </div>
+  const renderPersonalTab = () => (
+    <div className="space-y-8 animate-fadeIn">
+      {/* Personal Information */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-sm">📋</div>
+          Personal Information
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">First Name</label>
+            <input
+              type="text"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="Your first name"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Last Name</label>
+            <input
+              type="text"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="Your last name"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="your.email@example.com"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Phone Number</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Role</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+            >
+              <option value="">Select Role</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Rating (Stars)</label>
+            <input
+              type="number"
+              name="stars"
+              value={formData.stars}
+              onChange={handleInputChange}
+              min="0"
+              max="5"
+              step="0.1"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="0.0"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Security */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg flex items-center justify-center text-white text-sm">🔒</div>
+          Security Settings
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">New Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="Leave blank to keep current password"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Confirm Password</label>
+            <input
+              type="password"
+              name="password_confirmation"
+              value={formData.password_confirmation}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="Confirm new password"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Experience & Education */}
+      <div className="space-y-6">
+        <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white text-sm">🎓</div>
+          Experience & Education
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Professional Experience</label>
+            <textarea
+              name="experience"
+              value={Array.isArray(formData.experience) ? formData.experience.join('\n') : formData.experience}
+              onChange={(e) => setFormData(prev => ({ ...prev, experience: e.target.value.split('\n').filter(item => item.trim()) }))}
+              rows={6}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+              placeholder="Describe your work experience, roles, and achievements..."
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Education Background</label>
+            <textarea
+              name="education"
+              value={Array.isArray(formData.education) ? formData.education.join('\n') : formData.education}
+              onChange={(e) => setFormData(prev => ({ ...prev, education: e.target.value.split('\n').filter(item => item.trim()) }))}
+              rows={6}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 resize-none"
+              placeholder="List your educational qualifications, degrees, certifications..."
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-4 mb-6">
+            <button
+              onClick={() => router.push('/users/dashboard/profile')}
+              className="p-2 hover:bg-white/80 rounded-xl transition-all duration-200 group"
+            >
+              <svg className="w-6 h-6 text-gray-600 group-hover:text-gray-800 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Edit Profile</h1>
+              <p className="text-gray-600 mt-1">Update your profile information and personal details</p>
             </div>
-            
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Tab Navigation */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-2">
+            <div className="flex space-x-1">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg transform scale-[1.02]'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="text-lg">{tab.icon}</span>
+                  <span className="hidden sm:inline">{tab.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
+            {activeTab === 'profile' && renderProfileTab()}
+            {activeTab === 'personal' && renderPersonalTab()}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6">
+            <div className="flex flex-col sm:flex-row gap-4 justify-end">
+              <button
+                type="button"
+                onClick={() => router.push('/users/dashboard/profile')}
+                className="px-8 py-4 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 font-semibold border border-gray-300 hover:border-gray-400"
+              >
+                Cancel
+              </button>
+              
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 sm:flex-none px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none"
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none min-w-[160px]"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Updating Profile...
+                    Updating...
                   </span>
                 ) : (
-                  'Update Profile'
+                  'Save Changes'
                 )}
               </button>
-              
-              <button
-                type="button"
-                onClick={() => router.push('/users/dashboard/profile')}
-                className="flex-1 sm:flex-none px-8 py-4 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 font-semibold border border-gray-300 hover:border-gray-400"
-              >
-                Cancel
-              </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
+      
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+          from { opacity: 0; transform: translateX(-10px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out;
+        }
+        
+        .animate-slideIn {
+          animation: slideIn 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };
