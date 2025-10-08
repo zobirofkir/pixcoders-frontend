@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUser, updateCurrentUser } from '../../../../../src/redux/slices/authSlice';
+import { getCurrentUser, updateProfile } from '../../../../../src/redux/slices/authSlice';
 
 const PersonalInfoPage = () => {
   const router = useRouter();
@@ -11,17 +11,16 @@ const PersonalInfoPage = () => {
   const { user, loading } = useSelector((state) => state.auth);
   
   const [personalData, setPersonalData] = useState({
-    dateOfBirth: '',
-    gender: '',
-    nationality: '',
-    maritalStatus: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    country: '',
-    emergencyContact: '',
-    emergencyPhone: ''
+    bio: '',
+    website: '',
+    location: '',
+    phone: '',
+    description: '',
+    username: '',
+    first_name: '',
+    last_name: '',
+    experience: '',
+    education: ''
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -36,17 +35,16 @@ const PersonalInfoPage = () => {
   useEffect(() => {
     if (user?.profile) {
       setPersonalData({
-        dateOfBirth: user.profile.date_of_birth || '',
-        gender: user.profile.gender || '',
-        nationality: user.profile.nationality || '',
-        maritalStatus: user.profile.marital_status || '',
-        address: user.profile.location || '',
-        city: user.profile.city || '',
-        state: user.profile.state || '',
-        zipCode: user.profile.zip_code || '',
-        country: user.profile.country || '',
-        emergencyContact: user.profile.emergency_contact || '',
-        emergencyPhone: user.profile.emergency_phone || ''
+        bio: user.profile.bio || '',
+        website: user.profile.website || '',
+        location: user.profile.location || '',
+        phone: user.profile.phone || '',
+        description: user.profile.description || '',
+        username: user.profile.username || '',
+        first_name: user.profile.first_name || '',
+        last_name: user.profile.last_name || '',
+        experience: user.profile.experience || '',
+        education: user.profile.education || ''
       });
     }
   }, [user]);
@@ -64,26 +62,16 @@ const PersonalInfoPage = () => {
     setIsSubmitting(true);
     
     try {
-      const updateData = {
-        date_of_birth: personalData.dateOfBirth,
-        gender: personalData.gender,
-        nationality: personalData.nationality,
-        marital_status: personalData.maritalStatus,
-        location: personalData.address,
-        city: personalData.city,
-        state: personalData.state,
-        zip_code: personalData.zipCode,
-        country: personalData.country,
-        emergency_contact: personalData.emergencyContact,
-        emergency_phone: personalData.emergencyPhone
-      };
-      
-      await dispatch(updateCurrentUser(updateData)).unwrap();
+      await dispatch(updateProfile({
+        userId: user.id,
+        profileId: user.profile.id,
+        profileData: personalData
+      })).unwrap();
       setIsEditing(false);
-      alert('Personal information updated successfully!');
+      alert('Profile updated successfully!');
     } catch (error) {
-      console.error('Error updating personal info:', error);
-      alert('Failed to update personal information');
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile');
     } finally {
       setIsSubmitting(false);
     }
@@ -124,81 +112,141 @@ const PersonalInfoPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Date of Birth</label>
-                <input
-                  type="date"
-                  name="dateOfBirth"
-                  value={personalData.dateOfBirth}
-                  onChange={handleInputChange}
-                  disabled={!isEditing}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Gender</label>
-                <select
-                  name="gender"
-                  value={personalData.gender}
-                  onChange={handleInputChange}
-                  disabled={!isEditing}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
-                >
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Nationality</label>
+                <label className="block text-sm font-semibold text-gray-700">First Name</label>
                 <input
                   type="text"
-                  name="nationality"
-                  value={personalData.nationality}
+                  name="first_name"
+                  value={personalData.first_name}
                   onChange={handleInputChange}
                   disabled={!isEditing}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
-                  placeholder="Enter nationality"
+                  placeholder="Enter first name"
                 />
               </div>
               
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Marital Status</label>
-                <select
-                  name="maritalStatus"
-                  value={personalData.maritalStatus}
+                <label className="block text-sm font-semibold text-gray-700">Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  value={personalData.last_name}
                   onChange={handleInputChange}
                   disabled={!isEditing}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
-                >
-                  <option value="">Select Status</option>
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="divorced">Divorced</option>
-                </select>
+                  placeholder="Enter last name"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={personalData.username}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                  placeholder="Enter username"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Phone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={personalData.phone}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                  placeholder="Enter phone number"
+                />
               </div>
             </div>
           </div>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
             <h3 className="text-xl font-bold text-gray-900 flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center text-white text-sm">🏠</div>
-              Address Information
+              <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg flex items-center justify-center text-white text-sm">📝</div>
+              Profile Information
             </h3>
             
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">Street Address</label>
+                <label className="block text-sm font-semibold text-gray-700">Bio</label>
                 <textarea
-                  name="address"
-                  value={personalData.address}
+                  name="bio"
+                  value={personalData.bio}
                   onChange={handleInputChange}
                   disabled={!isEditing}
                   rows={3}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed resize-none"
-                  placeholder="Enter full address"
+                  placeholder="Enter your bio"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Website</label>
+                <input
+                  type="url"
+                  name="website"
+                  value={personalData.website}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                  placeholder="Enter website URL"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={personalData.location}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                  placeholder="Enter location"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Description</label>
+                <textarea
+                  name="description"
+                  value={personalData.description}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed resize-none"
+                  placeholder="Enter description"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Experience</label>
+                <textarea
+                  name="experience"
+                  value={personalData.experience}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed resize-none"
+                  placeholder="Enter experience"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-gray-700">Education</label>
+                <textarea
+                  name="education"
+                  value={personalData.education}
+                  onChange={handleInputChange}
+                  disabled={!isEditing}
+                  rows={3}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 disabled:bg-gray-50 disabled:cursor-not-allowed resize-none"
+                  placeholder="Enter educationEnter full address"
                 />
               </div>
               
