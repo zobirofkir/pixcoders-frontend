@@ -9,7 +9,6 @@ export const useSlider = (profileData, cardsPerSlide) => {
   const totalSlides = Math.ceil(profileData.length / cardsToShow);
   const transformOffset = current * (100 / cardsToShow);
 
-  // Handle window resize
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -20,7 +19,6 @@ export const useSlider = (profileData, cardsPerSlide) => {
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
-  // Auto-slide functionality
   useEffect(() => {
     const timer = setTimeout(() => {
       nextSlide();

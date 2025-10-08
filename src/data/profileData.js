@@ -50,7 +50,7 @@ const profileData = [
     name: 'Paula Yliasasi',
     role: 'Creative Product Manager',
     company: 'BBDO',
-    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
     companyLogo: 'https://logos-world.net/wp-content/uploads/2020/12/BBDO-Logo.png',
     isVerified: true,
     bio: 'Creative strategist bridging brand storytelling with digital product experiences.',
