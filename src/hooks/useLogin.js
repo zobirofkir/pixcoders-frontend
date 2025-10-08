@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthToken } from '../utils/cookies';
+import { setAuthToken, isAuthenticated } from '../utils/cookies';
 import { login } from '../redux/slices/authSlice';
 
 /**
@@ -43,11 +43,19 @@ export const useLogin = () => {
    * @throws {Error} If form validation fails or authentication error occurs
    */
   useEffect(() => {
+    // Redirect if already authenticated
+    if (isAuthenticated()) {
+      window.location.href = '/';
+      return;
+    }
+    
+    // Handle successful login
     if (user && accessToken) {
       console.log('User logged in successfully');
       setAuthToken(accessToken);
+      window.location.href = '/';
     }
-  }, [user, accessToken]);
+  }, [user, accessToken, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
