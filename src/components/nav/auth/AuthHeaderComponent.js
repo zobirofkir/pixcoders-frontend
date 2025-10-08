@@ -68,60 +68,62 @@ const AuthHeaderComponent = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button className="relative text-gray-600 hover:text-blue-600">
-            <FaBell size={18} />
-            <span className="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full text-[10px] px-1">
-              3
-            </span>
-          </button>
-
-          <button className="text-gray-600 hover:text-blue-600">
-            <FaComments size={18} />
-          </button>
-
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setProfileOpen(!profileOpen)}
-              className="flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-lg transition"
-            >
-              <Image
-                src="/profile.jpg"
-                alt="User"
-                width={32}
-                height={32}
-                className="rounded-full object-cover"
-              />
-              <FaChevronDown
-                size={14}
-                className={`text-gray-500 transition-transform ${
-                  profileOpen ? "rotate-180" : ""
-                }`}
-              />
+          <div className="hidden md:flex items-center gap-4">
+            <button className="relative text-gray-600 hover:text-blue-600">
+              <FaBell size={18} />
+              <span className="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full text-[10px] px-1">
+                3
+              </span>
             </button>
 
-            {profileOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
-                <Link
-                  href="/profile"
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50"
-                >
-                  <FaUser size={14} /> Profile
-                </Link>
-                <Link
-                  href="/settings"
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50"
-                >
-                  <FaCog size={14} /> Settings
-                </Link>
-                <hr className="my-1 border-gray-100" />
-                <button
-                  onClick={() => alert("Logout")}
-                  className="flex w-full items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50"
-                >
-                  <FaSignOutAlt size={14} /> Logout
-                </button>
-              </div>
-            )}
+            <button className="text-gray-600 hover:text-blue-600">
+              <FaComments size={18} />
+            </button>
+
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setProfileOpen(!profileOpen)}
+                className="flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-lg transition"
+              >
+                <Image
+                  src="/profile.jpg"
+                  alt="User"
+                  width={32}
+                  height={32}
+                  className="rounded-full object-cover"
+                />
+                <FaChevronDown
+                  size={14}
+                  className={`text-gray-500 transition-transform ${
+                    profileOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {profileOpen && (
+                <div className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50"
+                  >
+                    <FaUser size={14} /> Profile
+                  </Link>
+                  <Link
+                    href="/settings"
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50"
+                  >
+                    <FaCog size={14} /> Settings
+                  </Link>
+                  <hr className="my-1 border-gray-100" />
+                  <button
+                    onClick={() => alert("Logout")}
+                    className="flex w-full items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50"
+                  >
+                    <FaSignOutAlt size={14} /> Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -192,6 +194,55 @@ const AuthHeaderComponent = () => {
                 </Link>
               );
             })}
+            
+            {/* Mobile User Menu */}
+            <div className="border-t border-gray-100 mt-4 pt-4">
+              <div className="flex items-center gap-3 px-4 py-3 mb-2">
+                <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                  <FaUser size={18} />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">John Doe</p>
+                  <p className="text-sm text-gray-500">john@example.com</p>
+                </div>
+              </div>
+              
+              <Link
+                href="/profile"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaUser size={16} /> Profile
+              </Link>
+              <Link
+                href="/settings"
+                className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                <FaCog size={16} /> Settings
+              </Link>
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  alert("Logout");
+                }}
+                className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium text-left transition-colors"
+              >
+                <FaSignOutAlt size={16} /> Logout
+              </button>
+              
+              <div className="flex items-center gap-4 px-4 py-3 mt-2">
+                <button className="relative text-gray-600 hover:text-blue-600">
+                  <FaBell size={18} />
+                  <span className="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center">
+                    3
+                  </span>
+                </button>
+                <button className="text-gray-600 hover:text-blue-600">
+                  <FaComments size={18} />
+                </button>
+              </div>
+            </div>
           </nav>
         </div>
       </div>
