@@ -72,7 +72,11 @@ export const updateProfile = createAsyncThunk(
       if (userData.phone) formData.append('phone', userData.phone);
       if (userData.description) formData.append('description', userData.description);
       if (userData.stars) formData.append('stars', userData.stars);
-      if (userData.skills) formData.append('skills', JSON.stringify(userData.skills));
+      if (userData.skills && Array.isArray(userData.skills)) {
+        userData.skills.forEach((skill, index) => {
+          formData.append(`skills[${index}]`, skill);
+        });
+      }
       if (userData.username) formData.append('username', userData.username);
       if (userData.first_name) formData.append('first_name', userData.first_name);
       if (userData.last_name) formData.append('last_name', userData.last_name);
@@ -151,7 +155,15 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        const userData = { ...action.payload };
+        if (userData.profile?.skills && typeof userData.profile.skills === 'string') {
+          try {
+            userData.profile.skills = JSON.parse(userData.profile.skills);
+          } catch (e) {
+            userData.profile.skills = [];
+          }
+        }
+        state.user = userData;
         state.accessToken = getAuthToken();
         state.isAuthenticated = true;
       })
@@ -165,12 +177,20 @@ const authSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.loading = false;
+        const updatedData = { ...action.payload };
+        if (updatedData.profile?.skills && typeof updatedData.profile.skills === 'string') {
+          try {
+            updatedData.profile.skills = JSON.parse(updatedData.profile.skills);
+          } catch (e) {
+            updatedData.profile.skills = [];
+          }
+        }
         state.user = {
           ...state.user,
-          ...action.payload,
+          ...updatedData,
           profile: {
             ...state.user?.profile,
-            ...action.payload.profile
+            ...updatedData.profile
           }
         };
       })
