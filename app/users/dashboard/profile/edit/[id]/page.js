@@ -564,7 +564,31 @@ const EditProfilePage = () => {
           {/* Tab Content */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
             {activeTab === 'profile' && renderProfileTab()}
-            {activeTab === 'personal' && renderPersonalTab()}
+            {activeTab === 'personal' && (
+              <div className="space-y-6">
+                {renderPersonalTab()}
+                
+                {/* Personal Info Navigation */}
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900">Detailed Personal Information</h4>
+                      <p className="text-gray-600 text-sm mt-1">Manage comprehensive personal details, address, and emergency contacts</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => router.push('/users/dashboard/profile/personal-info')}
+                      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2"
+                    >
+                      <span>View Details</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Action Buttons */}
