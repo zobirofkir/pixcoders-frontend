@@ -1,10 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCurrentUser, updateCurrentUser } from '../../../../../src/redux/slices/authSlice';
 
 const PersonalInfoPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { user, loading } = useSelector((state) => state.auth);
+  
   const [personalData, setPersonalData] = useState({
     dateOfBirth: '',
     gender: '',
@@ -22,6 +27,30 @@ const PersonalInfoPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  useEffect(() => {
+    if (!user) {
+      dispatch(getCurrentUser());
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    if (user?.profile) {
+      setPersonalData({
+        dateOfBirth: user.profile.date_of_birth || '',
+        gender: user.profile.gender || '',
+        nationality: user.profile.nationality || '',
+        maritalStatus: user.profile.marital_status || '',
+        address: user.profile.location || '',
+        city: user.profile.city || '',
+        state: user.profile.state || '',
+        zipCode: user.profile.zip_code || '',
+        country: user.profile.country || '',
+        emergencyContact: user.profile.emergency_contact || '',
+        emergencyPhone: user.profile.emergency_phone || ''
+      });
+    }
+  }, [user]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPersonalData(prev => ({
@@ -35,8 +64,21 @@ const PersonalInfoPage = () => {
     setIsSubmitting(true);
     
     try {
-      console.log('Updating personal info:', personalData);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const updateData = {
+        date_of_birth: personalData.dateOfBirth,
+        gender: personalData.gender,
+        nationality: personalData.nationality,
+        marital_status: personalData.maritalStatus,
+        location: personalData.address,
+        city: personalData.city,
+        state: personalData.state,
+        zip_code: personalData.zipCode,
+        country: personalData.country,
+        emergency_contact: personalData.emergencyContact,
+        emergency_phone: personalData.emergencyPhone
+      };
+      
+      await dispatch(updateCurrentUser(updateData)).unwrap();
       setIsEditing(false);
       alert('Personal information updated successfully!');
     } catch (error) {
