@@ -89,12 +89,6 @@ const HeroProfileComponent = ({
           onSubmit={onSubmit}
         />
       </div>
-      
-      <div className="pt-16 pb-4 px-6">
-        <div className="flex items-end justify-between">
-          <div className="flex-1"></div>
-        </div>
-      </div>
     </div>
   );
 };
@@ -162,11 +156,7 @@ const ActionButtonsComponent = ({ isEditing, isSubmitting, onEditToggle, onCance
       <>
         <button
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onCancel();
-          }}
+          onClick={onCancel}
           className="bg-white text-red-600 hover:bg-red-50 px-6 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-200 hover:border-red-300"
         >
           <FiX className="w-4 h-4" />
@@ -174,11 +164,7 @@ const ActionButtonsComponent = ({ isEditing, isSubmitting, onEditToggle, onCance
         </button>
         <button
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onSubmit(e);
-          }}
+          onClick={onSubmit}
           disabled={isSubmitting}
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 px-6 py-2.5 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed transform hover:scale-105"
         >
