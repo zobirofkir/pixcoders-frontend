@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FiHome, FiUser, FiSettings, FiLogOut } from 'react-icons/fi';
 
-const DashboardPage = () => {
+const page = () => {
   const pathname = usePathname();
   
   const menuItems = [
@@ -16,32 +16,6 @@ const DashboardPage = () => {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="hidden md:flex flex-col w-64 bg-white shadow-lg">
-        <div className="p-4 border-b">
-          <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
-        </div>
-        <nav className="flex-1 overflow-y-auto">
-          {menuItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center px-4 py-3 text-sm font-medium ${
-                pathname === item.href
-                  ? 'bg-blue-50 text-blue-600 border-r-4 border-blue-600'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              {item.icon}
-              {item.name}
-            </Link>
-          ))}
-          <button className="flex items-center w-full px-4 py-3 text-sm font-medium text-left text-gray-600 hover:bg-gray-50">
-            <FiLogOut className="mr-2" />
-            Sign Out
-          </button>
-        </nav>
-      </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -68,4 +42,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default page;
