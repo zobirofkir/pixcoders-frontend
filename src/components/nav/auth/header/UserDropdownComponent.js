@@ -1,22 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronDown, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import Link from 'next/link';
+import { useUserDropdown } from '../../../../hooks/useUserDropdown';
 
 const UserDropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const {
+    isOpen,
+    isLoggingOut,
+    dropdownRef,
+    toggleDropdown,
+    closeDropdown,
+    handleLogout
+  } = useUserDropdown();
 
   const dropdownVariants = {
     hidden: { opacity: 0, y: -10 },
@@ -49,7 +44,7 @@ const UserDropdown = () => {
     <div className="relative" ref={dropdownRef}>
       <motion.button
         whileTap={{ scale: 0.98 }}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleDropdown}
         className="flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-lg transition-all"
       >
         <motion.div 
@@ -87,7 +82,7 @@ const UserDropdown = () => {
               <Link
                 href="/profile"
                 className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-                onClick={() => setIsOpen(false)}
+                onClick={closeDropdown}
               >
                 <FaUser size={14} /> Profile
               </Link>
@@ -96,7 +91,7 @@ const UserDropdown = () => {
               <Link
                 href="/settings"
                 className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
-                onClick={() => setIsOpen(false)}
+                onClick={closeDropdown}
               >
                 <FaCog size={14} /> Settings
               </Link>
@@ -106,13 +101,11 @@ const UserDropdown = () => {
             </motion.div>
             <motion.div variants={itemVariants}>
               <button
-                onClick={() => {
-                  setIsOpen(false);
-                  alert("Logout");
-                }}
-                className="flex w-full items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors text-left"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className={`flex w-full items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors text-left ${isLoggingOut ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <FaSignOutAlt size={14} /> Logout
+                <FaSignOutAlt size={14} /> {isLoggingOut ? 'Logging out...' : 'Logout'}
               </button>
             </motion.div>
           </motion.div>
