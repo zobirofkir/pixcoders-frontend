@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { API_CONFIG } from '../config/api';
+import { removeAuthToken, getAuthToken } from '../utils/cookies';
 
 export const useUserDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,24 +24,27 @@ export const useUserDropdown = () => {
   const handleLogout = useCallback(async () => {
     try {
       setIsLoggingOut(true);
+      const token = getAuthToken();
+      
+      // Call the logout endpoint to invalidate the session on the server
       const response = await fetch(API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUTH.LOGOUT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         credentials: 'include',
       });
+      
+      // removeAuthToken();
 
-      if (response.ok) {
-        window.location.href = '/';
-      } else {
-        console.error('Logout failed:', await response.text());
-      }
+      
+      window.location.href = '/';
+      
     } catch (error) {
       console.error('Logout error:', error);
-    } finally {
-      setIsLoggingOut(false);
+      window.location.href = '/';
     }
   }, []);
 

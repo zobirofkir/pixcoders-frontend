@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost/api',
+  BASE_URL: 'https://mediumvioletred-grouse-454147.hostingersite.com/api',
   ENDPOINTS: {
     AUTH: {
       LOGIN: '/auth/login',
