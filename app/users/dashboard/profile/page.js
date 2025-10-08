@@ -219,7 +219,7 @@ const ProfilePage = () => {
               onSubmit={handleSubmit}
             />
 
-            <div className="pt-20 px-6 pb-8">
+            <div className="pt-6 px-6 pb-8">
               <div className="flex flex-col md:flex-row gap-8">
                 <div className="md:w-1/3 space-y-6">
                   <AboutProfileComponent
