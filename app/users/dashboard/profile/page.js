@@ -9,11 +9,18 @@ import LoadingComponent from '@/components/loading/LoadingComponent';
 
 const page = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => ({
+    user: state.auth.user,
+    loading: state.auth.loading
+  }));
 
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
+
+  if (loading || !user) {
+    return <LoadingComponent />;
+  }
 
   const { profile } = user;
   const skills = profile?.skills ? JSON.parse(profile.skills) : [];
@@ -25,7 +32,22 @@ const page = () => {
         <div className="max-w-7xl mx-auto">
           <div className="bg-white rounded-xl shadow-sm overflow-hidden">
             {/* Profile Header */}
-            <div className="relative bg-gradient-to-r from-blue-600 to-blue-800 h-48 md:h-56">
+            <div className="relative h-48 md:h-56 overflow-hidden">
+              {/* Cover Image with Gradient Overlay */}
+              {user.cover ? (
+                <div className="absolute inset-0">
+                  <Image
+                    src={user.cover}
+                    alt="Cover"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/70 to-blue-800/70" />
+                </div>
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800" />
+              )}
               <div className="absolute -bottom-16 left-6">
                 <div className="relative h-32 w-32 rounded-full border-4 border-white bg-white overflow-hidden shadow-lg">
                   {user.avatar ? (
