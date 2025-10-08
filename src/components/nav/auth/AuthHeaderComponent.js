@@ -135,14 +135,40 @@ const AuthHeaderComponent = () => {
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 shadow-md">
-          <nav className="flex flex-col py-3 px-6 space-y-3">
+      <div 
+        className={`fixed inset-0 z-40 transform transition-all duration-300 ease-in-out ${
+          menuOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:hidden`}
+      >
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50"
+          onClick={() => setMenuOpen(false)}
+        />
+        <div className="relative w-64 h-full bg-white shadow-xl overflow-y-auto">
+          <div className="flex items-center justify-between p-4 border-b border-gray-100">
+            <Link href="/dashboard" className="flex items-center gap-2">
+              <Image
+                src={Logo}
+                alt="Logo"
+                width={28}
+                height={28}
+                className="object-contain"
+              />
+              <span className="font-semibold text-gray-900">PixCoders</span>
+            </Link>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              <FaTimes size={20} />
+            </button>
+          </div>
+          <nav className="flex flex-col py-3 px-4 space-y-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 hover:text-blue-600 font-medium transition"
+                className="px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}
@@ -150,7 +176,7 @@ const AuthHeaderComponent = () => {
             ))}
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 };
