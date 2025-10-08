@@ -125,13 +125,9 @@ const MobileMenuComponent = ({ isOpen, onClose }) => {
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                <Link 
-                  href="/dashboard" 
-                  className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-md"
-                  onClick={onClose}
-                >
+                <div className="flex items-center gap-2">
                   <Logo />
-                </Link>
+                </div>
                 <button
                   onClick={onClose}
                   className="p-2 text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 rounded-full transition-colors"
