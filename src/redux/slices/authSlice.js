@@ -1,46 +1,33 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getApiUrl, API_CONFIG } from '../../config/api';
-import { getAuthToken } from '../../utils/cookies';
+import { getAuthToken, removeAuthToken } from '../../utils/cookies';
 
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.LOGIN), {
-        email,
-        password,
-      });
-      console.log('Login API Response:', response.data);
-      return response.data.data;
-    } catch (error) {
-      if (error.response?.data) {
-        return rejectWithValue(error.response.data);
-      }
-      return rejectWithValue({ message: error.message });
-    }
+    const response = await axios.post(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.LOGIN), {
+      email,
+      password,
+    });
+    return response.data.data;
   }
 );
 
 export const getCurrentUser = createAsyncThunk(
   'auth/currentUser',
   async (_, { rejectWithValue }) => {
-    try {
-      const token = getAuthToken();
-      if (!token) return rejectWithValue('No token found');
-      
-      const response = await axios.get(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.ME), {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      return response.data.data;
-    } catch (error) {
-      if (error.response?.data) {
-        return rejectWithValue(error.response.data);
-      }
-      return rejectWithValue({ message: error.message });
-    }
+    const token = getAuthToken();
+    if (!token) return rejectWithValue('No token found');
+    
+    const response = await axios.get(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.ME), {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+    });
+    return response.data.data;
   }
 );
 
@@ -72,8 +59,12 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload.user;
-        state.accessToken = action.payload.access_token;
+        state.user = {
+          id: action.payload.id,
+          email: action.payload.email,
+          ...(action.payload.user || {}) 
+        };
+        state.accessToken = action.payload.accessToken?.accessToken || null;
         state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -87,6 +78,7 @@ const authSlice = createSlice({
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.accessToken = getAuthToken();
         state.isAuthenticated = true;
       })
       .addCase(getCurrentUser.rejected, (state, action) => {

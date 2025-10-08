@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaChevronDown, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useUserDropdown } from '../../../../hooks/useUserDropdown';
+import { useSelector } from 'react-redux';
 
 const UserDropdown = () => {
   const {
@@ -12,6 +14,8 @@ const UserDropdown = () => {
     closeDropdown,
     handleLogout
   } = useUserDropdown();
+  
+  const { user } = useSelector((state) => state.auth);
 
   const dropdownVariants = {
     hidden: { opacity: 0, y: -10 },
@@ -48,24 +52,30 @@ const UserDropdown = () => {
         className="flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-lg transition-all"
       >
         <motion.div 
-          className="rounded-full overflow-hidden"
+          className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png"
-            alt="User"
-            className="rounded-full object-cover w-6 h-6"
-          />
+          {user?.avatar ? (
+            <Image
+              src={user.avatar}
+              alt={user.name || 'User'}
+              width={32}
+              height={32}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <FaUser size={14} className="text-gray-500" />
+          )}
         </motion.div>
+        <span className="text-sm font-medium text-gray-700 hidden sm:inline">
+          {user?.name?.split(' ')[0] || 'Account'}
+        </span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.2 }}
         >
-          <FaChevronDown
-            size={12}
-            className="text-gray-500"
-          />
+          <FaChevronDown size={12} className="text-gray-500" />
         </motion.div>
       </motion.button>
 

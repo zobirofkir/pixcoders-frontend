@@ -44,10 +44,11 @@ export const useLogin = () => {
    * @throws {Error} If form validation fails or authentication error occurs
    */
   useEffect(() => {
-    if (isAuthenticated()) {
-      window.location.href = '/';
-    } else if (user && accessToken) {
+    if (user && accessToken) {
+      // Store the token in cookies
       setAuthToken(accessToken);
+      // Redirect to home page after successful login
+      window.location.href = '/';
       window.location.href = '/';
     }
   }, [user, accessToken]);
