@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "./header/LogoComponent";
-import DesktopNav from "./header/DesktopNavComponent";
-import NotificationIcons from "./header/NotificationIconsComponent";
-import UserDropdown from "./header/UserDropdownComponent";
-import MobileMenu from "./header/MobileMenuComponent";
+import LogoComponent from "./header/LogoComponent";
+import DesktopNavComponent from "./header/DesktopNavComponent";
+import NotificationIconsComponent from "./header/NotificationIconsComponent";
+import UserDropdownComponent from "./header/UserDropdownComponent";
+import MobileMenuComponent from "./header/MobileMenuComponent";
 
 /**
  * AuthHeaderComponent - A responsive navigation header component for authenticated users.
@@ -24,14 +24,14 @@ const AuthHeaderComponent = () => {
   return (
     <header className="w-full bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 py-3 flex items-center justify-between">
-        <Logo />
+        <LogoComponent />
         
-        <DesktopNav />
+        <DesktopNavComponent />
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-4">
-            <NotificationIcons />
-            <UserDropdown />
+            <NotificationIconsComponent />
+            <UserDropdownComponent />
           </div>
 
           {/* Mobile Menu Button */}
@@ -46,7 +46,7 @@ const AuthHeaderComponent = () => {
       </div>
 
       {/* Mobile Menu */}
-      <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <MobileMenuComponent isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   );
 };
