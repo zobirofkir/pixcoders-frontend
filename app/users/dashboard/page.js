@@ -1,12 +1,69 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FiHome, FiUser, FiSettings, FiLogOut } from 'react-icons/fi';
 
 const DashboardPage = () => {
+  const pathname = usePathname();
+  
+  const menuItems = [
+    { name: 'Overview', href: '/users/dashboard', icon: <FiHome className="mr-2" /> },
+    { name: 'Profile', href: '/users/dashboard/profile', icon: <FiUser className="mr-2" /> },
+    { name: 'Settings', href: '/users/dashboard/settings', icon: <FiSettings className="mr-2" /> },
+  ];
+
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-      <div>Welcome to your dashboard!</div>
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <div className="hidden md:flex flex-col w-64 bg-white shadow-lg">
+        <div className="p-4 border-b">
+          <h1 className="text-xl font-bold text-gray-800">Dashboard</h1>
+        </div>
+        <nav className="flex-1 overflow-y-auto">
+          {menuItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex items-center px-4 py-3 text-sm font-medium ${
+                pathname === item.href
+                  ? 'bg-blue-50 text-blue-600 border-r-4 border-blue-600'
+                  : 'text-gray-600 hover:bg-gray-50'
+              }`}
+            >
+              {item.icon}
+              {item.name}
+            </Link>
+          ))}
+          <button className="flex items-center w-full px-4 py-3 text-sm font-medium text-left text-gray-600 hover:bg-gray-50">
+            <FiLogOut className="mr-2" />
+            Sign Out
+          </button>
+        </nav>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-white shadow-sm">
+          <div className="px-4 py-4 sm:px-6 lg:px-8">
+            <h1 className="text-xl font-semibold text-gray-900">
+              {menuItems.find((item) => item.href === pathname)?.name || 'Dashboard'}
+            </h1>
+          </div>
+        </header>
+        
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-white rounded-lg shadow p-6">
+              <h2 className="text-lg font-medium text-gray-900 mb-4">Welcome back!</h2>
+              <p className="text-gray-600">
+                This is your dashboard. You can manage your account and view important information here.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
