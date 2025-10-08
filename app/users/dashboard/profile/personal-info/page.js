@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCurrentUser, updateProfile } from '../../../../../src/redux/slices/authSlice';
+import { getCurrentUser, updateCurrentUser } from '../../../../../src/redux/slices/authSlice';
 
 const PersonalInfoPage = () => {
   const router = useRouter();
@@ -62,11 +62,7 @@ const PersonalInfoPage = () => {
     setIsSubmitting(true);
     
     try {
-      await dispatch(updateProfile({
-        userId: user.id,
-        profileId: user.profile.id,
-        profileData: personalData
-      })).unwrap();
+      await dispatch(updateCurrentUser(personalData)).unwrap();
       setIsEditing(false);
       alert('Profile updated successfully!');
     } catch (error) {

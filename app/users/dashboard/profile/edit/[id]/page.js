@@ -194,51 +194,79 @@ const EditProfilePage = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">First Name</label>
+            <label className="block text-sm font-semibold text-gray-700">Name <span className="text-red-500">*</span></label>
             <input
               type="text"
-              name="first_name"
-              value={formData.first_name}
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
+              maxLength={255}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-              placeholder="Your first name"
+              placeholder="Your full name"
             />
           </div>
           
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Last Name</label>
-            <input
-              type="text"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-              placeholder="Your last name"
-            />
-          </div>
-          
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Email Address</label>
+            <label className="block text-sm font-semibold text-gray-700">Email Address <span className="text-red-500">*</span></label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleInputChange}
+              maxLength={255}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
               placeholder="your.email@example.com"
             />
           </div>
           
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Phone Number</label>
+            <label className="block text-sm font-semibold text-gray-700">Password</label>
             <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
+              type="password"
+              name="password"
+              value={formData.password}
               onChange={handleInputChange}
+              minLength={8}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-              placeholder="+1 (555) 123-4567"
+              placeholder="Leave blank to keep current password"
             />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Confirm Password</label>
+            <input
+              type="password"
+              name="password_confirmation"
+              value={formData.password_confirmation}
+              onChange={handleInputChange}
+              minLength={8}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
+              placeholder="Confirm your password"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Avatar Image</label>
+            <input
+              type="file"
+              name="avatar"
+              onChange={handleFileChange}
+              accept=".jpeg,.png,.jpg,.gif"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+            <p className="text-xs text-gray-500">Max size: 2MB. Formats: JPEG, PNG, JPG, GIF</p>
+          </div>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700">Cover Image</label>
+            <input
+              type="file"
+              name="cover"
+              onChange={handleFileChange}
+              accept=".jpeg,.png,.jpg,.gif"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+            <p className="text-xs text-gray-500">Max size: 5MB. Formats: JPEG, PNG, JPG, GIF</p>
           </div>
           
           <div className="space-y-2">
@@ -253,21 +281,6 @@ const EditProfilePage = () => {
               <option value="user">User</option>
               <option value="admin">Admin</option>
             </select>
-          </div>
-          
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Rating (Stars)</label>
-            <input
-              type="number"
-              name="stars"
-              value={formData.stars}
-              onChange={handleInputChange}
-              min="0"
-              max="5"
-              step="0.1"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-              placeholder="0.0"
-            />
           </div>
         </div>
       </div>
