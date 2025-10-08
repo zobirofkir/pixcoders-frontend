@@ -120,6 +120,8 @@ export const updateProfile = createAsyncThunk(
         }
       });
 
+
+      
       const response = await axios.post(
         getApiUrl(API_CONFIG.ENDPOINTS.AUTH.UPDATE_USER_PROFILE(userId, profileId)),
         formData,

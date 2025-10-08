@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter, useParams } from 'next/navigation';
-import { getCurrentUser, updateProfile } from '@/redux/slices/authSlice';
+import { getCurrentUser, updateCurrentUser } from '@/redux/slices/authSlice';
 import { toast } from 'react-toastify';
 
 const EditProfilePage = () => {
@@ -165,11 +165,7 @@ const EditProfilePage = () => {
         delete submitData.password_confirmation;
       }
       
-      await dispatch(updateProfile({
-        userId: user.id,
-        profileId: user.profile?.id,
-        profileData: submitData
-      })).unwrap();
+      await dispatch(updateCurrentUser(submitData)).unwrap();
       toast.success('Profile updated successfully!');
       router.push('/users/dashboard/profile');
     } catch (error) {
