@@ -60,7 +60,7 @@ const UserDropdown = () => {
           <img
             src="https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png"
             alt="User"
-            className="rounded-full object-cover w-8 h-8"
+            className="rounded-full object-cover w-6 h-6"
           />
         </motion.div>
         <motion.div
@@ -68,7 +68,7 @@ const UserDropdown = () => {
           transition={{ duration: 0.2 }}
         >
           <FaChevronDown
-            size={14}
+            size={12}
             className="text-gray-500"
           />
         </motion.div>
