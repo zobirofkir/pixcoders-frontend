@@ -47,7 +47,7 @@ export const useLogin = () => {
   useEffect(() => {
     // Redirect if already authenticated
     if (isAuthenticated()) {
-      router.push('/');
+      window.location.href = '/';
       return;
     }
     
@@ -55,7 +55,7 @@ export const useLogin = () => {
     if (user && accessToken) {
       console.log('User logged in successfully');
       setAuthToken(accessToken);
-      router.push('/');
+      window.location.href = '/';
     }
   }, [user, accessToken, router]);
 
@@ -76,7 +76,7 @@ export const useLogin = () => {
       if (login.fulfilled.match(resultAction)) {
         const { accessToken } = resultAction.payload;
         if (accessToken) {
-          router.push('/');
+          window.location.href = '/';
         }
       } else if (login.rejected.match(resultAction)) {
         const errorMessage = resultAction.error?.message || 'Login failed. Please check your credentials.';
