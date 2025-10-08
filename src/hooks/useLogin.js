@@ -43,19 +43,16 @@ export const useLogin = () => {
    * @throws {Error} If form validation fails or authentication error occurs
    */
   useEffect(() => {
-    // Redirect if already authenticated
     if (isAuthenticated()) {
       window.location.href = '/';
       return;
     }
     
-    // Handle successful login
     if (user && accessToken) {
-      console.log('User logged in successfully');
       setAuthToken(accessToken);
       window.location.href = '/';
     }
-  }, [user, accessToken, router]);
+  }, [user, accessToken]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
