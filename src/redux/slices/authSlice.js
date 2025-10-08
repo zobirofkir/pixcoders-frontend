@@ -6,11 +6,25 @@ import { getAuthToken, removeAuthToken } from '../../utils/cookies';
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
-    const response = await axios.post(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.LOGIN), {
-      email,
-      password,
-    });
-    return response.data.data;
+    try {
+      const response = await axios.post(getApiUrl(API_CONFIG.ENDPOINTS.AUTH.LOGIN), {
+        email,
+        password,
+      });
+      return response.data.data;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          return rejectWithValue({ message: 'Invalid email or password. Please try again.' });
+        }
+        return rejectWithValue({ 
+          message: error.response.data?.message || 'Login failed. Please try again.' 
+        });
+      } else if (error.request) {
+        return rejectWithValue({ message: 'No response from server. Please check your connection.' });
+      }
+      return rejectWithValue({ message: error.message || 'An error occurred during login.' });
+    }
   }
 );
 

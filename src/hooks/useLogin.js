@@ -74,7 +74,9 @@ export const useLogin = () => {
       }));
 
       if (resultAction.error) {
-        const errorMessage = resultAction.error.message || 'Login failed. Please check your credentials.';
+        const errorMessage = resultAction.payload?.message || 
+                            resultAction.error.message || 
+                            'Login failed. Please check your credentials and try again.';
         setError(errorMessage);
       }
     } catch (err) {
