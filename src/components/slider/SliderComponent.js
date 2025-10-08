@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import profileData, { CARDS_PER_SLIDE } from '../../data/profileData';
+import profileData, { SLIDER_CONFIG } from '../../data/profileData';
 import { useSlider } from '../../hooks/useSlider';
 import SliderCardComponent from './hero/SliderCardComponent';
 import SelectedProfileComponent from './hero/SelectedProfileComponent';
@@ -24,7 +24,7 @@ const SliderComponent = () => {
     prevSlide,
     goToSlide,
     handleCardClick,
-  } = useSlider(profileData, CARDS_PER_SLIDE);
+  } = useSlider(profileData, SLIDER_CONFIG.CARDS_PER_SLIDE);
 
   if (!Array.isArray(profileData) || profileData.length <= 0) {
     return null;
