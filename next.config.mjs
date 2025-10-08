@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'picsum.photos',
       },
+      {
+        protocol: 'https',
+        hostname: 'mediumvioletred-grouse-454147.hostingersite.com',
+      },
     ],
   },
 };

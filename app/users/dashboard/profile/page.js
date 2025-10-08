@@ -7,7 +7,7 @@ import { getCurrentUser } from '@/redux/slices/authSlice';
 import Image from 'next/image';
 import { FiEdit2, FiMail, FiGlobe, FiPhone, FiMapPin, FiBriefcase, FiAward, FiUser } from 'react-icons/fi';
 
-const ProfilePage = () => {
+const page = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { user, loading } = useSelector((state) => state.auth);
@@ -192,4 +192,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default page;
