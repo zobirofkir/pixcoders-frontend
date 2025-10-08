@@ -93,8 +93,53 @@ export const updateCurrentUser = createAsyncThunk(
   }
 );
 
-// Keep updateProfile for backward compatibility
-export const updateProfile = updateCurrentUser;
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async ({ userId, profileId, profileData }, { rejectWithValue }) => {
+    try {
+      const token = getAuthToken();
+      if (!token) return rejectWithValue({ message: 'No token found' });
+
+      const formData = new FormData();
+      
+      Object.keys(profileData).forEach(key => {
+        const value = profileData[key];
+        
+        if (key === 'avatar' || key === 'cover') {
+          if (value instanceof File) {
+            formData.append(key, value);
+          }
+        } else if (key === 'skills' || key === 'experience' || key === 'education') {
+          if (Array.isArray(value)) {
+            value.forEach((item, index) => {
+              formData.append(`${key}[${index}]`, typeof item === 'object' ? JSON.stringify(item) : item);
+            });
+          }
+        } else if (value !== null && value !== undefined && value !== '') {
+          formData.append(key, value);
+        }
+      });
+
+      const response = await axios.post(
+        getApiUrl(API_CONFIG.ENDPOINTS.AUTH.UPDATE_USER_PROFILE(userId, profileId)),
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+            'Accept': 'application/json'
+          },
+        }
+      );
+      
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue({
+        message: error.response?.data?.message || 'Failed to update profile'
+      });
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -212,6 +257,49 @@ const authSlice = createSlice({
         };
       })
       .addCase(updateCurrentUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || 'Failed to update profile';
+      })
+      .addCase(updateProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        const updatedData = { ...action.payload };
+        
+        if (updatedData.profile?.skills && typeof updatedData.profile.skills === 'string') {
+          try {
+            updatedData.profile.skills = JSON.parse(updatedData.profile.skills);
+          } catch (e) {
+            updatedData.profile.skills = [];
+          }
+        }
+        if (updatedData.profile?.experience && typeof updatedData.profile.experience === 'string') {
+          try {
+            updatedData.profile.experience = JSON.parse(updatedData.profile.experience);
+          } catch (e) {
+            updatedData.profile.experience = [];
+          }
+        }
+        if (updatedData.profile?.education && typeof updatedData.profile.education === 'string') {
+          try {
+            updatedData.profile.education = JSON.parse(updatedData.profile.education);
+          } catch (e) {
+            updatedData.profile.education = [];
+          }
+        }
+        
+        state.user = {
+          ...state.user,
+          ...updatedData,
+          profile: {
+            ...state.user?.profile,
+            ...updatedData.profile
+          }
+        };
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Failed to update profile';
       });
