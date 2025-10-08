@@ -37,17 +37,6 @@ const MobileUserMenuComponent = ({ onClose }) => (
       <FaSignOutAlt size={16} /> Logout
     </button>
     
-    <div className="flex items-center gap-4 px-4 py-3 mt-2">
-      <button className="relative text-gray-600 hover:text-blue-600">
-        <FaBell size={18} />
-        <span className="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center">
-          3
-        </span>
-      </button>
-      <button className="text-gray-600 hover:text-blue-600">
-        <FaComments size={18} />
-      </button>
-    </div>
   </div>
 );
 

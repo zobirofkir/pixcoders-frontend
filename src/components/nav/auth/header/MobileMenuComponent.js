@@ -6,11 +6,7 @@ import MobileUserMenu from './MobileUserMenuComponent';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Dashboard', href: '/dashboard', icon: '📊' },
-  { name: 'Projects', href: '/projects', icon: '📂' },
-  { name: 'Messages', href: '/messages', icon: '💬' },
-  { name: 'Notifications', href: '/notifications', icon: '🔔' },
-  { name: 'Support', href: '/support', icon: '🛟' },
+  { name: 'Dashboard', href: '/users/dashboard' },
 ];
 
 const overlayVariants = {
@@ -65,7 +61,6 @@ const itemVariants = {
 const MobileMenuComponent = ({ isOpen, onClose }) => {
   const menuRef = useRef(null);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
