@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
-import Logo from './LogoComponent';
-import MobileUserMenu from './MobileUserMenuComponent';
+import LogoComponent from './LogoComponent';
+import MobileUserMenuComponent from './MobileUserMenuComponent';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -79,7 +79,6 @@ const MobileMenuComponent = ({ isOpen, onClose }) => {
     };
   }, [isOpen, onClose]);
 
-  // Close on Escape key
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape') {
@@ -126,7 +125,7 @@ const MobileMenuComponent = ({ isOpen, onClose }) => {
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                  <Logo />
+                  <LogoComponent />
                 </div>
                 <button
                   onClick={onClose}
@@ -169,7 +168,7 @@ const MobileMenuComponent = ({ isOpen, onClose }) => {
                   variants={itemVariants}
                   className="mt-4 pt-4 border-t border-gray-100"
                 >
-                  <MobileUserMenu onClose={onClose} />
+                  <MobileUserMenuComponent onClose={onClose} />
                 </motion.div>
               </nav>
             </div>
