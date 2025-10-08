@@ -89,7 +89,6 @@ const DesktopNavComponent = () => {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const navRef = useRef(null);
 
-  // Close submenu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (navRef.current && !navRef.current.contains(event.target)) {

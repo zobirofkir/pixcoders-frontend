@@ -3,7 +3,7 @@ import Image from "next/image";
 import Logo from "../../../../../public/images/logo/logo.png";
 
 const LogoComponent = () => (
-  <Link href="/dashboard" className="flex items-center gap-2">
+  <Link href="/users/dashboard" className="flex items-center gap-2">
     <Image
       src={Logo}
       alt="Logo"
