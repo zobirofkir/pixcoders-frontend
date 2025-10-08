@@ -20,9 +20,10 @@ export const useLogin = () => {
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   
-  const { loading: isLoading, error, user, accessToken } = useSelector((state) => state.auth);
+  const { loading: isLoading, user, accessToken } = useSelector((state) => state.auth);
 
   /**
    * Handles input changes and updates form data
@@ -45,17 +46,20 @@ export const useLogin = () => {
   useEffect(() => {
     if (isAuthenticated()) {
       window.location.href = '/';
-      return;
-    }
-    
-    if (user && accessToken) {
+    } else if (user && accessToken) {
       setAuthToken(accessToken);
       window.location.href = '/';
     }
   }, [user, accessToken]);
 
+  // Clear error when component unmounts
+  useEffect(() => {
+    return () => setError(null);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null); // Reset error state on new submission
     
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields');
@@ -64,23 +68,17 @@ export const useLogin = () => {
 
     try {
       const resultAction = await dispatch(login({
-        email: formData.email,
+        email: formData.email.trim(),
         password: formData.password
       }));
 
-      if (login.fulfilled.match(resultAction)) {
-        const { accessToken } = resultAction.payload;
-        if (accessToken) {
-          window.location.href = '/';
-        }
-      } else if (login.rejected.match(resultAction)) {
-        const errorMessage = resultAction.error?.message || 'Login failed. Please check your credentials.';
+      if (resultAction.error) {
+        const errorMessage = resultAction.error.message || 'Login failed. Please check your credentials.';
         setError(errorMessage);
-        return;
       }
     } catch (err) {
       console.error('Login error:', err);
-      setError('An unexpected error occurred');
+      setError('An unexpected error occurred. Please try again.');
     }
   };
 
