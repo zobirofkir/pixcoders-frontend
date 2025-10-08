@@ -24,12 +24,10 @@ const UserDropdown = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 hover:bg-gray-50 px-2 py-1 rounded-lg transition"
       >
-        <Image
-          src="/profile.jpg"
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png"
           alt="User"
-          width={32}
-          height={32}
-          className="rounded-full object-cover"
+          className="rounded-full object-cover w-8 h-8"
         />
         <FaChevronDown
           size={14}
