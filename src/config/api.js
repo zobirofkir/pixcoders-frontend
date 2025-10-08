@@ -4,7 +4,8 @@ export const API_CONFIG = {
     AUTH: {
       LOGIN: '/auth/login',
       LOGOUT: '/auth/me/logout',
-      ME: '/auth/me'
+      ME: '/auth/me',
+      UPDATE_PROFILE: '/auth/me/update'
     },
   },
 };
