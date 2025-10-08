@@ -2,7 +2,7 @@ import './globals.css';
 import dynamic from 'next/dynamic';
 import FooterComponent from '@/src/components/nav/FooterComponent';
 import ReduxProvider from '@/src/providers/ReduxProvider';
-import AuthWrapper from '@/src/components/layout/AuthWrapper';
+import AuthWrapperComponent from '@/components/layout/AuthWrapperComponent';
 
 /**
  * Root layout component that wraps the entire application
@@ -15,9 +15,9 @@ export default function RootLayout({ children }) {
     <html lang="en" className="scroll-smooth">
       <body>
         <ReduxProvider>
-          <AuthWrapper>
+          <AuthWrapperComponent>
             {children}
-          </AuthWrapper>
+          </AuthWrapperComponent>
           <FooterComponent />
         </ReduxProvider>
       </body>
