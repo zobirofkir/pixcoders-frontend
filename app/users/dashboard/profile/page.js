@@ -58,7 +58,7 @@ const ProfilePage = () => {
           
           {/* Edit Button */}
           <button 
-            onClick={() => window.location.hre(`/users/dashboard/profile/edit/${user.id}`)}
+            onClick={() => window.location.href = `/users/dashboard/profile/edit/${user.id}`}
             className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-700 px-4 py-2 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl flex items-center gap-2 font-medium"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
