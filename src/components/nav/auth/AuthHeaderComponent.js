@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "./header/Logo";
-import DesktopNav from "./header/DesktopNav";
-import NotificationIcons from "./header/NotificationIcons";
-import UserDropdown from "./header/UserDropdown";
-import MobileMenu from "./header/MobileMenu";
+import Logo from "./header/LogoComponent";
+import DesktopNav from "./header/DesktopNavComponent";
+import NotificationIcons from "./header/NotificationIconsComponent";
+import UserDropdown from "./header/UserDropdownComponent";
+import MobileMenu from "./header/MobileMenuComponent";
 
 /**
  * AuthHeaderComponent - A responsive navigation header component for authenticated users.

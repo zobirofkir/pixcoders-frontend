@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
-import Logo from './Logo';
-import MobileUserMenu from './MobileUserMenu';
+import Logo from './LogoComponent';
+import MobileUserMenu from './MobileUserMenuComponent';
 
 const navLinks = [
   { name: "Dashboard", href: "/dashboard" },
@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Support", href: "/support" },
 ];
 
-const MobileMenu = ({ isOpen, onClose }) => {
+const MobileMenuComponent = ({ isOpen, onClose }) => {
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
@@ -74,4 +74,4 @@ const MobileMenu = ({ isOpen, onClose }) => {
   );
 };
 
-export default MobileMenu;
+export default MobileMenuComponent;

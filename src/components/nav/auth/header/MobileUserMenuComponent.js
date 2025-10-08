@@ -1,7 +1,7 @@
 import { FaUser, FaCog, FaSignOutAlt, FaBell, FaComments } from 'react-icons/fa';
 import Link from 'next/link';
 
-const MobileUserMenu = ({ onClose }) => (
+const MobileUserMenuComponent = ({ onClose }) => (
   <div className="border-t border-gray-100 mt-4 pt-4">
     <div className="flex items-center gap-3 px-4 py-3 mb-2">
       <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
@@ -51,4 +51,4 @@ const MobileUserMenu = ({ onClose }) => (
   </div>
 );
 
-export default MobileUserMenu;
+export default MobileUserMenuComponent;

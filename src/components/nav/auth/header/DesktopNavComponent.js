@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Support", href: "/support" },
 ];
 
-const DesktopNav = () => (
+const DesktopNavComponent = () => (
   <nav className="hidden md:flex items-center space-x-6">
     {navLinks.map((link) => (
       <Link
@@ -22,4 +22,4 @@ const DesktopNav = () => (
   </nav>
 );
 
-export default DesktopNav;
+export default DesktopNavComponent;

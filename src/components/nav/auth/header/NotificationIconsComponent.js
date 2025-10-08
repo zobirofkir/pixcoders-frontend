@@ -1,6 +1,6 @@
 import { FaBell, FaComments } from "react-icons/fa";
 
-const NotificationIcons = () => (
+const NotificationIconsComponent = () => (
   <div className="flex items-center gap-4">
     <button className="relative text-gray-600 hover:text-blue-600 transition-colors">
       <FaBell size={18} />
@@ -14,4 +14,4 @@ const NotificationIcons = () => (
   </div>
 );
 
-export default NotificationIcons;
+export default NotificationIconsComponent;
